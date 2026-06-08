@@ -335,7 +335,7 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
     <div class="modal-body">
       <div class="price-cards">
         <div class="pc"><div class="pc-l">Unitario</div><div class="pc-v" id="m-unit"></div></div>
-        <div class="pc"><div class="pc-l">Docena</div><div class="pc-v" id="m-6"></div></div>
+        <div class="pc"><div class="pc-l">Docena</div><div class="pc-v" id="m-12"></div></div>
         <div class="pc best"><div class="pc-l">Bulto</div><div class="pc-v" id="m-12"></div><div class="pc-note">−10% off</div></div>
       </div>
       <div class="m-label">Selecciona tu talla</div>
@@ -426,9 +426,9 @@ function openModal(id) {
   document.getElementById('m-ref').textContent = sel.ref;
   document.getElementById('m-name').textContent = sel.name;
   document.getElementById('m-unit').textContent = '$' + sel.price.toFixed(2);
-  document.getElementById('m-6').textContent = '$' + (sel.price * 6).toFixed(2);
+  document.getElementById('m-12').textContent = '$' + (sel.price * 12).toFixed(2);
   document.getElementById('m-12').textContent = '$' + (sel.price * 12 * 0.9).toFixed(2);
-  document.getElementById('m-qty').value = 6;
+  document.getElementById('m-qty').value = 12;
   document.getElementById('m-sizes').innerHTML = sel.sizes.map(s => `<div class="msz" onclick="pickSz(this)">${s}</div>`).join('');
   calcTotal();
   document.getElementById('modal').classList.add('open');
