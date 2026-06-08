@@ -299,7 +299,7 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
     </div>
     <div class="proc-grid reveal">
       <div class="pstep"><div class="pstep-n">01</div><div class="pstep-line"></div><div class="pstep-t">Elige tu modelo</div><div class="pstep-d">Navega la colección y selecciona las referencias que quieres pedir.</div></div>
-      <div class="pstep"><div class="pstep-n">02</div><div class="pstep-line"></div><div class="pstep-t">Selecciona talla y cantidad</div><div class="pstep-d">Elige talla y unidades. Mínimo 6 prendas por referencia.</div></div>
+      <div class="pstep"><div class="pstep-n">02</div><div class="pstep-line"></div><div class="pstep-t">Selecciona talla y cantidad</div><div class="pstep-d">Elige talla y unidades. Mínimo 12 prendas por referencia.</div></div>
       <div class="pstep"><div class="pstep-n">03</div><div class="pstep-line"></div><div class="pstep-t">Pide por WhatsApp</div><div class="pstep-d">El pedido se arma automáticamente y abre WhatsApp directo con nosotros.</div></div>
       <div class="pstep"><div class="pstep-n">04</div><div class="pstep-line"></div><div class="pstep-t">Confirmamos y enviamos</div><div class="pstep-d">Confirmamos disponibilidad y despachamos en 48 horas a todo Ecuador.</div></div>
     </div>
@@ -342,7 +342,7 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
       <div class="m-sizes" id="m-sizes"></div>
       <div class="qty-wrap">
         <span class="qty-l">Cantidad</span>
-        <input class="qty-in" type="number" id="m-qty" min="6" value="6" step="1" oninput="calcTotal()">
+        <input class="qty-in" type="number" id="m-qty" min="12" value="12" step="1" oninput="calcTotal()">
         <span class="qty-hint">mín. 12</span>
       </div>
       <div class="total-box">
@@ -445,7 +445,7 @@ function doOrder() {
   if (!sel) return;
   const sz = document.querySelector('.msz.on');
   const q = Math.max(parseInt(document.getElementById('m-qty').value) || 6, 6);
-  if (q < 6) { alert('Cantidad mínima: 6 unidades'); return; }
+  if (q < 6) { alert('Cantidad mínima: 12 unidades'); return; }
   const total = (sel.price * q).toFixed(2);
   const msg = `Hola The Selected 👋 requiero realizar el siguiente pedido:\n\n*Producto:* ${sel.name}\n*Ref:* ${sel.ref}\n*Talla:* ${sz ? sz.textContent : 'por definir'}\n*Cantidad:* ${q} unidades\n*Total aprox.:* $${total}\n\n¿Tienen disponibilidad?`;
   openWA(msg);
