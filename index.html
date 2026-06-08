@@ -220,7 +220,7 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
     <div class="hero-left">
       <div class="hero-badge"><div class="hbadge-dot"></div><span class="hbadge-text">Drop activo · Junio 2026</span></div>
       <h1 class="hero-h1">Catálogo<span class="accent">Mayorista</span></h1>
-      <p class="hero-sub">Ropa athleisure urbana de calidad para distribuidores y tiendas. Nuevos modelos cada semana, pedidos desde 6 prendas por referencia, despacho a todo Ecuador.</p>
+      <p class="hero-sub">Ropa athleisure urbana de calidad para distribuidores y tiendas. Nuevos modelos cada semana, pedidos desde 12 prendas por referencia, despacho a todo Ecuador.</p>
       <div class="hero-actions">
         <button class="btn-hero-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Ver colección</button>
         <button class="btn-hero-ghost" onclick="openWA('Hola, soy distribuidor y quiero información de The Selected')">Soy distribuidor</button>
@@ -228,7 +228,7 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
     </div>
     <div class="hero-right">
       <div class="hero-stat"><span class="hs-n" id="hero-count">8</span><span class="hs-l">Refs activas</span></div>
-      <div class="hero-stat"><span class="hs-n">6</span><span class="hs-l">Mín. prendas</span></div>
+      <div class="hero-stat"><span class="hs-n">12</span><span class="hs-l">Mín. prendas</span></div>
       <div class="hero-stat"><span class="hs-n">48h</span><span class="hs-l">Despacho</span></div>
     </div>
   </div>
@@ -245,7 +245,7 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
   <div class="info-strip-inner">
     <div class="is-item">
       <div class="is-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-      <div class="is-text"><div class="is-title">Mínimo 6 prendas</div><div class="is-desc">Por referencia por pedido</div></div>
+      <div class="is-text"><div class="is-title">Mínimo 12 prendas</div><div class="is-desc">Por referencia por pedido</div></div>
     </div>
     <div class="is-item">
       <div class="is-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
@@ -335,15 +335,15 @@ footer p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(2
     <div class="modal-body">
       <div class="price-cards">
         <div class="pc"><div class="pc-l">Unitario</div><div class="pc-v" id="m-unit"></div></div>
-        <div class="pc"><div class="pc-l">Media docena</div><div class="pc-v" id="m-6"></div></div>
-        <div class="pc best"><div class="pc-l">Docena</div><div class="pc-v" id="m-12"></div><div class="pc-note">−10% off</div></div>
+        <div class="pc"><div class="pc-l">Docena</div><div class="pc-v" id="m-6"></div></div>
+        <div class="pc best"><div class="pc-l">Bulto</div><div class="pc-v" id="m-12"></div><div class="pc-note">−10% off</div></div>
       </div>
       <div class="m-label">Selecciona tu talla</div>
       <div class="m-sizes" id="m-sizes"></div>
       <div class="qty-wrap">
         <span class="qty-l">Cantidad</span>
         <input class="qty-in" type="number" id="m-qty" min="6" value="6" step="1" oninput="calcTotal()">
-        <span class="qty-hint">mín. 6</span>
+        <span class="qty-hint">mín. 12</span>
       </div>
       <div class="total-box">
         <span class="tb-l">Total estimado</span>
@@ -447,7 +447,7 @@ function doOrder() {
   const q = Math.max(parseInt(document.getElementById('m-qty').value) || 6, 6);
   if (q < 6) { alert('Cantidad mínima: 6 unidades'); return; }
   const total = (sel.price * q).toFixed(2);
-  const msg = `Hola The Selected 👋 Pedido mayorista:\n\n*Producto:* ${sel.name}\n*Ref:* ${sel.ref}\n*Talla:* ${sz ? sz.textContent : 'por definir'}\n*Cantidad:* ${q} unidades\n*Total aprox.:* $${total}\n\n¿Tienen disponibilidad?`;
+  const msg = `Hola The Selected 👋 requiero realizar el siguiente pedido:\n\n*Producto:* ${sel.name}\n*Ref:* ${sel.ref}\n*Talla:* ${sz ? sz.textContent : 'por definir'}\n*Cantidad:* ${q} unidades\n*Total aprox.:* $${total}\n\n¿Tienen disponibilidad?`;
   openWA(msg);
 }
 function openWA(msg) { window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank'); }
