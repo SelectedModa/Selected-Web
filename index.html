@@ -224,6 +224,19 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 .cpf-form-input:focus{outline:none;border-color:var(--azul)}
 .cpf-form-input::placeholder{color:var(--texto-muted)}
 .cpf-form-full{grid-column:1 / -1}
+
+/* Footer */
+.footer{background:var(--azul-dark);padding:3rem 0;border-top:3px solid var(--amarillo)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.footer-logo{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.footer-logo-img{height:50px;width:auto;object-fit:contain;opacity:.9}
+.footer-tagline{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amarillo);font-weight:600}
+.footer-social{display:flex;flex-direction:column;align-items:center;gap:.75rem}
+.footer-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(232,224,204,0.6);font-weight:500}
+.footer-info{text-align:center}
+.footer-copy{font-size:12px;color:rgba(232,224,204,0.5);font-weight:300}
+.footer-tiktok-section{display:flex;flex-direction:column;align-items:center;gap:.75rem}
+.footer-tiktok-section .tiktok-embed{max-width:220px}
 .cpf-form-note{font-size:10px;color:var(--texto-muted);margin-bottom:1rem;display:flex;align-items:center;gap:6px}
 .cpf-form-note svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
@@ -285,6 +298,8 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
   .nm-card{padding:1.25rem}
   .nv-grid{grid-template-columns:1fr}
   .nv-item{padding:1.25rem}
+  .footer-inner{flex-direction:column;text-align:center;padding:0 1.5rem;gap:2rem}
+  .footer-tiktok-section .tiktok-embed{max-width:200px}
   nav{padding:0 1.5rem}
   .hero-inner{padding:0 1.5rem}
   .grid-wrap{padding:0 1.5rem}
@@ -460,6 +475,26 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
   <div class="cart-panel-body" id="cartPanelBody"></div>
   <div class="cart-panel-footer" id="cartPanelFooter" style="display:none;"></div>
 </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="assets/images/logos/nav-logo-img.png" alt="The Selected" class="footer-logo-img">
+      <p class="footer-tagline">Diferencia es estilo</p>
+    </div>
+    <div class="footer-tiktok-section">
+      <p class="footer-label">Síguenos en TikTok</p>
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@selectedmoda" data-unique-id="selectedmoda" data-embed-type="creator" style="max-width: 280px; min-width: 200px;">
+        <section>
+          <a target="_blank" href="https://www.tiktok.com/@selectedmoda?refer=creator_embed">@selectedmoda</a>
+        </section>
+      </blockquote>
+    </div>
+    <div class="footer-info">
+      <p class="footer-copy">© 2026 The Selected. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
 
 <div class="toast" id="toast"><div class="toast-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span id="toastText">Agregado</span></div>
 
@@ -714,7 +749,7 @@ function sendCartOrder() {
   msg += `📱 Teléfono: ${customerData.telefono}\n`;
   msg += `📍 Dirección: ${customerData.direccion || 'No especificada'}\n`;
   msg += `🏙️ Ciudad: ${customerData.ciudad || 'No especificada'}${customerData.provincia ? ', ' + customerData.provincia : ''}\n\n`;
-  msg += `He seleccionado las siguientes piezas:\n\n`;
+  msg += `He seleccionado las siguientes piezas de la mística urbana:\n\n`;
   
   let itemNum = 1, grandTotal = 0, totalQty = 0;
   
@@ -857,5 +892,7 @@ document.getElementById('modal').addEventListener('click', function(e) { if (e.t
 loadFromStorage();
 render();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0931170cc6e51c2',t:'MTc4MTAzODg1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a09354b45dae3bad',t:'MTc4MTA0MTYwNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0931170cc6e51c2',t:'MTc4MTAzODg1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
 </html>
