@@ -714,7 +714,7 @@ function sendCartOrder() {
   msg += `📱 Teléfono: ${customerData.telefono}\n`;
   msg += `📍 Dirección: ${customerData.direccion || 'No especificada'}\n`;
   msg += `🏙️ Ciudad: ${customerData.ciudad || 'No especificada'}${customerData.provincia ? ', ' + customerData.provincia : ''}\n\n`;
-  msg += `He seleccionado las siguientes piezas de la mística urbana:\n\n`;
+  msg += `He seleccionado las siguientes piezas:\n\n`;
   
   let itemNum = 1, grandTotal = 0, totalQty = 0;
   
