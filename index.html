@@ -195,6 +195,11 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 .ci-del{background:transparent;border:none;color:var(--texto-muted);cursor:pointer;padding:4px;font-size:16px;line-height:1;transition:color .2s}
 .ci-del:hover{color:#e74c3c}
 .ci-lines{margin-bottom:.5rem}
+.ci-details{margin-bottom:.75rem;padding:0}
+.ci-color-group{margin-bottom:.75rem;background:rgba(0,59,92,0.03);border-radius:8px;padding:.75rem}
+.ci-color-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px dashed var(--crema-dark)}
+.ci-color-name{font-size:12px;font-weight:700;color:var(--azul)}
+.ci-color-qty{font-size:11px;font-weight:600;color:var(--texto-muted)}
 .ci-line{display:flex;align-items:center;justify-content:space-between;padding:.5rem;background:rgba(0,59,92,0.03);border-radius:6px;margin-bottom:.4rem}
 .ci-line-info{font-size:11px;color:var(--azul)}
 .ci-line-sub{font-size:10px;color:var(--texto-muted)}
@@ -650,19 +655,61 @@ function renderCartPanel() {
   cartItems.forEach((item, idx) => {
     const p = P.find(x => x.id === item.productId);
     const itemQty = item.lines.reduce((s, l) => s + l.qty, 0);
-    const itemTotal = itemQty >= 100 ? p.price * itemQty * 0.9 : p.price * itemQty;
     const hasDiscount = itemQty >= 100;
-    grandTotal += itemTotal;
+    const itemBaseTotal = itemQty * p.price;
+    const itemFinalTotal = hasDiscount ? itemBaseTotal * 0.9 : itemBaseTotal;
+    grandTotal += itemFinalTotal;
     grandQty += itemQty;
     
-    html += `<div class="cart-order-item"><div class="ci-row"><div class="ci-thumb"><span class="ci-thumb-num">${p.ref.split('-')[1]}</span></div><div class="ci-info"><div class="ci-ref">${p.ref}</div><div class="ci-name">${p.name}</div><div class="ci-price">$${p.price.toFixed(2)} c/u${hasDiscount ? ' <span style="color:#f5b335;font-weight:700">−10%</span>' : ''}</div></div><button class="ci-del" onclick="removeCartItem(${idx})">✕</button></div><div class="ci-lines">`;
-    
-    item.lines.forEach((line, lidx) => {
-      const lineBaseTotal = p.price * line.qty;
-      html += `<div class="ci-line"><div><div class="ci-line-info">Talla ${line.size} · ${line.color}</div><div class="ci-line-sub">${line.qty} und · $${lineBaseTotal.toFixed(2)}${hasDiscount ? ' (descuento aplicado)' : ''}</div></div><button class="ci-line-del" onclick="removeCartLine(${idx},${lidx})">✕</button></div>`;
+    // Agrupar por color
+    const colorsData = {};
+    item.lines.forEach(line => {
+      if (!colorsData[line.color]) colorsData[line.color] = [];
+      colorsData[line.color].push(line);
     });
     
-    html += `</div><div class="ci-subtotal"><span class="ci-subtotal-l">${item.lines.reduce((s,l)=>s+l.qty,0)} unidades</span><span class="ci-subtotal-v">$${itemTotal.toFixed(2)}</span></div></div>`;
+    html += `<div class="cart-order-item">
+      <div class="ci-row">
+        <div class="ci-thumb"><span class="ci-thumb-num">${p.ref.split('-')[1]}</span></div>
+        <div class="ci-info">
+          <div class="ci-ref">${p.ref}</div>
+          <div class="ci-name">${p.name}</div>
+          <div class="ci-price">$${p.price.toFixed(2)} c/u${hasDiscount ? ' <span style="color:#f5b335;font-weight:700">−10%</span>' : ''}</div>
+        </div>
+        <button class="ci-del" onclick="removeCartItem(${idx})">✕</button>
+      </div>
+      <div class="ci-details">`;
+    
+    // Mostrar cada color con sus tallas
+    Object.keys(colorsData).forEach(color => {
+      const colorQty = colorsData[color].reduce((s, l) => s + l.qty, 0);
+      html += `<div class="ci-color-group">
+        <div class="ci-color-header">
+          <span class="ci-color-name">🎨 ${color}</span>
+          <span class="ci-color-qty">${colorQty} und</span>
+        </div>`;
+      
+      colorsData[color].forEach((line, lidx) => {
+        const lineIdx = item.lines.findIndex(l => l.color === line.color && l.size === line.size);
+        const lineBaseTotal = p.price * line.qty;
+        html += `<div class="ci-line">
+          <div>
+            <div class="ci-line-info">Talla ${line.size}</div>
+            <div class="ci-line-sub">${line.qty} und · $${lineBaseTotal.toFixed(2)}${hasDiscount ? ' (−10%)' : ''}</div>
+          </div>
+          <button class="ci-line-del" onclick="removeCartLine(${idx},${lineIdx})">✕</button>
+        </div>`;
+      });
+      
+      html += `</div>`;
+    });
+    
+    html += `</div>
+      <div class="ci-subtotal">
+        <span class="ci-subtotal-l">${itemQty} unidades · ${Object.keys(colorsData).length} color(es)</span>
+        <span class="ci-subtotal-v">$${itemFinalTotal.toFixed(2)}${hasDiscount ? ' <span style="color:#f5b335;font-size:10px">Ahorro $' + (itemBaseTotal - itemFinalTotal).toFixed(2) + '</span>' : ''}</span>
+      </div>
+    </div>`;
   });
   
   body.innerHTML = html;
@@ -762,11 +809,37 @@ function sendCartOrder() {
     grandTotal += itemFinalTotal;
     totalQty += itemQty;
     
-    msg += `${String(itemNum).padStart(2,'0')}. ${p.name}\n   ↳ Total: ${itemQty} und\n   ↳ Precio unitario: $${p.price.toFixed(2)}\n   ↳ Descuento 10%: ${hasDiscount ? 'SÍ (−$' + (itemBaseTotal - itemFinalTotal).toFixed(2) + ')' : 'NO'}\n   ↳ Valor total: $${itemFinalTotal.toFixed(2)}\n\n`;
+    // Agrupar por color
+    const colorsData = {};
+    item.lines.forEach(line => {
+      if (!colorsData[line.color]) colorsData[line.color] = [];
+      colorsData[line.color].push(line);
+    });
+    
+    msg += `${String(itemNum).padStart(2,'0')}. ${p.name}\n`;
+    msg += `   📌 Ref: ${p.ref} | Precio: $${p.price.toFixed(2)}/und\n`;
+    
+    // Mostrar cada color con sus tallas
+    Object.keys(colorsData).forEach(color => {
+      const colorQty = colorsData[color].reduce((s, l) => s + l.qty, 0);
+      msg += `   🎨 ${color.toUpperCase()} (${colorQty} und)\n`;
+      colorsData[color].forEach(line => {
+        const lineTotal = p.price * line.qty;
+        msg += `      ↳ Talla ${line.size}: ${line.qty} und · $${lineTotal.toFixed(2)}\n`;
+      });
+    });
+    
+    msg += `   ──────────────────\n`;
+    msg += `   📦 Subtotal: ${itemQty} und\n`;
+    msg += `   💰 Valor: $${itemFinalTotal.toFixed(2)}`;
+    if (hasDiscount) {
+      msg += ` (Ahorro: $${(itemBaseTotal - itemFinalTotal).toFixed(2)})`;
+    }
+    msg += `\n\n`;
     itemNum++;
   });
   
-  msg += `━━━━━━━━━━━━━━━━━━━━━━━━\n💰 TOTAL ESTIMADO: $${grandTotal.toFixed(2)}\n📦 Total unidades: ${totalQty}\n\nQuedo a la espera de la confirmación de disponibilidad para proceder con el estatus de mi pedido.\n¿Me pueden colaborar con el número de cuenta para emitir el pago, por favor?\n🙏`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━━━\n💰 *TOTAL ESTIMADO: $${grandTotal.toFixed(2)}*\n📦 Total unidades: ${totalQty}\n\nQuedo a la espera de la confirmación de disponibilidad para proceder con el estatus de mi pedido.\n¿Me pueden colaborar con el número de cuenta para emitir el pago, por favor?\n🙏`;
   
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
