@@ -692,7 +692,7 @@ function renderCartPanel() {
       const colorQty = colorsData[color].reduce((s, l) => s + l.qty, 0);
       html += `<div class="ci-color-group">
         <div class="ci-color-header">
-          <span class="ci-color-name">🎨 ${color}</span>
+          <span class="ci-color-name">${color}</span>
           <span class="ci-color-qty">${colorQty} und</span>
         </div>`;
       
@@ -802,7 +802,7 @@ function sendCartOrder() {
   if (totalCartQty < 12) { showToast('El pedido mínimo es 12 unidades'); return; }
   if (!customerData.nombre || !customerData.telefono) { showToast('Completa tu nombre y teléfono'); return; }
   
-  let msg = `⚜️ THE SELECTED | ORDEN DE PEDIDO ⚜️\n━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  let msg = `⚜️ *THE SELECTED | ORDEN DE PEDIDO* ⚜️\n━━━━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `*CLIENTE*\n`;
   msg += `📋 Nombre: ${customerData.nombre} ${customerData.apellido || ''}\n`;
   msg += `📧 Correo: ${customerData.correo || 'No especificado'}\n`;
@@ -835,7 +835,7 @@ function sendCartOrder() {
     // Mostrar cada color con sus tallas
     Object.keys(colorsData).forEach(color => {
       const colorQty = colorsData[color].reduce((s, l) => s + l.qty, 0);
-      msg += `   🎨 ${color.toUpperCase()} (${colorQty} und)\n`;
+      msg += `    ${color.toUpperCase()} (${colorQty} und)\n`;
       colorsData[color].forEach(line => {
         const lineTotal = p.price * line.qty;
         msg += `      ↳ Talla ${line.size}: ${line.qty} und · $${lineTotal.toFixed(2)}\n`;
