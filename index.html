@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Selected — Catálogo Mayorista</title>
+<title>The Selected — Catálogo Web Mayorista</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -181,7 +181,7 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 .cph-title span{font-size:16px;font-weight:700;color:var(--crema);letter-spacing:1px;text-transform:uppercase}
 .cph-close{background:rgba(232,224,204,0.1);border:1px solid rgba(232,224,204,0.2);color:var(--crema);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:'Exo 2',sans-serif}
 .cph-close:hover{background:rgba(245,179,53,0.2);border-color:var(--amarillo)}
-.cart-panel-body{flex:1;overflow-y:auto;padding:1.5rem}
+.cart-panel-body{flex:1;overflow-y:auto;padding:1.5rem;padding-bottom:0}
 .cart-panel-body::-webkit-scrollbar{width:6px}
 .cart-panel-body::-webkit-scrollbar-track{background:transparent}
 .cart-panel-body::-webkit-scrollbar-thumb{background:var(--crema-dark);border-radius:3px}
@@ -215,7 +215,7 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 .ci-subtotal-l{font-size:11px;color:var(--texto-muted);text-transform:uppercase}
 .ci-subtotal-v{font-size:16px;font-weight:800;color:var(--azul)}
 
-.cart-panel-footer{background:var(--blanco);padding:1.5rem;border-top:1px solid var(--crema-dark);flex-shrink:0;max-height:60vh;overflow-y:auto}
+.cart-panel-footer{background:var(--blanco);padding:1.5rem;border-top:1px solid var(--crema-dark);flex-shrink:0}
 .cart-panel-footer::-webkit-scrollbar{width:4px}
 .cart-panel-footer::-webkit-scrollbar-thumb{background:var(--crema-dark);border-radius:2px}
 .cpf-row{display:flex;justify-content:space-between;margin-bottom:.4rem}
@@ -335,7 +335,7 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
     <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
       <img src="assets/images/logos/nav-logo-img.png" alt="The Selected" class="nav-logo-img">
     </a>
-    <div class="nav-tagline">Moda Urban Mayorista</div>
+    <div class="nav-tagline">Moda Urban</div>
   </div>
   <div class="nav-links">
     <a href="#catalogo" class="nav-link">Catálogo</a>
@@ -369,8 +369,8 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 <div class="info-strip">
   <div class="info-strip-inner">
     <div class="is-item"><div class="is-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div><div class="is-title">Envío gratis</div><div class="is-desc">En pedidos +$500 USD</div></div></div>
-    <div class="is-item"><div class="is-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="is-title">Pago seguro</div><div class="is-desc">Transferencia o PayPal</div></div></div>
-    <div class="is-item"><div class="is-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="is-title">Envíos a todo el Ecuador</div><div class="is-desc">Desde Quito</div></div></div>
+    <div class="is-item"><div class="is-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="is-title">Pago seguro</div><div class="is-desc">Transferencia Banco Pichincha</div></div></div>
+    <div class="is-item"><div class="is-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="is-title">Envíos a todo el Ecuador</div><div class="is-desc">Desde Ambato</div></div></div>
     <div class="is-item"><div class="is-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="is-title">Mínimo 12 unidades</div><div class="is-desc">Por pedido mixto</div></div></div>
   </div>
 </div>
@@ -818,7 +818,7 @@ function sendCartOrder() {
   msg += `📱 Teléfono: ${customerData.telefono}\n`;
   msg += `📍 Dirección: ${customerData.direccion || 'No especificada'}\n`;
   msg += `🏙️ Ciudad: ${customerData.ciudad || 'No especificada'}${customerData.provincia ? ', ' + customerData.provincia : ''}\n\n`;
-  msg += `He seleccionado las siguientes piezas de la mística urbana:\n\n`;
+  msg += `He seleccionado las siguientes piezas:\n\n`;
   
   let itemNum = 1, grandTotal = 0, totalQty = 0;
   
@@ -867,6 +867,8 @@ function sendCartOrder() {
 }
 
 function openModal(id) {
+  history.pushState({modal:true}, "", "");
+  history.pushState({modal: true}, "", "");
   sel = P.find(p => p.id === id);
   selectedColors = [];
   
@@ -975,7 +977,7 @@ function calcTotals() {
   document.getElementById('btn-add-cart').disabled = false;
 }
 
-function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; sel = null; }
+function closeModal() { if (history.state function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; sel = null; }function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; sel = null; } history.state.modal) { history.back(); } else { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; sel = null; } }
 
 function doOrder() {
   if (!sel) return;
@@ -1004,8 +1006,22 @@ document.getElementById('modal').addEventListener('click', function(e) { if (e.t
 // Inicializar
 loadFromStorage();
 render();
+
+window.addEventListener('popstate', function(e) {
+  const modal = document.getElementById('modal');
+  const cartPanel = document.getElementById('cartPanel');
+  if (modal && modal.classList.contains('open')) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    sel = null;
+  } else if (cartPanel && cartPanel.classList.contains('open')) {
+    cartPanel.classList.remove('open');
+    document.getElementById('cartPanelOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
 </script>
 <script async src="https://www.tiktok.com/embed.js"></script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0931170cc6e51c2',t:'MTc4MTAzODg1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a09bb752bf2f3bb4',t:'MTc4MTEyOTUzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0aa3169dcac3a30',t:'MTc4MTI4MTMzMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a09bb752bf2f3bb4',t:'MTc4MTEyOTUzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0aa3e55ec267446',t:'MTc4MTI4MTg2Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
