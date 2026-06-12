@@ -463,11 +463,11 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
       <div class="ch-sub">8 productos disponibles | Mínimo 12 unidades por pedido</div>
     </div>
     <div class="filters">
-      <button class="fchip on" onclick="filter(this,'all')">Todos</button>
-      <button class="fchip" onclick="filter(this,'set')">Conjuntos</button>
-      <button class="fchip" onclick="filter(this,'top')">Tops</button>
-      <button class="fchip" onclick="filter(this,'pants')">Pantalones</button>
-      <button class="fchip" onclick="filter(this,'jacket')">Chaquetas</button>
+      <button class="fchip on" onclick="filterCat(this,'all')">Todos</button>
+      <button class="fchip" onclick="filterCat(this,'set')">Conjuntos</button>
+      <button class="fchip" onclick="filterCat(this,'top')">Tops</button>
+      <button class="fchip" onclick="filterCat(this,'pants')">Pantalones</button>
+      <button class="fchip" onclick="filterCat(this,'jacket')">Chaquetas</button>
     </div>
   </div>
   <div class="grid-wrap"><div class="grid" id="grid"></div></div>
@@ -600,7 +600,7 @@ function saveToStorage() {
   localStorage.setItem('selectedCustomer', JSON.stringify(customerData));
 }
 
-function filter(el, cat) {
+function filterCat(el, cat) {
   document.querySelectorAll('.fchip').forEach(c => c.classList.remove('on'));
   el.classList.add('on'); active = cat; render();
 }
@@ -623,7 +623,7 @@ function render() {
         <div class="cb-sizes">${p.sizes.map((s,i) => `<span class="csz ${i<3?'av':''}">${s}</span>`).join('')}</div>
         <div class="cb-prices">
           <div class="cp"><div class="cp-l">Unitario</div><div class="cp-v">$${p.price.toFixed(2)}</div></div>
-          </div>
+          <div class="cp-note">−10%</div></div>
         </div>
       </div>
     </div>`).join('');
@@ -670,8 +670,8 @@ function renderCartPanel() {
   cartItems.forEach((item, idx) => {
     const p = P.find(x => x.id === item.productId);
     const itemQty = item.lines.reduce((s, l) => s + l.qty, 0);
-    
-    const itemBaseTotal = itemQty * p.price;
+        const itemBaseTotal = itemQty * p.price;
+    const itemFinalTotal = hasDiscount ? itemBaseTotal * 0.9 : itemBaseTotal;
     grandTotal += itemFinalTotal;
     grandQty += itemQty;
     
@@ -823,8 +823,8 @@ function sendCartOrder() {
   cartItems.forEach(item => {
     const p = P.find(x => x.id === item.productId);
     const itemQty = item.lines.reduce((s, l) => s + l.qty, 0);
-    
-    const itemBaseTotal = itemQty * p.price;
+        const itemBaseTotal = itemQty * p.price;
+    const itemFinalTotal = hasDiscount ? itemBaseTotal * 0.9 : itemBaseTotal;
     grandTotal += itemFinalTotal;
     totalQty += itemQty;
     
@@ -851,6 +851,7 @@ function sendCartOrder() {
     msg += `   ──────────────────\n`;
     msg += `   📦 Subtotal: ${itemQty} und\n`;
     msg += `   💰 Valor: $${itemFinalTotal.toFixed(2)}`;
+    if (hasDiscount) {
       msg += ` (Ahorro: $${(itemBaseTotal - itemFinalTotal).toFixed(2)})`;
     }
     msg += `\n\n`;
@@ -869,11 +870,9 @@ function openModal(id) {
   document.getElementById('m-ref').textContent = sel.ref;
   document.getElementById('m-name').textContent = sel.name;
 
-  // Galería de imágenes
   const mainImg = document.getElementById('modalMainImg');
   const thumbsContainer = document.getElementById('modalThumbs');
   thumbsContainer.innerHTML = '';
-  
   if (sel.images && sel.images.length > 0) {
     mainImg.src = sel.images[0];
     sel.images.forEach((imgSrc, idx) => {
@@ -892,6 +891,7 @@ function openModal(id) {
   }
   document.getElementById('m-unit').textContent = '$' + sel.price.toFixed(2);
   document.getElementById('m-6').textContent = '$' + (sel.price * 12).toFixed(2);
+  
   
   document.getElementById('m-colors').innerHTML = sel.colors.map(c => 
     `<div class="mcolor" onclick="toggleColor(this,'${c}')">${c}</div>`
