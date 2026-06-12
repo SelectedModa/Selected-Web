@@ -127,11 +127,6 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 .modal-body{padding:1.5rem;overflow-y:auto;max-height:calc(95vh - 200px)}
 .modal-body::-webkit-scrollbar{width:4px}
 .modal-body::-webkit-scrollbar-thumb{background:var(--crema-dark);border-radius:2px}
-.modal-gallery{margin-bottom:20px}
-.modal-main-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid #eee;margin-bottom:10px}
-.modal-thumbs{display:flex;gap:8px;flex-wrap:wrap}
-.modal-thumb{width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer}
-.modal-thumb.active{border-color:var(--azul)}
 .price-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem}
 .pc{background:var(--crema-light);border-radius:8px;padding:.75rem;text-align:center;border:1.5px solid transparent}
 .pc.best{background:rgba(245,179,53,0.1);border-color:var(--amarillo)}
@@ -522,13 +517,10 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
       <div class="mh-wave"><svg viewBox="0 0 520 40" preserveAspectRatio="none"><path d="M0,20 C130,40 390,0 520,20 L520,40 L0,40 Z" fill="#FDFCF8"/></svg></div>
     </div>
     <div class="modal-body">
-      <div class="modal-gallery">
-        <img id="modalMainImg" class="modal-main-img" alt="">
-        <div class="modal-thumbs" id="modalThumbs"></div>
-      </div>
       <div class="price-cards">
         <div class="pc"><div class="pc-l">Unitario</div><div class="pc-v" id="m-unit"></div></div>
         <div class="pc"><div class="pc-l">Docena</div><div class="pc-v" id="m-6"></div></div>
+        
       </div>
       
       <div class="m-label">Selecciona los colores</div>
@@ -623,7 +615,7 @@ function render() {
         <div class="cb-sizes">${p.sizes.map((s,i) => `<span class="csz ${i<3?'av':''}">${s}</span>`).join('')}</div>
         <div class="cb-prices">
           <div class="cp"><div class="cp-l">Unitario</div><div class="cp-v">$${p.price.toFixed(2)}</div></div>
-          <div class="cp-note">−10%</div></div>
+          <div class="cp"><div class="cp-l">x Bulto</div><div class="cp-v amarillo">$${(p.price*100*0.9).toFixed(2)}</div><div class="cp-note">−10%</div></div>
         </div>
       </div>
     </div>`).join('');
@@ -670,7 +662,8 @@ function renderCartPanel() {
   cartItems.forEach((item, idx) => {
     const p = P.find(x => x.id === item.productId);
     const itemQty = item.lines.reduce((s, l) => s + l.qty, 0);
-        const itemBaseTotal = itemQty * p.price;
+    const hasDiscount = itemQty >= 100;
+    const itemBaseTotal = itemQty * p.price;
     const itemFinalTotal = hasDiscount ? itemBaseTotal * 0.9 : itemBaseTotal;
     grandTotal += itemFinalTotal;
     grandQty += itemQty;
@@ -721,7 +714,7 @@ function renderCartPanel() {
     html += `</div>
       <div class="ci-subtotal">
         <span class="ci-subtotal-l">${itemQty} unidades · ${Object.keys(colorsData).length} color(es)</span>
-        <span class="ci-subtotal-v">$${itemFinalTotal.toFixed(2)}</span>
+        <span class="ci-subtotal-v">$${itemFinalTotal.toFixed(2)}${hasDiscount ? ' <span style="color:#f5b335;font-size:10px">Ahorro $' + (itemBaseTotal - itemFinalTotal).toFixed(2) + '</span>' : ''}</span>
       </div>
     </div>`;
   });
@@ -823,7 +816,8 @@ function sendCartOrder() {
   cartItems.forEach(item => {
     const p = P.find(x => x.id === item.productId);
     const itemQty = item.lines.reduce((s, l) => s + l.qty, 0);
-        const itemBaseTotal = itemQty * p.price;
+    const hasDiscount = itemQty >= 100;
+    const itemBaseTotal = itemQty * p.price;
     const itemFinalTotal = hasDiscount ? itemBaseTotal * 0.9 : itemBaseTotal;
     grandTotal += itemFinalTotal;
     totalQty += itemQty;
@@ -869,29 +863,9 @@ function openModal(id) {
   
   document.getElementById('m-ref').textContent = sel.ref;
   document.getElementById('m-name').textContent = sel.name;
-
-  const mainImg = document.getElementById('modalMainImg');
-  const thumbsContainer = document.getElementById('modalThumbs');
-  thumbsContainer.innerHTML = '';
-  if (sel.images && sel.images.length > 0) {
-    mainImg.src = sel.images[0];
-    sel.images.forEach((imgSrc, idx) => {
-      const thumb = document.createElement('img');
-      thumb.src = imgSrc;
-      thumb.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
-      thumb.onclick = () => {
-        mainImg.src = imgSrc;
-        document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-      };
-      thumbsContainer.appendChild(thumb);
-    });
-  } else {
-    mainImg.src = '';
-  }
   document.getElementById('m-unit').textContent = '$' + sel.price.toFixed(2);
   document.getElementById('m-6').textContent = '$' + (sel.price * 12).toFixed(2);
-  
+  document.getElementById('m-12').textContent = '$' + (sel.price * 100 * 0.9).toFixed(2);
   
   document.getElementById('m-colors').innerHTML = sel.colors.map(c => 
     `<div class="mcolor" onclick="toggleColor(this,'${c}')">${c}</div>`
