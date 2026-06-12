@@ -127,6 +127,15 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 .modal-body{padding:1.5rem;overflow-y:auto;max-height:calc(95vh - 200px)}
 .modal-body::-webkit-scrollbar{width:4px}
 .modal-body::-webkit-scrollbar-thumb{background:var(--crema-dark);border-radius:2px}
+.modal-gallery{margin-bottom:20px}
+.modal-main-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid #eee;margin-bottom:10px}
+.modal-thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.modal-thumb{width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer}
+.modal-thumb.active{border-color:var(--azul)}
+.modal-info-extra{margin-top:20px;border-top:1px solid #eee;padding-top:20px}
+.info-section{margin-bottom:16px}
+.info-section h4{font-size:13px;color:#666;margin-bottom:6px;font-weight:600}
+.info-section p{font-size:14px;color:#444;line-height:1.6}
 .price-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem}
 .pc{background:var(--crema-light);border-radius:8px;padding:.75rem;text-align:center;border:1.5px solid transparent}
 .pc.best{background:rgba(245,179,53,0.1);border-color:var(--amarillo)}
@@ -517,6 +526,24 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
       <div class="mh-wave"><svg viewBox="0 0 520 40" preserveAspectRatio="none"><path d="M0,20 C130,40 390,0 520,20 L520,40 L0,40 Z" fill="#FDFCF8"/></svg></div>
     </div>
     <div class="modal-body">
+      <div class="modal-gallery">
+        <img id="modalMainImg" class="modal-main-img" alt="">
+        <div class="modal-thumbs" id="modalThumbs"></div>
+      </div>
+      <div class="modal-info-extra">
+        <div class="info-section">
+          <h4>Composición</h4>
+          <p id="modal-composition"></p>
+        </div>
+        <div class="info-section">
+          <h4>Cuidado</h4>
+          <p id="modal-care"></p>
+        </div>
+        <div class="info-section">
+          <h4>Detalles</h4>
+          <p id="modal-details"></p>
+        </div>
+      </div>
       <div class="price-cards">
         <div class="pc"><div class="pc-l">Unitario</div><div class="pc-v" id="m-unit"></div></div>
         <div class="pc"><div class="pc-l">Docena</div><div class="pc-v" id="m-6"></div></div>
@@ -555,14 +582,14 @@ nav{background:var(--azul);position:sticky;top:0;z-index:1000;display:flex;align
 const WA = '593998000866';
 
 const P = [
-  {id:1, ref:'TS-001', name:'Conjunto Flex Pro',      cat:'set',    tag:'new',   price:18, sizes:['XS','S','M','L','XL'],    colors:['Negro','Blanco','Gris','Azul'],    images:['assets/images/productos/conjunto-flex-pro-1.png','assets/images/productos/conjunto-flex-pro-2.png']},
-  {id:2, ref:'TS-002', name:'Top Ribbed Essential',   cat:'top',    tag:'hot',   price:12, sizes:['S','M','L','XL'],         colors:['Negro','Blanco','Rosa','Menta'],   images:['assets/images/productos/top-ribbed-essential-1.png']},
-  {id:3, ref:'TS-003', name:'Jogger Urban Slim',      cat:'pants',  tag:'new',   price:15, sizes:['S','M','L','XL','XXL'],   colors:['Negro','Gris','Beige','Verde'],     images:['assets/images/productos/jogger-urban-slim-1.png','assets/images/productos/jogger-urban-slim-2.png']},
-  {id:4, ref:'TS-004', name:'Chaqueta Windbreaker',   cat:'jacket', tag:'limit', price:28, sizes:['S','M','L','XL'],         colors:['Negro','Azul','Rojo','Amarillo'],   images:['assets/images/productos/chaqueta-windbreaker-1.png']},
-  {id:5, ref:'TS-005', name:'Set Crop + Legging',     cat:'set',    tag:'new',   price:22, sizes:['XS','S','M','L'],         colors:['Negro','Blanco','Lila','Salmon'],   images:['assets/images/productos/set-crop-legging-1.png','assets/images/productos/set-crop-legging-2.png']},
-  {id:6, ref:'TS-006', name:'Biker Short Pro',        cat:'pants',  tag:'hot',   price:11, sizes:['XS','S','M','L','XL'],   colors:['Negro','Gris','Café','Oliva'],      images:['assets/images/productos/biker-short-pro-1.png']},
-  {id:7, ref:'TS-007', name:'Top Seamless Zen',       cat:'top',    tag:'new',   price:13, sizes:['S','M','L'],              colors:['Negro','Blanco','Terracota','Coral'],images:['assets/images/productos/top-seamless-zen-1.png','assets/images/productos/top-seamless-zen-2.png']},
-  {id:8, ref:'TS-008', name:'Hoodie Oversize Mod',    cat:'jacket', tag:'limit', price:32, sizes:['S','M','L','XL','XXL'],  colors:['Negro','Gris','Azul','Café'],       images:['assets/images/productos/hoodie-oversize-mod-1.png']},
+  {id:1, ref:'TS-001', name:'Conjunto Flex Pro',      cat:'set',    tag:'new',   price:18, sizes:['XS','S','M','L','XL'],    colors:['Negro','Blanco','Gris','Azul'],    images:['assets/images/productos/conjunto-flex-pro-1.png','assets/images/productos/conjunto-flex-pro-2.png'], composition:'95% Algodón, 5% Elastano', care:'Lavar a máquina 30°C, no usar blanqueador', details:'Conjunto de 2 piezas con ajuste perfecto'},
+  {id:2, ref:'TS-002', name:'Top Ribbed Essential',   cat:'top',    tag:'hot',   price:12, sizes:['S','M','L','XL'],         colors:['Negro','Blanco','Rosa','Menta'],   images:['assets/images/productos/top-ribbed-essential-1.png'], composition:'92% Algodón, 8% Elastano', care:'Lavar a mano o máquina en ciclo suave', details:'Tejido acanalado de alta calidad'},
+  {id:3, ref:'TS-003', name:'Jogger Urban Slim',      cat:'pants',  tag:'new',   price:15, sizes:['S','M','L','XL','XXL'],   colors:['Negro','Gris','Beige','Verde'],     images:['assets/images/productos/jogger-urban-slim-1.png','assets/images/productos/jogger-urban-slim-2.png'], composition:'85% Algodón, 15% Poliéster', care:'Lavar a máquina 30°C, planchar a temperatura media', details:'Corte slim con bolsillos laterales'},
+  {id:4, ref:'TS-004', name:'Chaqueta Windbreaker',   cat:'jacket', tag:'limit', price:28, sizes:['S','M','L','XL'],         colors:['Negro','Azul','Rojo','Amarillo'],   images:['assets/images/productos/chaqueta-windbreaker-1.png'], composition:'100% Poliéster', care:'Lavar a mano, no planchar', details:'Ligera y resistente al viento'},
+  {id:5, ref:'TS-005', name:'Set Crop + Legging',     cat:'set',    tag:'new',   price:22, sizes:['XS','S','M','L'],         colors:['Negro','Blanco','Lila','Salmon'],   images:['assets/images/productos/set-crop-legging-1.png','assets/images/productos/set-crop-legging-2.png'], composition:'88% Poliamida, 12% Elastano', care:'Lavar a mano con agua fría', details:'Conjunto deportivo de alto rendimiento'},
+  {id:6, ref:'TS-006', name:'Biker Short Pro',        cat:'pants',  tag:'hot',   price:11, sizes:['XS','S','M','L','XL'],   colors:['Negro','Gris','Café','Oliva'],      images:['assets/images/productos/biker-short-pro-1.png'], composition:'75% Algodón, 25% Elastano', care:'Lavar a máquina 30°C', details:'Short ajustado con costuras planas'},
+  {id:7, ref:'TS-007', name:'Top Seamless Zen',       cat:'top',    tag:'new',   price:13, sizes:['S','M','L'],              colors:['Negro','Blanco','Terracota','Coral'],images:['assets/images/productos/top-seamless-zen-1.png','assets/images/productos/top-seamless-zen-2.png'], composition:'90% Poliamida, 10% Elastano', care:'No usar secadora', details:'Sin costuras para máximo confort'},
+  {id:8, ref:'TS-008', name:'Hoodie Oversize Mod',    cat:'jacket', tag:'limit', price:32, sizes:['S','M','L','XL','XXL'],  colors:['Negro','Gris','Azul','Café'],       images:['assets/images/productos/hoodie-oversize-mod-1.png'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina con colores similares', details:'Corte oversize con capucha ajustable'},
 ];
 
 const catLabel = {set:'Conjunto', top:'Top', pants:'Pantalón', jacket:'Chaqueta'};
@@ -863,6 +890,32 @@ function openModal(id) {
   
   document.getElementById('m-ref').textContent = sel.ref;
   document.getElementById('m-name').textContent = sel.name;
+
+  // Galería de imágenes
+  const mainImg = document.getElementById('modalMainImg');
+  const thumbsContainer = document.getElementById('modalThumbs');
+  thumbsContainer.innerHTML = '';
+  if (sel.images && sel.images.length > 0) {
+    mainImg.src = sel.images[0];
+    sel.images.forEach((imgSrc, idx) => {
+      const thumb = document.createElement('img');
+      thumb.src = imgSrc;
+      thumb.className = 'modal-thumb' + (idx === 0 ? ' active' : '');
+      thumb.onclick = () => {
+        mainImg.src = imgSrc;
+        document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      };
+      thumbsContainer.appendChild(thumb);
+    });
+  } else {
+    mainImg.src = '';
+  }
+
+  // Información adicional del producto
+  document.getElementById('modal-composition').textContent = sel.composition || 'No especificado';
+  document.getElementById('modal-care').textContent = sel.care || 'No especificado';
+  document.getElementById('modal-details').textContent = sel.details || 'No especificado';
   document.getElementById('m-unit').textContent = '$' + sel.price.toFixed(2);
   document.getElementById('m-6').textContent = '$' + (sel.price * 12).toFixed(2);
   
@@ -977,5 +1030,5 @@ render();
 </script>
 <script async src="https://www.tiktok.com/embed.js"></script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0931170cc6e51c2',t:'MTc4MTAzODg1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a09bb752bf2f3bb4',t:'MTc4MTEyOTUzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0aab38488f9f453',t:'MTc4MTI4NjY2MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0aac0aea84dc82c',t:'MTc4MTI4NzIwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a09bb752bf2f3bb4',t:'MTc4MTEyOTUzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0aab38488f9f453',t:'MTc4MTI4NjY2MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0aae31dac54cc71',t:'MTc4MTI4ODYxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
