@@ -57,7 +57,7 @@
 .grid-wm-2{position:absolute;top:35%;left:-2%;width:180px;opacity:.035;pointer-events:none;z-index:0;--rot:-18deg;transform:rotate(-18deg)}
 .grid-wm-3{position:absolute;bottom:15%;right:2%;width:200px;opacity:.04;pointer-events:none;z-index:0;--rot:8deg;transform:rotate(8deg)}
 
-.catalog-container{max-width:var(--container);margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:260px 1fr;gap:2.5rem;position:relative;z-index:2}
+.catalog-container{max-width:var(--container);margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:280px 1fr;gap:2.5rem;position:relative;z-index:2;align-items:start}
 
 /* ═══════════════════════════════════════
    SIDEBAR FILTROS
@@ -66,7 +66,7 @@
   background:var(--blanco);
   border-radius:var(--radius-md);
   border:1px solid var(--border);
-  padding:1.75rem;
+  padding:1.5rem;
   position:sticky;
   top:calc(var(--nav-height) + 1rem);
   transition:top var(--transition-fast);
@@ -75,14 +75,16 @@
   overflow-x:hidden;
   scrollbar-width:thin;
   scrollbar-color:var(--nude-dark) transparent;
+  will-change:auto;
+  contain:layout style;
 }
 .nav.scrolled ~ main .sidebar{
   top:calc(64px + 1rem);
   max-height:calc(100vh - 64px - 2rem);
 }
-.sidebar::-webkit-scrollbar{width:6px}
-.sidebar::-webkit-scrollbar-track{background:transparent;margin:1rem 0}
-.sidebar::-webkit-scrollbar-thumb{background:var(--nude-dark);border-radius:3px;border:1px solid var(--blanco)}
+.sidebar::-webkit-scrollbar{width:5px}
+.sidebar::-webkit-scrollbar-track{background:transparent;margin:.5rem 0}
+.sidebar::-webkit-scrollbar-thumb{background:var(--nude-dark);border-radius:3px}
 .sidebar::-webkit-scrollbar-thumb:hover{background:var(--azul)}
 
 .sidebar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
@@ -94,6 +96,13 @@
 .filter-group:last-of-type{border-bottom:none;margin-bottom:1rem}
 .filter-group-title{font-family:var(--font-sans);font-size:11px;font-weight:700;color:var(--texto-muted);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
 .filter-group-title span{color:var(--azul-dark)}
+
+ /* GÉNERO (Radio - destacado) */
+.filter-gender-list{display:flex;gap:6px;margin-bottom:.5rem}
+.filter-gender-btn{flex:1;padding:10px 8px;background:var(--blanco);border:1.5px solid var(--border-dark);border-radius:var(--radius-sm);cursor:pointer;font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--texto-mid);transition:all var(--transition-fast);text-align:center;position:relative}
+.filter-gender-btn:hover{border-color:var(--azul);color:var(--azul-dark)}
+.filter-gender-btn.active{background:var(--azul-dark);border-color:var(--azul-dark);color:var(--amarillo)}
+.filter-gender-icon{display:block;font-size:16px;margin-bottom:2px;line-height:1}
 
 /* Categorías (Radio) */
 .filter-cat-list{display:flex;flex-direction:column;gap:.5rem}
@@ -399,7 +408,7 @@
    RESPONSIVE
    ═══════════════════════════════════════ */
 @media(max-width:1200px){
-  .catalog-container{grid-template-columns:230px 1fr;gap:2rem}
+  .catalog-container{grid-template-columns:250px 1fr;gap:2rem}
   .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
 }
 
@@ -678,69 +687,104 @@ const ITEMS_PER_PAGE = 12;
 // ═══════════════════════════════════════
 // SUBCATEGORÍAS POR CATEGORÍA
 // ═══════════════════════════════════════
+const GENDERS = ['mujer','hombre','unisex'];
+const GENDER_LABEL = {mujer:'Mujer', hombre:'Hombre', unisex:'Unisex', all:'Todos'};
+const GENDER_ICON = {mujer:'♀', hombre:'♂', unisex:'⚭', all:'✦'};
+
+// Subcategorías por género + categoría
 const SUBCATS = {
-  set: ['Deportivos','Casuales','Elegantes','Playa'],
-  top: ['Crop tops','Blusas','Camisetas','Bodies','Tanks'],
-  pants: ['Joggers','Bikers','Palazzo','Cargos','Leggings','Shorts'],
-  jacket: ['Hoodies','Bombers','Windbreakers','Blazers']
+  mujer: {
+    set: ['Deportivos','Casuales','Elegantes','Playa'],
+    top: ['Crop tops','Blusas','Camisetas','Bodies','Tanks'],
+    pants: ['Bikers','Palazzo','Leggings','Shorts'],
+    jacket: ['Blazers','Bombers']
+  },
+  hombre: {
+    set: ['Deportivos','Casuales'],
+    top: ['Camisetas','Tanks'],
+    pants: ['Joggers','Cargos','Shorts'],
+    jacket: ['Hoodies','Bombers','Windbreakers']
+  },
+  unisex: {
+    set: ['Deportivos'],
+    top: ['Camisetas'],
+    pants: ['Joggers','Cargos'],
+    jacket: ['Hoodies','Windbreakers','Bombers']
+  }
 };
 
 // ═══════════════════════════════════════
-// 45 PRODUCTOS
+// 45 PRODUCTOS ORGANIZADOS POR GÉNERO
 // ═══════════════════════════════════════
 const P = [
-  // ═══ CONJUNTOS (12) ═══
-  {id:1, ref:'TS-001', name:'Conjunto Flex Pro', cat:'set', sub:'Deportivos', tag:'new', price:24, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul'], images:['assets/images/productos/DSC_0690.webp','assets/images/productos/DSC_0691.webp'], composition:'95% Algodón, 5% Elastano', care:'Lavar a máquina 30°C, no usar blanqueador', details:'Conjunto deportivo de 2 piezas con ajuste perfecto y tela transpirable'},
-  {id:2, ref:'TS-002', name:'Set Athletic Elite', cat:'set', sub:'Deportivos', tag:'hot', price:26, sizes:['S','M','L','XL'], colors:['Negro','Gris','Verde Militar','Vino'], images:['assets/images/productos/DSC_0692.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Set deportivo de alto rendimiento con tecnología dry-fit'},
-  {id:3, ref:'TS-003', name:'Set Crop + Legging', cat:'set', sub:'Deportivos', tag:'new', price:22, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Lila','Salmón'], images:['assets/images/productos/DSC_0709.webp','assets/images/productos/DSC_0722.webp'], composition:'88% Poliamida, 12% Elastano', care:'Lavar a mano con agua fría', details:'Conjunto deportivo con soporte moderado, ideal para yoga y pilates'},
-  {id:4, ref:'TS-004', name:'Set Runner Pro', cat:'set', sub:'Deportivos', tag:'hot', price:28, sizes:['S','M','L','XL'], colors:['Negro','Azul Marino','Rojo'], images:['assets/images/productos/DSC_0693.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina 30°C', details:'Conjunto para running con paneles de ventilación estratégicos'},
-  {id:5, ref:'TS-005', name:'Conjunto Casual Weekend', cat:'set', sub:'Casuales', tag:'new', price:32, sizes:['S','M','L','XL'], colors:['Beige','Gris','Blanco Hueso','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 40°C', details:'Conjunto casual perfecto para el día a día con estilo relajado'},
-  {id:6, ref:'TS-006', name:'Set Urban Comfort', cat:'set', sub:'Casuales', tag:'hot', price:34, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris Melange','Beige','Verde Oliva'], images:['assets/images/productos/DSC_0698.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina en ciclo normal', details:'Conjunto urbano con estética minimalista y tejido premium'},
-  {id:7, ref:'TS-007', name:'Set Loungewear Silk', cat:'set', sub:'Casuales', tag:'new', price:30, sizes:['S','M','L'], colors:['Champagne','Perla','Negro','Vino'], images:['assets/images/productos/DSC_0700.webp'], composition:'95% Poliéster, 5% Elastano (efecto seda)', care:'Lavar a mano con agua fría', details:'Set loungewear con acabado satinado tipo seda para máximo confort'},
-  {id:8, ref:'TS-008', name:'Conjunto Weekend Chic', cat:'set', sub:'Casuales', tag:'limit', price:36, sizes:['S','M','L','XL'], colors:['Beige','Terracota','Gris'], images:['assets/images/productos/DSC_0701.webp'], composition:'75% Viscosa, 25% Lino', care:'Lavar a mano, no torcer', details:'Conjunto chic con tejido fresco y caída elegante'},
-  {id:9, ref:'TS-009', name:'Set Blazer + Pantalón', cat:'set', sub:'Elegantes', tag:'new', price:48, sizes:['S','M','L','XL'], colors:['Negro','Gris','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'65% Poliéster, 32% Viscosa, 3% Elastano', care:'Lavado en seco recomendado', details:'Conjunto formal ejecutivo con blazer estructurado y pantalón recto'},
-  {id:10, ref:'TS-010', name:'Set Formal Executive', cat:'set', sub:'Elegantes', tag:'hot', price:52, sizes:['S','M','L','XL'], colors:['Negro','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Traje elegante para eventos formales y oficina ejecutiva'},
-  {id:11, ref:'TS-011', name:'Set Beach Vibes', cat:'set', sub:'Playa', tag:'new', price:26, sizes:['XS','S','M','L'], colors:['Blanco','Coral','Turquesa','Amarillo'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Viscosa', care:'Lavar a mano', details:'Conjunto playero con estampado tropical y tejido fresco'},
-  {id:12, ref:'TS-012', name:'Set Resort Palm', cat:'set', sub:'Playa', tag:'hot', price:28, sizes:['S','M','L'], colors:['Blanco','Beige Arena','Verde Palma'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Lino', care:'Lavar a mano con agua fría', details:'Set resort para vacaciones con estilo bohemio-chic'},
+  // ═══ MUJER — CONJUNTOS (8) ═══
+  {id:1, ref:'TS-001', name:'Conjunto Flex Pro', gender:'mujer', cat:'set', sub:'Deportivos', tag:'new', price:24, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul'], images:['assets/images/productos/DSC_0690.webp','assets/images/productos/DSC_0691.webp'], composition:'95% Algodón, 5% Elastano', care:'Lavar a máquina 30°C, no usar blanqueador', details:'Conjunto deportivo de 2 piezas con ajuste perfecto y tela transpirable'},
+  {id:2, ref:'TS-002', name:'Set Athletic Elite', gender:'mujer', cat:'set', sub:'Deportivos', tag:'hot', price:26, sizes:['S','M','L','XL'], colors:['Negro','Gris','Verde Militar','Vino'], images:['assets/images/productos/DSC_0692.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Set deportivo de alto rendimiento con tecnología dry-fit'},
+  {id:3, ref:'TS-003', name:'Set Crop + Legging', gender:'mujer', cat:'set', sub:'Deportivos', tag:'new', price:22, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Lila','Salmón'], images:['assets/images/productos/DSC_0709.webp','assets/images/productos/DSC_0722.webp'], composition:'88% Poliamida, 12% Elastano', care:'Lavar a mano con agua fría', details:'Conjunto deportivo con soporte moderado, ideal para yoga y pilates'},
+  {id:5, ref:'TS-005', name:'Conjunto Casual Weekend', gender:'mujer', cat:'set', sub:'Casuales', tag:'new', price:32, sizes:['S','M','L','XL'], colors:['Beige','Gris','Blanco Hueso','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 40°C', details:'Conjunto casual perfecto para el día a día con estilo relajado'},
+  {id:7, ref:'TS-007', name:'Set Loungewear Silk', gender:'mujer', cat:'set', sub:'Casuales', tag:'new', price:30, sizes:['S','M','L'], colors:['Champagne','Perla','Negro','Vino'], images:['assets/images/productos/DSC_0700.webp'], composition:'95% Poliéster, 5% Elastano (efecto seda)', care:'Lavar a mano con agua fría', details:'Set loungewear con acabado satinado tipo seda para máximo confort'},
+  {id:9, ref:'TS-009', name:'Set Blazer + Pantalón', gender:'mujer', cat:'set', sub:'Elegantes', tag:'new', price:48, sizes:['S','M','L','XL'], colors:['Negro','Gris','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'65% Poliéster, 32% Viscosa, 3% Elastano', care:'Lavado en seco recomendado', details:'Conjunto formal ejecutivo con blazer estructurado y pantalón recto'},
+  {id:11, ref:'TS-011', name:'Set Beach Vibes', gender:'mujer', cat:'set', sub:'Playa', tag:'new', price:26, sizes:['XS','S','M','L'], colors:['Blanco','Coral','Turquesa','Amarillo'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Viscosa', care:'Lavar a mano', details:'Conjunto playero con estampado tropical y tejido fresco'},
+  {id:12, ref:'TS-012', name:'Set Resort Palm', gender:'mujer', cat:'set', sub:'Playa', tag:'hot', price:28, sizes:['S','M','L'], colors:['Blanco','Beige Arena','Verde Palma'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Lino', care:'Lavar a mano con agua fría', details:'Set resort para vacaciones con estilo bohemio-chic'},
   
-  // ═══ TOPS (13) ═══
-  {id:13, ref:'TS-013', name:'Crop Top Ribbed', cat:'top', sub:'Crop tops', tag:'new', price:12, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Rosa','Menta','Beige'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Crop top de tejido acanalado con corte moderno y ajustado'},
-  {id:14, ref:'TS-014', name:'Crop Basic Cotton', cat:'top', sub:'Crop tops', tag:'hot', price:10, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Beige','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Crop top básico esencial de algodón peinado suave'},
-  {id:15, ref:'TS-015', name:'Crop Off Shoulder', cat:'top', sub:'Crop tops', tag:'new', price:14, sizes:['S','M','L'], colors:['Negro','Blanco','Vino','Verde'], images:['assets/images/productos/DSC_0698.webp'], composition:'95% Poliéster, 5% Elastano', care:'Lavar a máquina en ciclo suave', details:'Crop top con hombros descubiertos y elástico ajustable'},
-  {id:16, ref:'TS-016', name:'Blusa Satin Flow', cat:'top', sub:'Blusas', tag:'hot', price:22, sizes:['S','M','L','XL'], colors:['Champagne','Perla','Negro','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0700.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano, planchar temperatura baja', details:'Blusa fluida con caída elegante tipo satén'},
-  {id:17, ref:'TS-017', name:'Blusa Wrap Elegance', cat:'top', sub:'Blusas', tag:'new', price:24, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rojo','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a mano con agua fría', details:'Blusa cruzada con lazo lateral para un look sofisticado'},
-  {id:18, ref:'TS-018', name:'Blusa Silk Touch', cat:'top', sub:'Blusas', tag:'limit', price:26, sizes:['S','M','L'], colors:['Blanco Hueso','Champagne','Rosa Palo'], images:['assets/images/productos/DSC_0709.webp'], composition:'100% Poliéster efecto seda', care:'Lavar a mano', details:'Blusa con tacto seda para looks refinados'},
-  {id:19, ref:'TS-019', name:'Camiseta Basic Premium', cat:'top', sub:'Camisetas', tag:'hot', price:11, sizes:['XS','S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Beige','Café','Verde Militar'], images:['assets/images/productos/DSC_0722.webp'], composition:'100% Algodón peinado', care:'Lavar a máquina 30°C', details:'Camiseta básica premium con corte relajado y tela suave'},
-  {id:20, ref:'TS-020', name:'Camiseta Oversize', cat:'top', sub:'Camisetas', tag:'new', price:15, sizes:['S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Vino','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Algodón', care:'Lavar a máquina en ciclo normal', details:'Camiseta oversize con corte urbano moderno'},
-  {id:21, ref:'TS-021', name:'Camiseta Graphic Art', cat:'top', sub:'Camisetas', tag:'hot', price:13, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Algodón', care:'Lavar del revés a máquina', details:'Camiseta con estampado gráfico exclusivo The Selected'},
-  {id:22, ref:'TS-022', name:'Body Seamless Zen', cat:'top', sub:'Bodies', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Nude','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'90% Poliamida, 10% Elastano', care:'No usar secadora', details:'Body sin costuras para máximo confort y ajuste perfecto'},
-  {id:23, ref:'TS-023', name:'Body Long Sleeve', cat:'top', sub:'Bodies', tag:'hot', price:18, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Chocolate','Vino'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Body de manga larga con escote redondo y broches ocultos'},
-  {id:24, ref:'TS-024', name:'Tank Ribbed Essential', cat:'top', sub:'Tanks', tag:'hot', price:12, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rosa','Menta','Gris'], images:['assets/images/productos/DSC_0696.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a mano o máquina en ciclo suave', details:'Tank de tejido acanalado ajustado al cuerpo'},
-  {id:25, ref:'TS-025', name:'Tank Sport Pro', cat:'top', sub:'Tanks', tag:'new', price:14, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul','Coral'], images:['assets/images/productos/DSC_0698.webp'], composition:'88% Poliéster, 12% Elastano', care:'Lavar a máquina 30°C', details:'Tank deportivo con tejido transpirable y secado rápido'},
+  // ═══ MUJER — TOPS (10) ═══
+  {id:13, ref:'TS-013', name:'Crop Top Ribbed', gender:'mujer', cat:'top', sub:'Crop tops', tag:'new', price:12, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Rosa','Menta','Beige'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Crop top de tejido acanalado con corte moderno y ajustado'},
+  {id:14, ref:'TS-014', name:'Crop Basic Cotton', gender:'mujer', cat:'top', sub:'Crop tops', tag:'hot', price:10, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Beige','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Crop top básico esencial de algodón peinado suave'},
+  {id:15, ref:'TS-015', name:'Crop Off Shoulder', gender:'mujer', cat:'top', sub:'Crop tops', tag:'new', price:14, sizes:['S','M','L'], colors:['Negro','Blanco','Vino','Verde'], images:['assets/images/productos/DSC_0698.webp'], composition:'95% Poliéster, 5% Elastano', care:'Lavar a máquina en ciclo suave', details:'Crop top con hombros descubiertos y elástico ajustable'},
+  {id:16, ref:'TS-016', name:'Blusa Satin Flow', gender:'mujer', cat:'top', sub:'Blusas', tag:'hot', price:22, sizes:['S','M','L','XL'], colors:['Champagne','Perla','Negro','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0700.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano, planchar temperatura baja', details:'Blusa fluida con caída elegante tipo satén'},
+  {id:17, ref:'TS-017', name:'Blusa Wrap Elegance', gender:'mujer', cat:'top', sub:'Blusas', tag:'new', price:24, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rojo','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a mano con agua fría', details:'Blusa cruzada con lazo lateral para un look sofisticado'},
+  {id:18, ref:'TS-018', name:'Blusa Silk Touch', gender:'mujer', cat:'top', sub:'Blusas', tag:'limit', price:26, sizes:['S','M','L'], colors:['Blanco Hueso','Champagne','Rosa Palo'], images:['assets/images/productos/DSC_0709.webp'], composition:'100% Poliéster efecto seda', care:'Lavar a mano', details:'Blusa con tacto seda para looks refinados'},
+  {id:22, ref:'TS-022', name:'Body Seamless Zen', gender:'mujer', cat:'top', sub:'Bodies', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Nude','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'90% Poliamida, 10% Elastano', care:'No usar secadora', details:'Body sin costuras para máximo confort y ajuste perfecto'},
+  {id:23, ref:'TS-023', name:'Body Long Sleeve', gender:'mujer', cat:'top', sub:'Bodies', tag:'hot', price:18, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Chocolate','Vino'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Body de manga larga con escote redondo y broches ocultos'},
+  {id:24, ref:'TS-024', name:'Tank Ribbed Essential', gender:'mujer', cat:'top', sub:'Tanks', tag:'hot', price:12, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rosa','Menta','Gris'], images:['assets/images/productos/DSC_0696.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a mano o máquina en ciclo suave', details:'Tank de tejido acanalado ajustado al cuerpo'},
   
-  // ═══ PANTALONES (12) ═══
-  {id:26, ref:'TS-026', name:'Jogger Urban Slim', cat:'pants', sub:'Joggers', tag:'new', price:20, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Beige','Verde Militar'], images:['assets/images/productos/DSC_0700.webp'], composition:'85% Algodón, 15% Poliéster', care:'Lavar a máquina 30°C, planchar temperatura media', details:'Jogger corte slim con bolsillos laterales y puños elásticos'},
-  {id:27, ref:'TS-027', name:'Jogger Comfort Fit', cat:'pants', sub:'Joggers', tag:'hot', price:22, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris Melange','Azul Marino','Café'], images:['assets/images/productos/DSC_0701.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina en ciclo normal', details:'Jogger con corte relajado tipo french terry premium'},
-  {id:28, ref:'TS-028', name:'Biker Short Pro', cat:'pants', sub:'Bikers', tag:'hot', price:14, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Oliva','Vino'], images:['assets/images/productos/DSC_0709.webp'], composition:'75% Algodón, 25% Elastano', care:'Lavar a máquina 30°C', details:'Short biker ajustado con costuras planas y cintura ancha'},
-  {id:29, ref:'TS-029', name:'Biker High Waist', cat:'pants', sub:'Bikers', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Nude','Gris','Blanco'], images:['assets/images/productos/DSC_0722.webp'], composition:'80% Poliamida, 20% Elastano', care:'Lavar a mano', details:'Biker de cintura alta con efecto push-up'},
-  {id:30, ref:'TS-030', name:'Palazzo Wide Silk', cat:'pants', sub:'Palazzo', tag:'new', price:28, sizes:['S','M','L','XL'], colors:['Negro','Beige','Champagne','Verde Botella'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano', details:'Palazzo ancho con caída tipo seda para looks elegantes'},
-  {id:31, ref:'TS-031', name:'Palazzo Culotte', cat:'pants', sub:'Palazzo', tag:'hot', price:26, sizes:['XS','S','M','L','XL'], colors:['Negro','Beige','Blanco','Terracota'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a máquina en ciclo delicado', details:'Palazzo tipo culotte con cintura alta ajustable'},
-  {id:32, ref:'TS-032', name:'Cargo Utility Pro', cat:'pants', sub:'Cargos', tag:'new', price:26, sizes:['S','M','L','XL'], colors:['Verde Militar','Beige','Negro','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Algodón resistente', care:'Lavar a máquina 40°C', details:'Cargo con múltiples bolsillos utility y corte cargo pants moderno'},
-  {id:33, ref:'TS-033', name:'Cargo Slim Urban', cat:'pants', sub:'Cargos', tag:'hot', price:24, sizes:['S','M','L','XL','XXL'], colors:['Negro','Beige','Gris Piedra'], images:['assets/images/productos/DSC_0693.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar a máquina 30°C', details:'Cargo con corte slim y detalles urbanos actuales'},
-  {id:34, ref:'TS-034', name:'Legging Sculpt Pro', cat:'pants', sub:'Leggings', tag:'hot', price:18, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Verde Militar','Vino'], images:['assets/images/productos/DSC_0696.webp'], composition:'82% Poliamida, 18% Elastano', care:'Lavar a mano con agua fría', details:'Legging con efecto sculpt y cintura alta reforzada'},
-  {id:35, ref:'TS-035', name:'Legging High Waist', cat:'pants', sub:'Leggings', tag:'new', price:16, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Azul Marino','Café'], images:['assets/images/productos/DSC_0698.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina en ciclo suave', details:'Legging básico de cintura alta con soporte moderado'},
-  {id:36, ref:'TS-036', name:'Short Denim Chic', cat:'pants', sub:'Shorts', tag:'new', price:22, sizes:['XS','S','M','L','XL'], colors:['Azul Denim','Negro','Blanco','Beige'], images:['assets/images/productos/DSC_0700.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar del revés', details:'Short denim con lavado especial y corte moderno'},
-  {id:37, ref:'TS-037', name:'Short Bermuda Casual', cat:'pants', sub:'Shorts', tag:'hot', price:18, sizes:['S','M','L','XL'], colors:['Beige','Negro','Verde Militar','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Bermuda casual con corte cómodo y bolsillos funcionales'},
+  // ═══ MUJER — PANTALONES (5) ═══
+  {id:28, ref:'TS-028', name:'Biker Short Pro', gender:'mujer', cat:'pants', sub:'Bikers', tag:'hot', price:14, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Oliva','Vino'], images:['assets/images/productos/DSC_0709.webp'], composition:'75% Algodón, 25% Elastano', care:'Lavar a máquina 30°C', details:'Short biker ajustado con costuras planas y cintura ancha'},
+  {id:29, ref:'TS-029', name:'Biker High Waist', gender:'mujer', cat:'pants', sub:'Bikers', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Nude','Gris','Blanco'], images:['assets/images/productos/DSC_0722.webp'], composition:'80% Poliamida, 20% Elastano', care:'Lavar a mano', details:'Biker de cintura alta con efecto push-up'},
+  {id:30, ref:'TS-030', name:'Palazzo Wide Silk', gender:'mujer', cat:'pants', sub:'Palazzo', tag:'new', price:28, sizes:['S','M','L','XL'], colors:['Negro','Beige','Champagne','Verde Botella'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano', details:'Palazzo ancho con caída tipo seda para looks elegantes'},
+  {id:34, ref:'TS-034', name:'Legging Sculpt Pro', gender:'mujer', cat:'pants', sub:'Leggings', tag:'hot', price:18, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Verde Militar','Vino'], images:['assets/images/productos/DSC_0696.webp'], composition:'82% Poliamida, 18% Elastano', care:'Lavar a mano con agua fría', details:'Legging con efecto sculpt y cintura alta reforzada'},
+  {id:35, ref:'TS-035', name:'Legging High Waist', gender:'mujer', cat:'pants', sub:'Leggings', tag:'new', price:16, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Azul Marino','Café'], images:['assets/images/productos/DSC_0698.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina en ciclo suave', details:'Legging básico de cintura alta con soporte moderado'},
   
-  // ═══ CHAQUETAS (8) ═══
-  {id:38, ref:'TS-038', name:'Hoodie Oversize Mod', cat:'jacket', sub:'Hoodies', tag:'limit', price:38, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Azul','Café','Verde Militar'], images:['assets/images/productos/DSC_0709.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina con colores similares', details:'Hoodie oversize con capucha ajustable y bolsillo canguro'},
-  {id:39, ref:'TS-039', name:'Hoodie Zip Premium', cat:'jacket', sub:'Hoodies', tag:'new', price:42, sizes:['S','M','L','XL'], colors:['Negro','Gris Melange','Vino','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 30°C', details:'Hoodie con cierre completo y forro french terry premium'},
-  {id:40, ref:'TS-040', name:'Bomber Classic', cat:'jacket', sub:'Bombers', tag:'hot', price:48, sizes:['S','M','L','XL'], colors:['Negro','Verde Militar','Azul Marino','Café'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster con forro', care:'Lavado en seco recomendado', details:'Bomber jacket clásica con puños y cintura elásticos'},
-  {id:41, ref:'TS-041', name:'Bomber Satin Luxe', cat:'jacket', sub:'Bombers', tag:'new', price:52, sizes:['S','M','L','XL'], colors:['Negro','Champagne','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Poliéster satinado, 5% Elastano', care:'Lavado en seco', details:'Bomber satinado premium con acabado luxury'},
-  {id:42, ref:'TS-042', name:'Windbreaker Sport', cat:'jacket', sub:'Windbreakers', tag:'limit', price:34, sizes:['S','M','L','XL'], colors:['Negro','Azul','Rojo','Amarillo Neón'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Poliéster', care:'Lavar a mano, no planchar', details:'Windbreaker ligera y resistente al viento con detalles reflectivos'},
-  {id:43, ref:'TS-043', name:'Windbreaker Color Block', cat:'jacket', sub:'Windbreakers', tag:'new', price:36, sizes:['S','M','L','XL'], colors:['Multi Negro/Amarillo','Multi Azul/Blanco','Multi Rojo/Negro'], images:['assets/images/productos/DSC_0693.webp'], composition:'100% Nylon impermeable', care:'Lavar a mano', details:'Windbreaker con diseño color block y capucha plegable'},
-  {id:44, ref:'TS-044', name:'Blazer Structured', cat:'jacket', sub:'Blazers', tag:'new', price:58, sizes:['S','M','L','XL'], colors:['Negro','Beige','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Blazer estructurado con hombreras discretas y forro completo'},
-  {id:45, ref:'TS-045', name:'Blazer Oversize Chic', cat:'jacket', sub:'Blazers', tag:'hot', price:56, sizes:['S','M','L','XL'], colors:['Negro','Beige','Café Chocolate'], images:['assets/images/productos/DSC_0698.webp'], composition:'75% Poliéster, 23% Viscosa, 2% Elastano', care:'Lavado en seco recomendado', details:'Blazer oversize con corte moderno y solapas anchas'},
+  // ═══ MUJER — CHAQUETAS (2) ═══
+  {id:44, ref:'TS-044', name:'Blazer Structured', gender:'mujer', cat:'jacket', sub:'Blazers', tag:'new', price:58, sizes:['S','M','L','XL'], colors:['Negro','Beige','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Blazer estructurado con hombreras discretas y forro completo'},
+  {id:45, ref:'TS-045', name:'Blazer Oversize Chic', gender:'mujer', cat:'jacket', sub:'Blazers', tag:'hot', price:56, sizes:['S','M','L','XL'], colors:['Negro','Beige','Café Chocolate'], images:['assets/images/productos/DSC_0698.webp'], composition:'75% Poliéster, 23% Viscosa, 2% Elastano', care:'Lavado en seco recomendado', details:'Blazer oversize con corte moderno y solapas anchas'},
+  
+  // ═══ HOMBRE — CONJUNTOS (2) ═══
+  {id:4, ref:'TS-004', name:'Set Runner Pro', gender:'hombre', cat:'set', sub:'Deportivos', tag:'hot', price:28, sizes:['S','M','L','XL'], colors:['Negro','Azul Marino','Rojo'], images:['assets/images/productos/DSC_0693.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina 30°C', details:'Conjunto para running con paneles de ventilación estratégicos'},
+  {id:10, ref:'TS-010', name:'Set Formal Executive', gender:'hombre', cat:'set', sub:'Casuales', tag:'hot', price:52, sizes:['S','M','L','XL'], colors:['Negro','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Traje elegante para eventos formales y oficina ejecutiva'},
+  
+  // ═══ HOMBRE — TOPS (3) ═══
+  {id:20, ref:'TS-020', name:'Camiseta Oversize', gender:'hombre', cat:'top', sub:'Camisetas', tag:'new', price:15, sizes:['S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Vino','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Algodón', care:'Lavar a máquina en ciclo normal', details:'Camiseta oversize con corte urbano moderno'},
+  {id:21, ref:'TS-021', name:'Camiseta Graphic Art', gender:'hombre', cat:'top', sub:'Camisetas', tag:'hot', price:13, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Algodón', care:'Lavar del revés a máquina', details:'Camiseta con estampado gráfico exclusivo The Selected'},
+  {id:25, ref:'TS-025', name:'Tank Sport Pro', gender:'hombre', cat:'top', sub:'Tanks', tag:'new', price:14, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul','Coral'], images:['assets/images/productos/DSC_0698.webp'], composition:'88% Poliéster, 12% Elastano', care:'Lavar a máquina 30°C', details:'Tank deportivo con tejido transpirable y secado rápido'},
+  
+  // ═══ HOMBRE — PANTALONES (3) ═══
+  {id:26, ref:'TS-026', name:'Jogger Urban Slim', gender:'hombre', cat:'pants', sub:'Joggers', tag:'new', price:20, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Beige','Verde Militar'], images:['assets/images/productos/DSC_0700.webp'], composition:'85% Algodón, 15% Poliéster', care:'Lavar a máquina 30°C, planchar temperatura media', details:'Jogger corte slim con bolsillos laterales y puños elásticos'},
+  {id:32, ref:'TS-032', name:'Cargo Utility Pro', gender:'hombre', cat:'pants', sub:'Cargos', tag:'new', price:26, sizes:['S','M','L','XL'], colors:['Verde Militar','Beige','Negro','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Algodón resistente', care:'Lavar a máquina 40°C', details:'Cargo con múltiples bolsillos utility y corte cargo pants moderno'},
+  {id:37, ref:'TS-037', name:'Short Bermuda Casual', gender:'hombre', cat:'pants', sub:'Shorts', tag:'hot', price:18, sizes:['S','M','L','XL'], colors:['Beige','Negro','Verde Militar','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Bermuda casual con corte cómodo y bolsillos funcionales'},
+  
+  // ═══ HOMBRE — CHAQUETAS (2) ═══
+  {id:40, ref:'TS-040', name:'Bomber Classic', gender:'hombre', cat:'jacket', sub:'Bombers', tag:'hot', price:48, sizes:['S','M','L','XL'], colors:['Negro','Verde Militar','Azul Marino','Café'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster con forro', care:'Lavado en seco recomendado', details:'Bomber jacket clásica con puños y cintura elásticos'},
+  {id:42, ref:'TS-042', name:'Windbreaker Sport', gender:'hombre', cat:'jacket', sub:'Windbreakers', tag:'limit', price:34, sizes:['S','M','L','XL'], colors:['Negro','Azul','Rojo','Amarillo Neón'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Poliéster', care:'Lavar a mano, no planchar', details:'Windbreaker ligera y resistente al viento con detalles reflectivos'},
+  
+  // ═══ UNISEX — CONJUNTOS (2) ═══
+  {id:6, ref:'TS-006', name:'Set Urban Comfort', gender:'unisex', cat:'set', sub:'Deportivos', tag:'hot', price:34, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris Melange','Beige','Verde Oliva'], images:['assets/images/productos/DSC_0698.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina en ciclo normal', details:'Conjunto urbano con estética minimalista y tejido premium'},
+  {id:8, ref:'TS-008', name:'Conjunto Weekend Chic', gender:'unisex', cat:'set', sub:'Deportivos', tag:'limit', price:36, sizes:['S','M','L','XL'], colors:['Beige','Terracota','Gris'], images:['assets/images/productos/DSC_0701.webp'], composition:'75% Viscosa, 25% Lino', care:'Lavar a mano, no torcer', details:'Conjunto chic con tejido fresco y caída elegante'},
+  
+  // ═══ UNISEX — TOPS (1) ═══
+  {id:19, ref:'TS-019', name:'Camiseta Basic Premium', gender:'unisex', cat:'top', sub:'Camisetas', tag:'hot', price:11, sizes:['XS','S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Beige','Café','Verde Militar'], images:['assets/images/productos/DSC_0722.webp'], composition:'100% Algodón peinado', care:'Lavar a máquina 30°C', details:'Camiseta básica premium con corte relajado y tela suave'},
+  
+  // ═══ UNISEX — PANTALONES (4) ═══
+  {id:27, ref:'TS-027', name:'Jogger Comfort Fit', gender:'unisex', cat:'pants', sub:'Joggers', tag:'hot', price:22, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris Melange','Azul Marino','Café'], images:['assets/images/productos/DSC_0701.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina en ciclo normal', details:'Jogger con corte relajado tipo french terry premium'},
+  {id:31, ref:'TS-031', name:'Palazzo Culotte', gender:'mujer', cat:'pants', sub:'Palazzo', tag:'hot', price:26, sizes:['XS','S','M','L','XL'], colors:['Negro','Beige','Blanco','Terracota'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a máquina en ciclo delicado', details:'Palazzo tipo culotte con cintura alta ajustable'},
+  {id:33, ref:'TS-033', name:'Cargo Slim Urban', gender:'unisex', cat:'pants', sub:'Cargos', tag:'hot', price:24, sizes:['S','M','L','XL','XXL'], colors:['Negro','Beige','Gris Piedra'], images:['assets/images/productos/DSC_0693.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar a máquina 30°C', details:'Cargo con corte slim y detalles urbanos actuales'},
+  {id:36, ref:'TS-036', name:'Short Denim Chic', gender:'unisex', cat:'pants', sub:'Shorts', tag:'new', price:22, sizes:['XS','S','M','L','XL'], colors:['Azul Denim','Negro','Blanco','Beige'], images:['assets/images/productos/DSC_0700.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar del revés', details:'Short denim con lavado especial y corte moderno'},
+  
+  // ═══ UNISEX — CHAQUETAS (3) ═══
+  {id:38, ref:'TS-038', name:'Hoodie Oversize Mod', gender:'unisex', cat:'jacket', sub:'Hoodies', tag:'limit', price:38, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Azul','Café','Verde Militar'], images:['assets/images/productos/DSC_0709.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina con colores similares', details:'Hoodie oversize con capucha ajustable y bolsillo canguro'},
+  {id:39, ref:'TS-039', name:'Hoodie Zip Premium', gender:'unisex', cat:'jacket', sub:'Hoodies', tag:'new', price:42, sizes:['S','M','L','XL'], colors:['Negro','Gris Melange','Vino','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 30°C', details:'Hoodie con cierre completo y forro french terry premium'},
+  {id:41, ref:'TS-041', name:'Bomber Satin Luxe', gender:'unisex', cat:'jacket', sub:'Bombers', tag:'new', price:52, sizes:['S','M','L','XL'], colors:['Negro','Champagne','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Poliéster satinado, 5% Elastano', care:'Lavado en seco', details:'Bomber satinado premium con acabado luxury'},
+  {id:43, ref:'TS-043', name:'Windbreaker Color Block', gender:'unisex', cat:'jacket', sub:'Windbreakers', tag:'new', price:36, sizes:['S','M','L','XL'], colors:['Multi Negro/Amarillo','Multi Azul/Blanco','Multi Rojo/Negro'], images:['assets/images/productos/DSC_0693.webp'], composition:'100% Nylon impermeable', care:'Lavar a mano', details:'Windbreaker con diseño color block y capucha plegable'},
 ];
 
 const catLabel = {set:'Conjuntos', top:'Tops', pants:'Pantalones', jacket:'Chaquetas', all:'Todos'};
@@ -753,8 +797,9 @@ const ALL_SIZES = ['XS','S','M','L','XL','XXL'];
 // STATE
 // ═══════════════════════════════════════
 let filters = {
+  gender: 'all',
   cat: 'all',
-  subs: [],
+  sub: '',
   sizes: [],
   tags: []
 };
@@ -884,10 +929,12 @@ function updateCartBadge(){
 // ═══════════════════════════════════════
 function getFilteredProducts(){
   return P.filter(function(p){
+    // Género
+    if(filters.gender !== 'all' && p.gender !== filters.gender) return false;
     // Categoría
     if(filters.cat !== 'all' && p.cat !== filters.cat) return false;
-    // Subcategorías
-    if(filters.subs.length > 0 && filters.subs.indexOf(p.sub) === -1) return false;
+    // Subcategoría (solo 1)
+    if(filters.sub && p.sub !== filters.sub) return false;
     // Tallas
     if(filters.sizes.length > 0){
       const hasSize = p.sizes.some(function(s){ return filters.sizes.indexOf(s) !== -1; });
@@ -899,9 +946,45 @@ function getFilteredProducts(){
   });
 }
 
-function countCategoryProducts(cat){
-  if(cat === 'all') return P.length;
-  return P.filter(function(p){ return p.cat === cat; }).length;
+function countByGender(gender){
+  if(gender === 'all') return P.length;
+  return P.filter(function(p){ return p.gender === gender; }).length;
+}
+
+function countByCategory(cat){
+  return P.filter(function(p){
+    if(filters.gender !== 'all' && p.gender !== filters.gender) return false;
+    if(cat === 'all') return true;
+    return p.cat === cat;
+  }).length;
+}
+
+function countBySubcategory(sub){
+  return P.filter(function(p){
+    if(filters.gender !== 'all' && p.gender !== filters.gender) return false;
+    if(filters.cat !== 'all' && p.cat !== filters.cat) return false;
+    return p.sub === sub;
+  }).length;
+}
+
+function getAvailableSubcategories(){
+  if(filters.cat === 'all') return [];
+  const subs = new Set();
+  P.forEach(function(p){
+    if(filters.gender !== 'all' && p.gender !== filters.gender) return;
+    if(p.cat === filters.cat) subs.add(p.sub);
+  });
+  return Array.from(subs);
+}
+
+function getActiveFilterCount(){
+  let count = 0;
+  if(filters.gender !== 'all') count++;
+  if(filters.cat !== 'all') count++;
+  if(filters.sub) count++;
+  count += filters.sizes.length;
+  count += filters.tags.length;
+  return count;
 }
 
 function getActiveFilterCount(){
@@ -922,7 +1005,23 @@ function renderSidebar(targetId){
   
   let html = '';
   
-  // Categorías
+  // GÉNERO
+  html += '<div class="filter-group">' +
+    '<div class="filter-group-title"><span>Género</span></div>' +
+    '<div class="filter-gender-list">';
+  
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'all' ? 'active' : '') + '" data-gender="all">' +
+    '<span class="filter-gender-icon">✦</span>Todos</button>';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'mujer' ? 'active' : '') + '" data-gender="mujer">' +
+    '<span class="filter-gender-icon">♀</span>Mujer</button>';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'hombre' ? 'active' : '') + '" data-gender="hombre">' +
+    '<span class="filter-gender-icon">♂</span>Hombre</button>';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'unisex' ? 'active' : '') + '" data-gender="unisex">' +
+    '<span class="filter-gender-icon">⚭</span>Unisex</button>';
+  
+  html += '</div></div>';
+  
+  // CATEGORÍA
   html += '<div class="filter-group">' +
     '<div class="filter-group-title"><span>Categoría</span></div>' +
     '<div class="filter-cat-list">';
@@ -930,43 +1029,52 @@ function renderSidebar(targetId){
   html += '<div class="filter-cat-item ' + (filters.cat === 'all' ? 'active' : '') + '" data-cat="all">' +
     '<div class="filter-cat-radio"></div>' +
     '<span class="filter-cat-name">Todos</span>' +
-    '<span class="filter-cat-count">' + P.length + '</span>' +
+    '<span class="filter-cat-count">' + countByCategory('all') + '</span>' +
   '</div>';
   
-  Object.keys(catLabel).forEach(function(cat){
-    if(cat === 'all') return;
+  ['set','top','pants','jacket'].forEach(function(cat){
+    const count = countByCategory(cat);
     html += '<div class="filter-cat-item ' + (filters.cat === cat ? 'active' : '') + '" data-cat="' + cat + '">' +
       '<div class="filter-cat-radio"></div>' +
       '<span class="filter-cat-name">' + catLabel[cat] + '</span>' +
-      '<span class="filter-cat-count">' + countCategoryProducts(cat) + '</span>' +
+      '<span class="filter-cat-count">' + count + '</span>' +
     '</div>';
   });
   
   html += '</div></div>';
   
-  // Subcategorías (solo si hay categoría seleccionada)
+  // SUBCATEGORÍA (Radio - solo 1)
   html += '<div class="filter-group">' +
     '<div class="filter-group-title"><span>Subcategoría</span></div>';
   
   if(filters.cat === 'all'){
     html += '<div class="filter-empty">Selecciona una categoría</div>';
   } else {
-    const subs = SUBCATS[filters.cat] || [];
-    html += '<div class="filter-sub-list open">';
-    subs.forEach(function(sub){
-      const count = P.filter(function(p){ return p.cat === filters.cat && p.sub === sub; }).length;
-      const active = filters.subs.indexOf(sub) !== -1;
-      html += '<div class="filter-sub-item ' + (active ? 'active' : '') + '" data-sub="' + sub + '">' +
-        '<div class="filter-sub-check"></div>' +
-        '<span class="filter-sub-name">' + sub + '</span>' +
-        '<span class="filter-cat-count">' + count + '</span>' +
+    const availableSubs = getAvailableSubcategories();
+    if(availableSubs.length === 0){
+      html += '<div class="filter-empty">Sin subcategorías disponibles</div>';
+    } else {
+      html += '<div class="filter-cat-list">';
+      html += '<div class="filter-cat-item ' + (!filters.sub ? 'active' : '') + '" data-sub="">' +
+        '<div class="filter-cat-radio"></div>' +
+        '<span class="filter-cat-name">Todas</span>' +
+        '<span class="filter-cat-count">' + countByCategory(filters.cat) + '</span>' +
       '</div>';
-    });
-    html += '</div>';
+      availableSubs.forEach(function(sub){
+        const count = countBySubcategory(sub);
+        const active = filters.sub === sub;
+        html += '<div class="filter-cat-item ' + (active ? 'active' : '') + '" data-sub="' + sub + '">' +
+          '<div class="filter-cat-radio"></div>' +
+          '<span class="filter-cat-name">' + sub + '</span>' +
+          '<span class="filter-cat-count">' + count + '</span>' +
+        '</div>';
+      });
+      html += '</div>';
+    }
   }
   html += '</div>';
   
-  // Tallas
+  // TALLAS
   html += '<div class="filter-group">' +
     '<div class="filter-group-title"><span>Talla</span></div>' +
     '<div class="filter-size-grid">';
@@ -976,7 +1084,7 @@ function renderSidebar(targetId){
   });
   html += '</div></div>';
   
-  // Estado (Tags)
+  // ESTADO
   html += '<div class="filter-group">' +
     '<div class="filter-group-title"><span>Estado</span></div>' +
     '<div class="filter-tag-list">';
@@ -990,7 +1098,7 @@ function renderSidebar(targetId){
   });
   html += '</div></div>';
   
-  // Limpiar
+  // LIMPIAR
   const activeCount = getActiveFilterCount();
   html += '<button class="filter-clear" ' + (activeCount === 0 ? 'disabled' : '') + '>' +
     '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
@@ -1002,29 +1110,46 @@ function renderSidebar(targetId){
 }
 
 function attachSidebarEvents(container){
-  container.querySelectorAll('.filter-cat-item').forEach(function(el){
+  // Género
+  container.querySelectorAll('.filter-gender-btn').forEach(function(el){
     el.addEventListener('click', function(){
-      const cat = el.dataset.cat;
-      if(filters.cat !== cat){
-        filters.cat = cat;
-        filters.subs = [];
+      const gender = el.dataset.gender;
+      if(filters.gender !== gender){
+        filters.gender = gender;
+        filters.cat = 'all';
+        filters.sub = '';
         currentPage = 1;
         updateAll();
       }
     });
   });
   
-  container.querySelectorAll('.filter-sub-item').forEach(function(el){
+  // Categoría
+  container.querySelectorAll('.filter-cat-item[data-cat]').forEach(function(el){
     el.addEventListener('click', function(){
-      const sub = el.dataset.sub;
-      const idx = filters.subs.indexOf(sub);
-      if(idx === -1) filters.subs.push(sub);
-      else filters.subs.splice(idx, 1);
-      currentPage = 1;
-      updateAll();
+      const cat = el.dataset.cat;
+      if(filters.cat !== cat){
+        filters.cat = cat;
+        filters.sub = '';
+        currentPage = 1;
+        updateAll();
+      }
     });
   });
   
+  // Subcategoría (radio - solo 1)
+  container.querySelectorAll('.filter-cat-item[data-sub]').forEach(function(el){
+    el.addEventListener('click', function(){
+      const sub = el.dataset.sub;
+      if(filters.sub !== sub){
+        filters.sub = sub;
+        currentPage = 1;
+        updateAll();
+      }
+    });
+  });
+  
+  // Tallas
   container.querySelectorAll('.filter-size-btn').forEach(function(el){
     el.addEventListener('click', function(){
       const size = el.dataset.size;
@@ -1036,6 +1161,7 @@ function attachSidebarEvents(container){
     });
   });
   
+  // Tags
   container.querySelectorAll('.filter-tag-item').forEach(function(el){
     el.addEventListener('click', function(){
       const tag = el.dataset.tag;
@@ -1047,6 +1173,7 @@ function attachSidebarEvents(container){
     });
   });
   
+  // Limpiar
   const clearBtn = container.querySelector('.filter-clear');
   if(clearBtn){
     clearBtn.addEventListener('click', function(){
@@ -1056,7 +1183,7 @@ function attachSidebarEvents(container){
 }
 
 window.clearAllFilters = function(){
-  filters = { cat:'all', subs:[], sizes:[], tags:[] };
+  filters = { gender:'all', cat:'all', sub:'', sizes:[], tags:[] };
   currentPage = 1;
   updateAll();
 };
@@ -1070,12 +1197,15 @@ function renderActiveFilters(){
   
   let html = '';
   
-  if(filters.cat !== 'all'){
-    html += '<div class="active-filter-chip">' + catLabel[filters.cat] + '<button data-remove="cat">✕</button></div>';
+  if(filters.gender !== 'all'){
+    html += '<div class="active-filter-chip">' + GENDER_LABEL[filters.gender] + '<button data-remove-gender="1">✕</button></div>';
   }
-  filters.subs.forEach(function(sub){
-    html += '<div class="active-filter-chip">' + sub + '<button data-remove-sub="' + sub + '">✕</button></div>';
-  });
+  if(filters.cat !== 'all'){
+    html += '<div class="active-filter-chip">' + catLabel[filters.cat] + '<button data-remove-cat="1">✕</button></div>';
+  }
+  if(filters.sub){
+    html += '<div class="active-filter-chip">' + filters.sub + '<button data-remove-sub="1">✕</button></div>';
+  }
   filters.sizes.forEach(function(size){
     html += '<div class="active-filter-chip">Talla ' + size + '<button data-remove-size="' + size + '">✕</button></div>';
   });
@@ -1085,38 +1215,26 @@ function renderActiveFilters(){
   
   container.innerHTML = html;
   
-  container.querySelectorAll('button[data-remove]').forEach(function(btn){
-    btn.addEventListener('click', function(){
+  container.onclick = function(e){
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    if(btn.dataset.removeGender){
+      filters.gender = 'all';
       filters.cat = 'all';
-      filters.subs = [];
-      currentPage = 1;
-      updateAll();
-    });
-  });
-  container.querySelectorAll('button[data-remove-sub]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      const sub = btn.dataset.removeSub;
-      filters.subs = filters.subs.filter(function(s){ return s !== sub; });
-      currentPage = 1;
-      updateAll();
-    });
-  });
-  container.querySelectorAll('button[data-remove-size]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      const size = btn.dataset.removeSize;
-      filters.sizes = filters.sizes.filter(function(s){ return s !== size; });
-      currentPage = 1;
-      updateAll();
-    });
-  });
-  container.querySelectorAll('button[data-remove-tag]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      const tag = btn.dataset.removeTag;
-      filters.tags = filters.tags.filter(function(t){ return t !== tag; });
-      currentPage = 1;
-      updateAll();
-    });
-  });
+      filters.sub = '';
+    } else if(btn.dataset.removeCat){
+      filters.cat = 'all';
+      filters.sub = '';
+    } else if(btn.dataset.removeSub){
+      filters.sub = '';
+    } else if(btn.dataset.removeSize){
+      filters.sizes = filters.sizes.filter(function(s){ return s !== btn.dataset.removeSize; });
+    } else if(btn.dataset.removeTag){
+      filters.tags = filters.tags.filter(function(t){ return t !== btn.dataset.removeTag; });
+    }
+    currentPage = 1;
+    updateAll();
+  };
 }
 
 // ═══════════════════════════════════════
@@ -1283,7 +1401,31 @@ function loadFromURL(){
   const subs = params.get('subs');
   const sizes = params.get('sizes');
   const tags = params.get('tags');
+  function updateURL(){
+  const params = new URLSearchParams();
+  if(filters.gender !== 'all') params.set('g', filters.gender);
+  if(filters.cat !== 'all') params.set('cat', filters.cat);
+  if(filters.sub) params.set('sub', filters.sub);
+  if(filters.sizes.length) params.set('sizes', filters.sizes.join(','));
+  if(filters.tags.length) params.set('tags', filters.tags.join(','));
+  const url = params.toString() ? '?' + params.toString() : window.location.pathname;
+  window.history.replaceState({}, '', url);
+}
+
+function loadFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const gender = params.get('g');
+  const cat = params.get('cat');
+  const sub = params.get('sub');
+  const sizes = params.get('sizes');
+  const tags = params.get('tags');
   
+  if(gender && GENDERS.indexOf(gender) !== -1) filters.gender = gender;
+  if(cat && ['all','set','top','pants','jacket'].indexOf(cat) !== -1) filters.cat = cat;
+  if(sub) filters.sub = sub;
+  if(sizes) filters.sizes = sizes.split(',').filter(function(s){ return ALL_SIZES.indexOf(s) !== -1; });
+  if(tags) filters.tags = tags.split(',').filter(function(t){ return ['new','hot','limit'].indexOf(t) !== -1; });
+}
   if(cat && ['all','set','top','pants','jacket'].indexOf(cat) !== -1) filters.cat = cat;
   if(subs) filters.subs = subs.split(',');
   if(sizes) filters.sizes = sizes.split(',').filter(function(s){ return ALL_SIZES.indexOf(s) !== -1; });
