@@ -62,8 +62,28 @@
 /* ═══════════════════════════════════════
    SIDEBAR FILTROS
    ═══════════════════════════════════════ */
-.sidebar{background:var(--blanco);border-radius:var(--radius-md);border:1px solid var(--border);padding:1.75rem;height:fit-content;position:sticky;top:calc(var(--nav-height) + 1rem);transition:top var(--transition-fast)}
-.nav.scrolled ~ main .sidebar{top:calc(64px + 1rem)}
+.sidebar{
+  background:var(--blanco);
+  border-radius:var(--radius-md);
+  border:1px solid var(--border);
+  padding:1.75rem;
+  position:sticky;
+  top:calc(var(--nav-height) + 1rem);
+  transition:top var(--transition-fast);
+  max-height:calc(100vh - var(--nav-height) - 2rem);
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:thin;
+  scrollbar-color:var(--nude-dark) transparent;
+}
+.nav.scrolled ~ main .sidebar{
+  top:calc(64px + 1rem);
+  max-height:calc(100vh - 64px - 2rem);
+}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-track{background:transparent;margin:1rem 0}
+.sidebar::-webkit-scrollbar-thumb{background:var(--nude-dark);border-radius:3px;border:1px solid var(--blanco)}
+.sidebar::-webkit-scrollbar-thumb:hover{background:var(--azul)}
 
 .sidebar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
 .sidebar-title{font-family:var(--font-serif);font-size:22px;font-weight:500;color:var(--azul-dark);letter-spacing:1px;text-transform:uppercase}
