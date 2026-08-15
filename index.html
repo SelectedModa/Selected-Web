@@ -359,14 +359,17 @@
   .cta-actions{flex-direction:column;max-width:280px;margin:0 auto}
   .cta-actions .btn{width:100%}
   
-  /* Even smaller watermarks */
-  .promo-wm-left,.promo-wm-right{width:130px;opacity:.035}
-  .cat-wm-top,.cat-wm-bottom{width:100px;opacity:.025}
-  .feat-wm-corner{width:110px;opacity:.025}
-  .nos-wm-top,.nos-wm-bottom{width:130px;opacity:.03}
-  .nos-wm-center{width:260px;opacity:.02}
-  .cta-wm-right{width:160px;opacity:.04}
-  .cta-wm-left{width:120px;opacity:.035}
+  /* Even smaller watermarks - Mobile optimized */
+  .promo-wm-left,.promo-wm-right{width:110px;opacity:.03;will-change:auto}
+  .cat-wm-top,.cat-wm-bottom{width:90px;opacity:.02;will-change:auto}
+  .feat-wm-corner{width:100px;opacity:.02;will-change:auto}
+  .nos-wm-top,.nos-wm-bottom{width:110px;opacity:.025;will-change:auto}
+  .nos-wm-center{width:220px;opacity:.015;will-change:auto}
+  .cta-wm-right{width:140px;opacity:.035;will-change:auto}
+  .cta-wm-left{width:100px;opacity:.03;will-change:auto}
+  
+  /* Desactivar animaciones flotantes en móvil (mejora performance) */
+  .wm-float{animation:none}
 }
 
 @media(max-width:380px){
