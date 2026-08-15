@@ -173,16 +173,18 @@
 .m-color-name{font-family:var(--font-serif);font-size:18px;font-weight:500;color:var(--azul-dark);letter-spacing:1px;text-transform:uppercase}
 .m-color-total{font-family:var(--font-sans);font-size:11px;font-weight:700;color:var(--azul);background:var(--blanco);padding:4px 12px;border-radius:var(--radius-full);border:1px solid var(--border)}
 
-.m-size-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px}
-.m-size-item{display:flex;flex-direction:column;align-items:center;gap:6px}
-.m-size-label{font-family:var(--font-sans);font-size:10px;font-weight:700;color:var(--texto-muted);text-transform:uppercase;letter-spacing:1px}
-.m-size-controls{display:flex;align-items:center;background:var(--blanco);border:1.5px solid var(--border-dark);border-radius:var(--radius-sm);overflow:hidden;transition:border-color var(--transition-fast)}
-.m-size-controls:focus-within{border-color:var(--azul)}
-.m-size-btn{width:30px;height:38px;background:transparent;color:var(--texto-mid);font-size:18px;font-weight:400;cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;user-select:none;font-family:var(--font-sans);border:none;flex-shrink:0}
-.m-size-btn:hover{background:var(--crema-lighter);color:var(--azul-dark)}
-.m-size-btn:active{background:var(--azul-dark);color:var(--crema-lighter)}
-.m-size-input{width:44px;padding:8px 4px;border:none;text-align:center;font-size:14px;font-weight:700;color:var(--azul-dark);font-family:var(--font-sans);background:transparent;min-width:0}
-.m-size-input:focus{outline:none}
+.m-size-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:12px}
+.m-size-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.m-size-label{font-family:var(--font-sans);font-size:10px;font-weight:700;color:var(--texto-muted);text-transform:uppercase;letter-spacing:1.5px}
+.m-size-controls{display:flex;align-items:stretch;background:var(--blanco);border:1.5px solid var(--border-dark);border-radius:var(--radius-sm);overflow:hidden;transition:all var(--transition-fast);width:100%;height:40px}
+.m-size-controls:hover{border-color:var(--nude-dark)}
+.m-size-controls:focus-within{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,59,92,0.08)}
+.m-size-btn{flex:0 0 32px;background:var(--crema-lighter);color:var(--azul-dark);font-size:18px;font-weight:400;cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;user-select:none;font-family:var(--font-sans);border:none;padding:0;line-height:1}
+.m-size-btn:hover:not(:disabled){background:var(--azul-dark);color:var(--amarillo)}
+.m-size-btn:active:not(:disabled){transform:scale(0.92)}
+.m-size-btn:disabled{opacity:.3;cursor:not-allowed;background:var(--crema-lighter);color:var(--texto-light)}
+.m-size-input{flex:1;min-width:0;padding:0 4px;border:none;text-align:center;font-size:15px;font-weight:700;color:var(--azul-dark);font-family:var(--font-sans);background:transparent;height:100%}
+.m-size-input:focus{outline:none;background:rgba(201,153,42,0.05)}
 .m-size-input::-webkit-outer-spin-button,.m-size-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .m-size-input[type=number]{-moz-appearance:textfield}
 
@@ -359,9 +361,10 @@
   .pc-v{font-size:20px}
   .m-color-block{padding:1rem}
   .m-color-name{font-size:16px}
-  .m-size-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
-  .m-size-btn{width:26px;height:34px;font-size:16px}
-  .m-size-input{width:36px;font-size:13px;padding:6px 2px}
+  .m-size-grid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:10px}
+  .m-size-controls{height:38px}
+  .m-size-btn{flex:0 0 30px;font-size:16px}
+  .m-size-input{font-size:13px;padding:0 2px}
   .m-total-final-v{font-size:24px}
   .btn-add-cart{font-size:11px;letter-spacing:2px;padding:14px}
   
@@ -925,12 +928,13 @@ function renderColorBlocks(){
     
     sel.sizes.forEach(function(size){
       const savedQty = colorData[size] || 0;
-      const val = savedQty > 0 ? savedQty : '';
+      const val = savedQty > 0 ? savedQty : 0;
+      const decDisabled = savedQty === 0 ? 'disabled' : '';
       html += '<div class="m-size-item">' +
         '<label class="m-size-label">' + size + '</label>' +
         '<div class="m-size-controls">' +
-          '<button type="button" class="m-size-btn" data-action="dec" data-color="' + color + '" data-size="' + size + '" aria-label="Restar">−</button>' +
-          '<input type="number" class="m-size-input" min="0" step="1" value="' + val + '" placeholder="0" data-color="' + color + '" data-size="' + size + '" aria-label="Cantidad talla ' + size + ' color ' + color + '">' +
+          '<button type="button" class="m-size-btn" data-action="dec" data-color="' + color + '" data-size="' + size + '" aria-label="Restar" ' + decDisabled + '>−</button>' +
+          '<input type="number" class="m-size-input" min="0" step="1" value="' + val + '" data-color="' + color + '" data-size="' + size + '" aria-label="Cantidad talla ' + size + ' color ' + color + '" inputmode="numeric">' +
           '<button type="button" class="m-size-btn" data-action="inc" data-color="' + color + '" data-size="' + size + '" aria-label="Sumar">+</button>' +
         '</div>' +
       '</div>';
@@ -942,19 +946,31 @@ function renderColorBlocks(){
   section.innerHTML = html;
   
   section.querySelectorAll('.m-size-input').forEach(function(input){
-    input.addEventListener('input', function(){ handleQtyChange(input); });
+    input.addEventListener('input', function(){ 
+      handleQtyChange(input);
+      const val = parseInt(input.value) || 0;
+      const color = input.dataset.color;
+      const size = input.dataset.size;
+      const decBtn = section.querySelector('.m-size-btn[data-action="dec"][data-color="' + color + '"][data-size="' + size + '"]');
+      if(decBtn) decBtn.disabled = (val === 0);
+    });
     input.addEventListener('blur', function(){
       if(input.value === '' || parseInt(input.value) === 0){
-        input.value = '';
+        input.value = 0;
         const color = input.dataset.color;
         const size = input.dataset.size;
         if(stateMap[color]) delete stateMap[color][size];
       }
     });
+    input.addEventListener('focus', function(){
+      input.select();
+    });
   });
   
   section.querySelectorAll('.m-size-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      if(btn.disabled) return;
       const action = btn.dataset.action;
       const color = btn.dataset.color;
       const size = btn.dataset.size;
@@ -963,8 +979,11 @@ function renderColorBlocks(){
       let val = parseInt(input.value) || 0;
       if(action === 'inc') val++;
       else if(action === 'dec' && val > 0) val--;
-      input.value = val > 0 ? val : '';
+      input.value = val;
       handleQtyChange(input);
+      
+      const decBtn = section.querySelector('.m-size-btn[data-action="dec"][data-color="' + color + '"][data-size="' + size + '"]');
+      if(decBtn) decBtn.disabled = (val === 0);
     });
   });
   
@@ -986,7 +1005,7 @@ function handleQtyChange(input){
     input.value = val;
   } else {
     delete stateMap[color][size];
-    input.value = '';
+    input.value = 0;
   }
   
   calcTotals();
