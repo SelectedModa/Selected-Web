@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#002a42">
 <title>Catálogo Mayorista | The Selected — Ropa al por mayor Ecuador</title>
-<meta name="description" content="Catálogo mayorista completo de The Selected. 45 productos premium: conjuntos, tops, pantalones y chaquetas urbanas. Mínimo 12 unidades. Envíos a todo Ecuador.">
-<meta name="keywords" content="catálogo mayorista, ropa por docena, moda urbana Ecuador, The Selected catálogo">
+<meta name="description" content="Catálogo mayorista completo de The Selected. 45 productos premium para Mujer, Hombre y Unisex. Mínimo 12 unidades. Envíos a todo Ecuador.">
+<meta name="keywords" content="catálogo mayorista, ropa por docena, moda urbana Ecuador, The Selected catálogo, ropa mujer, ropa hombre">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://theselected.ec/catalogo.html">
 
@@ -26,18 +26,10 @@
 <link rel="stylesheet" href="assets/css/shared.css">
 
 <style>
-/* ═══════════════════════════════════════
-   WATERMARKS
-   ═══════════════════════════════════════ */
-@keyframes wmFloat{
-  0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}
-  50%{transform:translateY(-15px) rotate(var(--rot,0deg))}
-}
+@keyframes wmFloat{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-15px) rotate(var(--rot,0deg))}}
 .wm-float{animation:wmFloat 8s ease-in-out infinite}
 
-/* ═══════════════════════════════════════
-   CATALOG HERO
-   ═══════════════════════════════════════ */
+/* HERO */
 .catalog-hero{background:linear-gradient(135deg,var(--crema-light) 0%,var(--nude) 100%);padding:4rem 0 3rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .catalog-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.3),transparent 70%);z-index:1}
 .chero-wm-right{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:280px;height:auto;opacity:.06;pointer-events:none;z-index:0}
@@ -49,39 +41,16 @@
 .catalog-title em{font-style:normal;color:var(--azul);font-weight:600}
 .catalog-sub{font-family:var(--font-sans);font-size:14px;color:var(--texto-mid);letter-spacing:.3px;max-width:520px;margin:0 auto;line-height:1.7;font-weight:300}
 
-/* ═══════════════════════════════════════
-   MAIN LAYOUT (SIDEBAR + GRID)
-   ═══════════════════════════════════════ */
+/* MAIN LAYOUT */
 .catalog-main{padding:2.5rem 0 5rem;background:var(--crema-lighter);min-height:60vh;position:relative;overflow:hidden}
 .grid-wm-1{position:absolute;top:5%;right:-3%;width:220px;opacity:.04;pointer-events:none;z-index:0;--rot:12deg;transform:rotate(12deg)}
 .grid-wm-2{position:absolute;top:35%;left:-2%;width:180px;opacity:.035;pointer-events:none;z-index:0;--rot:-18deg;transform:rotate(-18deg)}
 .grid-wm-3{position:absolute;bottom:15%;right:2%;width:200px;opacity:.04;pointer-events:none;z-index:0;--rot:8deg;transform:rotate(8deg)}
-
 .catalog-container{max-width:var(--container);margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:280px 1fr;gap:2.5rem;position:relative;z-index:2;align-items:start}
 
-/* ═══════════════════════════════════════
-   SIDEBAR FILTROS
-   ═══════════════════════════════════════ */
-.sidebar{
-  background:var(--blanco);
-  border-radius:var(--radius-md);
-  border:1px solid var(--border);
-  padding:1.5rem;
-  position:sticky;
-  top:calc(var(--nav-height) + 1rem);
-  transition:top var(--transition-fast);
-  max-height:calc(100vh - var(--nav-height) - 2rem);
-  overflow-y:auto;
-  overflow-x:hidden;
-  scrollbar-width:thin;
-  scrollbar-color:var(--nude-dark) transparent;
-  will-change:auto;
-  contain:layout style;
-}
-.nav.scrolled ~ main .sidebar{
-  top:calc(64px + 1rem);
-  max-height:calc(100vh - 64px - 2rem);
-}
+/* SIDEBAR */
+.sidebar{background:var(--blanco);border-radius:var(--radius-md);border:1px solid var(--border);padding:1.5rem;position:sticky;top:calc(var(--nav-height) + 1rem);transition:top var(--transition-fast);max-height:calc(100vh - var(--nav-height) - 2rem);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--nude-dark) transparent;contain:layout style}
+.nav.scrolled ~ main .sidebar{top:calc(64px + 1rem);max-height:calc(100vh - 64px - 2rem)}
 .sidebar::-webkit-scrollbar{width:5px}
 .sidebar::-webkit-scrollbar-track{background:transparent;margin:.5rem 0}
 .sidebar::-webkit-scrollbar-thumb{background:var(--nude-dark);border-radius:3px}
@@ -97,15 +66,15 @@
 .filter-group-title{font-family:var(--font-sans);font-size:11px;font-weight:700;color:var(--texto-muted);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
 .filter-group-title span{color:var(--azul-dark)}
 
- /* GÉNERO (Radio - destacado) */
-.filter-gender-list{display:flex;gap:6px;margin-bottom:.5rem}
-.filter-gender-btn{flex:1;padding:10px 8px;background:var(--blanco);border:1.5px solid var(--border-dark);border-radius:var(--radius-sm);cursor:pointer;font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--texto-mid);transition:all var(--transition-fast);text-align:center;position:relative}
+/* Género */
+.filter-gender-list{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.filter-gender-btn{padding:10px 6px;background:var(--blanco);border:1.5px solid var(--border-dark);border-radius:var(--radius-sm);cursor:pointer;font-family:var(--font-sans);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--texto-mid);transition:all var(--transition-fast);text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px}
 .filter-gender-btn:hover{border-color:var(--azul);color:var(--azul-dark)}
 .filter-gender-btn.active{background:var(--azul-dark);border-color:var(--azul-dark);color:var(--amarillo)}
-.filter-gender-icon{display:block;font-size:16px;margin-bottom:2px;line-height:1}
+.filter-gender-icon{font-size:18px;line-height:1;display:block}
 
-/* Categorías (Radio) */
-.filter-cat-list{display:flex;flex-direction:column;gap:.5rem}
+/* Categoría/Subcategoría (Radio) */
+.filter-cat-list{display:flex;flex-direction:column;gap:.4rem}
 .filter-cat-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition-fast);font-family:var(--font-sans);font-size:13px;color:var(--texto-mid);font-weight:500;letter-spacing:.3px}
 .filter-cat-item:hover{background:var(--crema-lighter);color:var(--azul-dark)}
 .filter-cat-item.active{background:var(--azul-dark);color:var(--crema-lighter)}
@@ -115,17 +84,6 @@
 .filter-cat-item.active .filter-cat-radio::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;background:var(--azul-dark);border-radius:50%}
 .filter-cat-name{flex:1}
 .filter-cat-count{font-size:10px;color:var(--texto-muted);background:var(--crema-lighter);padding:2px 8px;border-radius:var(--radius-full);font-weight:600}
-
-/* Subcategorías (Checkbox) */
-.filter-sub-list{display:flex;flex-direction:column;gap:.4rem;max-height:0;overflow:hidden;transition:max-height .4s ease}
-.filter-sub-list.open{max-height:500px}
-.filter-sub-item{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition-fast);font-family:var(--font-sans);font-size:12px;color:var(--texto-mid);font-weight:400}
-.filter-sub-item:hover{background:var(--crema-lighter);color:var(--azul-dark)}
-.filter-sub-item.active{color:var(--azul-dark);font-weight:600}
-.filter-sub-check{width:16px;height:16px;border:1.5px solid var(--border-dark);border-radius:3px;flex-shrink:0;position:relative;transition:all var(--transition-fast);background:var(--blanco)}
-.filter-sub-item.active .filter-sub-check{background:var(--azul-dark);border-color:var(--azul-dark)}
-.filter-sub-item.active .filter-sub-check::after{content:'';position:absolute;top:1px;left:4px;width:5px;height:9px;border:solid var(--amarillo);border-width:0 2px 2px 0;transform:rotate(45deg)}
-.filter-sub-name{flex:1}
 .filter-empty{font-family:var(--font-sans);font-size:12px;color:var(--texto-light);padding:8px 10px;font-style:italic}
 
 /* Tallas */
@@ -147,18 +105,15 @@
 .filter-tag-item.active .filter-tag-check{background:var(--azul-dark);border-color:var(--azul-dark)}
 .filter-tag-item.active .filter-tag-check::after{content:'';position:absolute;top:1px;left:4px;width:5px;height:9px;border:solid var(--amarillo);border-width:0 2px 2px 0;transform:rotate(45deg)}
 
-/* Botón limpiar */
+/* Limpiar */
 .filter-clear{width:100%;padding:12px;background:transparent;border:1.5px solid var(--danger);color:var(--danger);border-radius:var(--radius-sm);cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all var(--transition-fast);margin-top:1rem;display:flex;align-items:center;justify-content:center;gap:8px}
 .filter-clear:hover{background:var(--danger);color:var(--blanco)}
 .filter-clear:disabled{opacity:.3;cursor:not-allowed;border-color:var(--border-dark);color:var(--texto-muted)}
 .filter-clear:disabled:hover{background:transparent}
 .filter-clear svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
-/* ═══════════════════════════════════════
-   GRID DE PRODUCTOS
-   ═══════════════════════════════════════ */
+/* Products */
 .products-section{min-width:0}
-
 .products-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;padding-bottom:1rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:1rem}
 .products-count{font-family:var(--font-sans);font-size:13px;color:var(--texto-mid);font-weight:500}
 .products-count strong{color:var(--azul-dark);font-weight:700}
@@ -173,8 +128,8 @@
 .active-filter-chip button{background:none;border:none;color:var(--amarillo);cursor:pointer;padding:0;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;transition:all var(--transition-fast)}
 .active-filter-chip button:hover{background:rgba(232,224,204,0.2)}
 
+/* Grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
-
 .card{background:var(--blanco);border-radius:var(--radius-md);overflow:hidden;transition:all var(--transition-med);cursor:pointer;border:1px solid var(--border);display:flex;flex-direction:column;position:relative}
 .card:focus-visible{outline:2px solid var(--azul);outline-offset:4px}
 .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--nude-dark)}
@@ -187,6 +142,7 @@
 .badge-new{background:var(--azul-dark);color:var(--crema-lighter)}
 .badge-hot{background:var(--amarillo);color:var(--azul-dark)}
 .badge-lim{background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);color:var(--crema-lighter);border:1px solid rgba(232,224,204,0.2)}
+.card-gender-badge{position:absolute;top:12px;right:12px;font-family:var(--font-sans);font-size:14px;font-weight:700;background:rgba(0,26,46,0.7);backdrop-filter:blur(8px);color:var(--amarillo);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3}
 .card-overlay-btn{position:absolute;bottom:12px;left:12px;right:12px;background:var(--blanco);color:var(--azul-dark);padding:10px;font-family:var(--font-sans);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-align:center;border-radius:var(--radius-sm);opacity:0;transform:translateY(10px);transition:all var(--transition-fast);z-index:3;border:none;cursor:pointer;pointer-events:none}
 .card:hover .card-overlay-btn{opacity:1;transform:translateY(0);pointer-events:auto}
 .card-overlay-btn:hover{background:var(--azul-dark);color:var(--crema-lighter)}
@@ -212,9 +168,7 @@
 .empty-catalog-btn{display:inline-block;padding:12px 32px;background:var(--azul-dark);color:var(--crema-lighter);border:none;border-radius:var(--radius-sm);font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast)}
 .empty-catalog-btn:hover{background:var(--azul);transform:translateY(-2px)}
 
-/* ═══════════════════════════════════════
-   PAGINATION
-   ═══════════════════════════════════════ */
+/* Pagination */
 .pagination{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:3rem}
 .page-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--blanco);border:1px solid var(--border);color:var(--azul-dark);font-family:var(--font-sans);font-size:12px;font-weight:600;cursor:pointer;transition:all var(--transition-fast);border-radius:var(--radius-sm)}
 .page-btn:hover:not(:disabled){border-color:var(--azul);color:var(--azul)}
@@ -222,34 +176,26 @@
 .page-btn:disabled{opacity:.3;cursor:not-allowed}
 .page-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
-/* ═══════════════════════════════════════
-   MOBILE FILTER PANEL
-   ═══════════════════════════════════════ */
+/* Mobile Filter Panel */
 .mobile-filter-overlay{position:fixed;inset:0;background:rgba(0,26,46,0.6);z-index:1200;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
 .mobile-filter-overlay.open{opacity:1;pointer-events:auto}
-
 .mobile-filter-panel{position:fixed;top:0;left:-100%;width:340px;max-width:90vw;height:100vh;height:100dvh;background:var(--crema-lighter);z-index:1201;box-shadow:12px 0 50px rgba(0,26,46,0.2);transition:left .4s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;overflow:hidden}
 .mobile-filter-panel.open{left:0}
-
 .mfp-header{background:linear-gradient(135deg,var(--azul-dark),var(--azul));padding:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:2px solid var(--amarillo)}
 .mfp-title{font-family:var(--font-serif);font-size:22px;font-weight:500;color:var(--crema-lighter);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
 .mfp-title svg{width:20px;height:20px;stroke:var(--amarillo);fill:none;stroke-width:2}
 .mfp-close{background:rgba(232,224,204,0.08);border:1px solid rgba(232,224,204,0.15);color:var(--crema);width:36px;height:36px;border-radius:var(--radius-sm);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)}
 .mfp-close:hover{background:rgba(201,153,42,0.15);border-color:var(--amarillo);color:var(--amarillo);transform:rotate(90deg)}
-
 .mfp-body{flex:1;overflow-y:auto;padding:1.5rem;-webkit-overflow-scrolling:touch}
 .mfp-body::-webkit-scrollbar{width:4px}
 .mfp-body::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:2px}
-
 .mfp-footer{padding:1rem 1.5rem;background:var(--blanco);border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0}
 .mfp-btn-apply{flex:1;padding:12px;background:var(--azul-dark);color:var(--crema-lighter);border:none;border-radius:var(--radius-sm);font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast)}
 .mfp-btn-apply:hover{background:var(--azul)}
 .mfp-btn-clear{padding:12px 20px;background:transparent;border:1.5px solid var(--danger);color:var(--danger);border-radius:var(--radius-sm);font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast)}
 .mfp-btn-clear:hover{background:var(--danger);color:var(--blanco)}
 
-/* ═══════════════════════════════════════
-   MODAL Y CART PANEL (mismos que antes)
-   ═══════════════════════════════════════ */
+/* Modal */
 .overlay{position:fixed;inset:0;background:rgba(0,26,46,0.65);z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem}
 .overlay.open{opacity:1;pointer-events:auto}
 .modal{background:var(--blanco);border-radius:var(--radius-lg);width:100%;max-width:560px;max-height:95vh;overflow:hidden;box-shadow:var(--shadow-xl);transform:scale(.94) translateY(20px);transition:transform var(--transition-med);display:flex;flex-direction:column;position:relative}
@@ -404,78 +350,12 @@
 .cpf-clear{width:100%;padding:.6rem;background:transparent;border:1px solid var(--border-dark);color:var(--texto-muted);border-radius:var(--radius-sm);cursor:pointer;font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-top:.75rem;transition:all var(--transition-fast)}
 .cpf-clear:hover{border-color:var(--danger);color:var(--danger);background:rgba(231,76,60,0.04)}
 
-/* ═══════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════ */
-@media(max-width:1200px){
-  .catalog-container{grid-template-columns:250px 1fr;gap:2rem}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
-}
-
-@media(max-width:1024px){
-  .catalog-container{grid-template-columns:1fr;padding:0 2rem}
-  .sidebar{display:none}
-  .mobile-filter-btn{display:inline-flex}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
-  .chero-wm-right{width:200px;opacity:.05}
-  .chero-wm-left{width:140px;opacity:.04}
-}
-
-@media(max-width:900px){
-  .cart-panel{width:100%;right:-100%}
-  .products-header{flex-direction:column;align-items:stretch;gap:1rem}
-  .mobile-filter-btn{width:100%;justify-content:center}
-}
-
-@media(max-width:600px){
-  .catalog-hero{padding:2.5rem 0 2rem}
-  .catalog-hero-inner{padding:0 1.25rem}
-  .catalog-container{padding:0 1rem}
-  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .card-body{padding:1rem .75rem 1.25rem}
-  .cb-cat{font-size:9px;letter-spacing:1.5px}
-  .cb-name{font-size:15px;letter-spacing:.5px}
-  .cb-ref{font-size:9px;margin-bottom:.75rem}
-  .cb-sizes{margin-bottom:.75rem;gap:3px}
-  .csz{font-size:9px;padding:3px 7px}
-  .cb-prices{gap:1rem;padding-top:.75rem}
-  .cp-l{font-size:8px}
-  .cp-v{font-size:16px}
-  .card-badge{font-size:8px;padding:4px 10px;top:10px;left:10px}
-  .card-overlay-btn{display:none}
-  .overlay{padding:0}
-  .modal{border-radius:0;max-width:100%;max-height:100vh;height:100vh;height:100dvh}
-  .modal-header{padding:1.25rem 1.25rem 1rem}
-  .modal-body{padding:1.25rem}
-  .mh-name{font-size:20px;letter-spacing:1px}
-  .modal-close{width:36px;height:36px;top:10px;right:10px}
-  .modal-header-wm{width:120px;opacity:.06}
-  .price-cards{grid-template-columns:1fr 1fr;gap:8px}
-  .pc{padding:.75rem .5rem}
-  .pc-v{font-size:20px}
-  .m-color-block{padding:1rem}
-  .m-color-name{font-size:16px}
-  .m-size-grid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:10px}
-  .m-size-controls{height:38px}
-  .m-size-btn{flex:0 0 30px;font-size:16px}
-  .m-size-input{font-size:13px;padding:0 2px}
-  .m-total-final-v{font-size:24px}
-  .btn-add-cart{font-size:11px;letter-spacing:2px;padding:14px}
-  .cpf-form-row{grid-template-columns:1fr}
-  .cpf-total{padding:.85rem 1rem}
-  .cpf-total-v{font-size:22px}
-  .cart-panel-header{padding:1.25rem 1.25rem}
-  .cph-title span{font-size:18px}
-  .cart-panel-body{padding:1.25rem}
-  .cart-panel-footer{padding:1.25rem}
-}
-
-@media(max-width:380px){
-  .grid{grid-template-columns:1fr;gap:1rem}
-  .card-body{padding:1.25rem}
-  .cb-name{font-size:18px}
-  .cp-v{font-size:20px}
-}
+/* Responsive */
+@media(max-width:1200px){.catalog-container{grid-template-columns:250px 1fr;gap:2rem}.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}}
+@media(max-width:1024px){.catalog-container{grid-template-columns:1fr;padding:0 2rem}.sidebar{display:none}.mobile-filter-btn{display:inline-flex}.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}.chero-wm-right{width:200px;opacity:.05}.chero-wm-left{width:140px;opacity:.04}}
+@media(max-width:900px){.cart-panel{width:100%;right:-100%}.products-header{flex-direction:column;align-items:stretch;gap:1rem}.mobile-filter-btn{width:100%;justify-content:center}}
+@media(max-width:600px){.catalog-hero{padding:2.5rem 0 2rem}.catalog-hero-inner{padding:0 1.25rem}.catalog-container{padding:0 1rem}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card-body{padding:1rem .75rem 1.25rem}.cb-cat{font-size:9px;letter-spacing:1.5px}.cb-name{font-size:15px;letter-spacing:.5px}.cb-ref{font-size:9px;margin-bottom:.75rem}.cb-sizes{margin-bottom:.75rem;gap:3px}.csz{font-size:9px;padding:3px 7px}.cb-prices{gap:1rem;padding-top:.75rem}.cp-l{font-size:8px}.cp-v{font-size:16px}.card-badge{font-size:8px;padding:4px 10px;top:10px;left:10px}.card-gender-badge{top:10px;right:10px;width:22px;height:22px;font-size:12px}.card-overlay-btn{display:none}.overlay{padding:0}.modal{border-radius:0;max-width:100%;max-height:100vh;height:100vh;height:100dvh}.modal-header{padding:1.25rem 1.25rem 1rem}.modal-body{padding:1.25rem}.mh-name{font-size:20px;letter-spacing:1px}.modal-close{width:36px;height:36px;top:10px;right:10px}.modal-header-wm{width:120px;opacity:.06}.price-cards{grid-template-columns:1fr 1fr;gap:8px}.pc{padding:.75rem .5rem}.pc-v{font-size:20px}.m-color-block{padding:1rem}.m-color-name{font-size:16px}.m-size-grid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:10px}.m-size-controls{height:38px}.m-size-btn{flex:0 0 30px;font-size:16px}.m-size-input{font-size:13px;padding:0 2px}.m-total-final-v{font-size:24px}.btn-add-cart{font-size:11px;letter-spacing:2px;padding:14px}.cpf-form-row{grid-template-columns:1fr}.cpf-total{padding:.85rem 1rem}.cpf-total-v{font-size:22px}.cart-panel-header{padding:1.25rem 1.25rem}.cph-title span{font-size:18px}.cart-panel-body{padding:1.25rem}.cart-panel-footer{padding:1.25rem}}
+@media(max-width:380px){.grid{grid-template-columns:1fr;gap:1rem}.card-body{padding:1.25rem}.cb-name{font-size:18px}.cp-v{font-size:20px}}
 </style>
 </head>
 <body>
@@ -526,8 +406,6 @@
   <img src="assets/images/logos/isotipoazul.png" alt="" class="grid-wm-3 wm-float" aria-hidden="true" onerror="this.style.display='none'">
   
   <div class="catalog-container">
-    
-    <!-- SIDEBAR FILTROS -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <h2 class="sidebar-title">Filtros</h2>
@@ -536,7 +414,6 @@
       <div id="sidebarContent"></div>
     </aside>
     
-    <!-- GRID DE PRODUCTOS -->
     <div class="products-section">
       <div class="products-header">
         <div class="products-count"><strong id="resultsCount">0</strong> productos</div>
@@ -546,20 +423,15 @@
           <span class="mobile-filter-btn-count zero" id="mobileFilterCount">0</span>
         </button>
       </div>
-      
       <div class="active-filters" id="activeFilters"></div>
-      
       <div class="grid" id="grid" role="list" aria-label="Productos"></div>
-      
       <div class="pagination" id="pagination"></div>
     </div>
-    
   </div>
 </section>
 
 </main>
 
-<!-- MOBILE FILTER PANEL -->
 <div class="mobile-filter-overlay" id="mobileFilterOverlay" onclick="closeMobileFilters()"></div>
 <aside class="mobile-filter-panel" id="mobileFilterPanel">
   <div class="mfp-header">
@@ -576,10 +448,8 @@
   </div>
 </aside>
 
-<!-- Cart Panel Overlay -->
 <div class="cart-panel-overlay" id="cartPanelOverlay" onclick="closeCartPanel()" aria-hidden="true"></div>
 
-<!-- Cart Panel -->
 <aside class="cart-panel" id="cartPanel" role="dialog" aria-label="Mi pedido" aria-modal="true">
   <img src="assets/images/logos/isotipoazul.png" alt="" class="cart-wm-bg" aria-hidden="true" onerror="this.style.display='none'">
   <div class="cart-panel-header">
@@ -594,7 +464,6 @@
   <div class="cart-panel-footer" id="cartPanelFooter" style="display:none;"></div>
 </aside>
 
-<!-- Product Modal -->
 <div class="overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
   <div class="modal">
     <div class="modal-header">
@@ -607,7 +476,6 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-col">
@@ -631,9 +499,9 @@
       <a href="index.html">Inicio</a>
       <a href="catalogo.html">Catálogo</a>
       <a href="index.html#nosotros">Nosotros</a>
-      <a href="catalogo.html?cat=set">Conjuntos</a>
-      <a href="catalogo.html?cat=top">Tops</a>
-      <a href="catalogo.html?cat=jacket">Chaquetas</a>
+      <a href="catalogo.html?g=mujer">Mujer</a>
+      <a href="catalogo.html?g=hombre">Hombre</a>
+      <a href="catalogo.html?g=unisex">Unisex</a>
     </div>
     <div class="footer-col">
       <h4>Información</h4>
@@ -668,7 +536,6 @@
   </div>
 </footer>
 
-<!-- Toast -->
 <div class="toast" id="toast" role="alert" aria-live="assertive">
   <div class="toast-check" aria-hidden="true">
     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
@@ -684,125 +551,94 @@ const ISOTIPO_PH = 'assets/images/logos/isotipoblanco.png';
 const ISOTIPO_WM = 'assets/images/logos/isotipoblanco.png';
 const ITEMS_PER_PAGE = 12;
 
-// ═══════════════════════════════════════
-// SUBCATEGORÍAS POR CATEGORÍA
-// ═══════════════════════════════════════
 const GENDERS = ['mujer','hombre','unisex'];
 const GENDER_LABEL = {mujer:'Mujer', hombre:'Hombre', unisex:'Unisex', all:'Todos'};
-const GENDER_ICON = {mujer:'♀', hombre:'♂', unisex:'⚭', all:'✦'};
-
-// Subcategorías por género + categoría
-const SUBCATS = {
-  mujer: {
-    set: ['Deportivos','Casuales','Elegantes','Playa'],
-    top: ['Crop tops','Blusas','Camisetas','Bodies','Tanks'],
-    pants: ['Bikers','Palazzo','Leggings','Shorts'],
-    jacket: ['Blazers','Bombers']
-  },
-  hombre: {
-    set: ['Deportivos','Casuales'],
-    top: ['Camisetas','Tanks'],
-    pants: ['Joggers','Cargos','Shorts'],
-    jacket: ['Hoodies','Bombers','Windbreakers']
-  },
-  unisex: {
-    set: ['Deportivos'],
-    top: ['Camisetas'],
-    pants: ['Joggers','Cargos'],
-    jacket: ['Hoodies','Windbreakers','Bombers']
-  }
-};
-
-// ═══════════════════════════════════════
-// 45 PRODUCTOS ORGANIZADOS POR GÉNERO
-// ═══════════════════════════════════════
-const P = [
-  // ═══ MUJER — CONJUNTOS (8) ═══
-  {id:1, ref:'TS-001', name:'Conjunto Flex Pro', gender:'mujer', cat:'set', sub:'Deportivos', tag:'new', price:24, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul'], images:['assets/images/productos/DSC_0690.webp','assets/images/productos/DSC_0691.webp'], composition:'95% Algodón, 5% Elastano', care:'Lavar a máquina 30°C, no usar blanqueador', details:'Conjunto deportivo de 2 piezas con ajuste perfecto y tela transpirable'},
-  {id:2, ref:'TS-002', name:'Set Athletic Elite', gender:'mujer', cat:'set', sub:'Deportivos', tag:'hot', price:26, sizes:['S','M','L','XL'], colors:['Negro','Gris','Verde Militar','Vino'], images:['assets/images/productos/DSC_0692.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Set deportivo de alto rendimiento con tecnología dry-fit'},
-  {id:3, ref:'TS-003', name:'Set Crop + Legging', gender:'mujer', cat:'set', sub:'Deportivos', tag:'new', price:22, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Lila','Salmón'], images:['assets/images/productos/DSC_0709.webp','assets/images/productos/DSC_0722.webp'], composition:'88% Poliamida, 12% Elastano', care:'Lavar a mano con agua fría', details:'Conjunto deportivo con soporte moderado, ideal para yoga y pilates'},
-  {id:5, ref:'TS-005', name:'Conjunto Casual Weekend', gender:'mujer', cat:'set', sub:'Casuales', tag:'new', price:32, sizes:['S','M','L','XL'], colors:['Beige','Gris','Blanco Hueso','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 40°C', details:'Conjunto casual perfecto para el día a día con estilo relajado'},
-  {id:7, ref:'TS-007', name:'Set Loungewear Silk', gender:'mujer', cat:'set', sub:'Casuales', tag:'new', price:30, sizes:['S','M','L'], colors:['Champagne','Perla','Negro','Vino'], images:['assets/images/productos/DSC_0700.webp'], composition:'95% Poliéster, 5% Elastano (efecto seda)', care:'Lavar a mano con agua fría', details:'Set loungewear con acabado satinado tipo seda para máximo confort'},
-  {id:9, ref:'TS-009', name:'Set Blazer + Pantalón', gender:'mujer', cat:'set', sub:'Elegantes', tag:'new', price:48, sizes:['S','M','L','XL'], colors:['Negro','Gris','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'65% Poliéster, 32% Viscosa, 3% Elastano', care:'Lavado en seco recomendado', details:'Conjunto formal ejecutivo con blazer estructurado y pantalón recto'},
-  {id:11, ref:'TS-011', name:'Set Beach Vibes', gender:'mujer', cat:'set', sub:'Playa', tag:'new', price:26, sizes:['XS','S','M','L'], colors:['Blanco','Coral','Turquesa','Amarillo'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Viscosa', care:'Lavar a mano', details:'Conjunto playero con estampado tropical y tejido fresco'},
-  {id:12, ref:'TS-012', name:'Set Resort Palm', gender:'mujer', cat:'set', sub:'Playa', tag:'hot', price:28, sizes:['S','M','L'], colors:['Blanco','Beige Arena','Verde Palma'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Lino', care:'Lavar a mano con agua fría', details:'Set resort para vacaciones con estilo bohemio-chic'},
-  
-  // ═══ MUJER — TOPS (10) ═══
-  {id:13, ref:'TS-013', name:'Crop Top Ribbed', gender:'mujer', cat:'top', sub:'Crop tops', tag:'new', price:12, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Rosa','Menta','Beige'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Crop top de tejido acanalado con corte moderno y ajustado'},
-  {id:14, ref:'TS-014', name:'Crop Basic Cotton', gender:'mujer', cat:'top', sub:'Crop tops', tag:'hot', price:10, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Beige','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Crop top básico esencial de algodón peinado suave'},
-  {id:15, ref:'TS-015', name:'Crop Off Shoulder', gender:'mujer', cat:'top', sub:'Crop tops', tag:'new', price:14, sizes:['S','M','L'], colors:['Negro','Blanco','Vino','Verde'], images:['assets/images/productos/DSC_0698.webp'], composition:'95% Poliéster, 5% Elastano', care:'Lavar a máquina en ciclo suave', details:'Crop top con hombros descubiertos y elástico ajustable'},
-  {id:16, ref:'TS-016', name:'Blusa Satin Flow', gender:'mujer', cat:'top', sub:'Blusas', tag:'hot', price:22, sizes:['S','M','L','XL'], colors:['Champagne','Perla','Negro','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0700.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano, planchar temperatura baja', details:'Blusa fluida con caída elegante tipo satén'},
-  {id:17, ref:'TS-017', name:'Blusa Wrap Elegance', gender:'mujer', cat:'top', sub:'Blusas', tag:'new', price:24, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rojo','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a mano con agua fría', details:'Blusa cruzada con lazo lateral para un look sofisticado'},
-  {id:18, ref:'TS-018', name:'Blusa Silk Touch', gender:'mujer', cat:'top', sub:'Blusas', tag:'limit', price:26, sizes:['S','M','L'], colors:['Blanco Hueso','Champagne','Rosa Palo'], images:['assets/images/productos/DSC_0709.webp'], composition:'100% Poliéster efecto seda', care:'Lavar a mano', details:'Blusa con tacto seda para looks refinados'},
-  {id:22, ref:'TS-022', name:'Body Seamless Zen', gender:'mujer', cat:'top', sub:'Bodies', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Nude','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'90% Poliamida, 10% Elastano', care:'No usar secadora', details:'Body sin costuras para máximo confort y ajuste perfecto'},
-  {id:23, ref:'TS-023', name:'Body Long Sleeve', gender:'mujer', cat:'top', sub:'Bodies', tag:'hot', price:18, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Chocolate','Vino'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Body de manga larga con escote redondo y broches ocultos'},
-  {id:24, ref:'TS-024', name:'Tank Ribbed Essential', gender:'mujer', cat:'top', sub:'Tanks', tag:'hot', price:12, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rosa','Menta','Gris'], images:['assets/images/productos/DSC_0696.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a mano o máquina en ciclo suave', details:'Tank de tejido acanalado ajustado al cuerpo'},
-  
-  // ═══ MUJER — PANTALONES (5) ═══
-  {id:28, ref:'TS-028', name:'Biker Short Pro', gender:'mujer', cat:'pants', sub:'Bikers', tag:'hot', price:14, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Oliva','Vino'], images:['assets/images/productos/DSC_0709.webp'], composition:'75% Algodón, 25% Elastano', care:'Lavar a máquina 30°C', details:'Short biker ajustado con costuras planas y cintura ancha'},
-  {id:29, ref:'TS-029', name:'Biker High Waist', gender:'mujer', cat:'pants', sub:'Bikers', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Nude','Gris','Blanco'], images:['assets/images/productos/DSC_0722.webp'], composition:'80% Poliamida, 20% Elastano', care:'Lavar a mano', details:'Biker de cintura alta con efecto push-up'},
-  {id:30, ref:'TS-030', name:'Palazzo Wide Silk', gender:'mujer', cat:'pants', sub:'Palazzo', tag:'new', price:28, sizes:['S','M','L','XL'], colors:['Negro','Beige','Champagne','Verde Botella'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano', details:'Palazzo ancho con caída tipo seda para looks elegantes'},
-  {id:34, ref:'TS-034', name:'Legging Sculpt Pro', gender:'mujer', cat:'pants', sub:'Leggings', tag:'hot', price:18, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Verde Militar','Vino'], images:['assets/images/productos/DSC_0696.webp'], composition:'82% Poliamida, 18% Elastano', care:'Lavar a mano con agua fría', details:'Legging con efecto sculpt y cintura alta reforzada'},
-  {id:35, ref:'TS-035', name:'Legging High Waist', gender:'mujer', cat:'pants', sub:'Leggings', tag:'new', price:16, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Azul Marino','Café'], images:['assets/images/productos/DSC_0698.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina en ciclo suave', details:'Legging básico de cintura alta con soporte moderado'},
-  
-  // ═══ MUJER — CHAQUETAS (2) ═══
-  {id:44, ref:'TS-044', name:'Blazer Structured', gender:'mujer', cat:'jacket', sub:'Blazers', tag:'new', price:58, sizes:['S','M','L','XL'], colors:['Negro','Beige','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Blazer estructurado con hombreras discretas y forro completo'},
-  {id:45, ref:'TS-045', name:'Blazer Oversize Chic', gender:'mujer', cat:'jacket', sub:'Blazers', tag:'hot', price:56, sizes:['S','M','L','XL'], colors:['Negro','Beige','Café Chocolate'], images:['assets/images/productos/DSC_0698.webp'], composition:'75% Poliéster, 23% Viscosa, 2% Elastano', care:'Lavado en seco recomendado', details:'Blazer oversize con corte moderno y solapas anchas'},
-  
-  // ═══ HOMBRE — CONJUNTOS (2) ═══
-  {id:4, ref:'TS-004', name:'Set Runner Pro', gender:'hombre', cat:'set', sub:'Deportivos', tag:'hot', price:28, sizes:['S','M','L','XL'], colors:['Negro','Azul Marino','Rojo'], images:['assets/images/productos/DSC_0693.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina 30°C', details:'Conjunto para running con paneles de ventilación estratégicos'},
-  {id:10, ref:'TS-010', name:'Set Formal Executive', gender:'hombre', cat:'set', sub:'Casuales', tag:'hot', price:52, sizes:['S','M','L','XL'], colors:['Negro','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Traje elegante para eventos formales y oficina ejecutiva'},
-  
-  // ═══ HOMBRE — TOPS (3) ═══
-  {id:20, ref:'TS-020', name:'Camiseta Oversize', gender:'hombre', cat:'top', sub:'Camisetas', tag:'new', price:15, sizes:['S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Vino','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Algodón', care:'Lavar a máquina en ciclo normal', details:'Camiseta oversize con corte urbano moderno'},
-  {id:21, ref:'TS-021', name:'Camiseta Graphic Art', gender:'hombre', cat:'top', sub:'Camisetas', tag:'hot', price:13, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Algodón', care:'Lavar del revés a máquina', details:'Camiseta con estampado gráfico exclusivo The Selected'},
-  {id:25, ref:'TS-025', name:'Tank Sport Pro', gender:'hombre', cat:'top', sub:'Tanks', tag:'new', price:14, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul','Coral'], images:['assets/images/productos/DSC_0698.webp'], composition:'88% Poliéster, 12% Elastano', care:'Lavar a máquina 30°C', details:'Tank deportivo con tejido transpirable y secado rápido'},
-  
-  // ═══ HOMBRE — PANTALONES (3) ═══
-  {id:26, ref:'TS-026', name:'Jogger Urban Slim', gender:'hombre', cat:'pants', sub:'Joggers', tag:'new', price:20, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Beige','Verde Militar'], images:['assets/images/productos/DSC_0700.webp'], composition:'85% Algodón, 15% Poliéster', care:'Lavar a máquina 30°C, planchar temperatura media', details:'Jogger corte slim con bolsillos laterales y puños elásticos'},
-  {id:32, ref:'TS-032', name:'Cargo Utility Pro', gender:'hombre', cat:'pants', sub:'Cargos', tag:'new', price:26, sizes:['S','M','L','XL'], colors:['Verde Militar','Beige','Negro','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Algodón resistente', care:'Lavar a máquina 40°C', details:'Cargo con múltiples bolsillos utility y corte cargo pants moderno'},
-  {id:37, ref:'TS-037', name:'Short Bermuda Casual', gender:'hombre', cat:'pants', sub:'Shorts', tag:'hot', price:18, sizes:['S','M','L','XL'], colors:['Beige','Negro','Verde Militar','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Bermuda casual con corte cómodo y bolsillos funcionales'},
-  
-  // ═══ HOMBRE — CHAQUETAS (2) ═══
-  {id:40, ref:'TS-040', name:'Bomber Classic', gender:'hombre', cat:'jacket', sub:'Bombers', tag:'hot', price:48, sizes:['S','M','L','XL'], colors:['Negro','Verde Militar','Azul Marino','Café'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster con forro', care:'Lavado en seco recomendado', details:'Bomber jacket clásica con puños y cintura elásticos'},
-  {id:42, ref:'TS-042', name:'Windbreaker Sport', gender:'hombre', cat:'jacket', sub:'Windbreakers', tag:'limit', price:34, sizes:['S','M','L','XL'], colors:['Negro','Azul','Rojo','Amarillo Neón'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Poliéster', care:'Lavar a mano, no planchar', details:'Windbreaker ligera y resistente al viento con detalles reflectivos'},
-  
-  // ═══ UNISEX — CONJUNTOS (2) ═══
-  {id:6, ref:'TS-006', name:'Set Urban Comfort', gender:'unisex', cat:'set', sub:'Deportivos', tag:'hot', price:34, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris Melange','Beige','Verde Oliva'], images:['assets/images/productos/DSC_0698.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina en ciclo normal', details:'Conjunto urbano con estética minimalista y tejido premium'},
-  {id:8, ref:'TS-008', name:'Conjunto Weekend Chic', gender:'unisex', cat:'set', sub:'Deportivos', tag:'limit', price:36, sizes:['S','M','L','XL'], colors:['Beige','Terracota','Gris'], images:['assets/images/productos/DSC_0701.webp'], composition:'75% Viscosa, 25% Lino', care:'Lavar a mano, no torcer', details:'Conjunto chic con tejido fresco y caída elegante'},
-  
-  // ═══ UNISEX — TOPS (1) ═══
-  {id:19, ref:'TS-019', name:'Camiseta Basic Premium', gender:'unisex', cat:'top', sub:'Camisetas', tag:'hot', price:11, sizes:['XS','S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Beige','Café','Verde Militar'], images:['assets/images/productos/DSC_0722.webp'], composition:'100% Algodón peinado', care:'Lavar a máquina 30°C', details:'Camiseta básica premium con corte relajado y tela suave'},
-  
-  // ═══ UNISEX — PANTALONES (4) ═══
-  {id:27, ref:'TS-027', name:'Jogger Comfort Fit', gender:'unisex', cat:'pants', sub:'Joggers', tag:'hot', price:22, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris Melange','Azul Marino','Café'], images:['assets/images/productos/DSC_0701.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina en ciclo normal', details:'Jogger con corte relajado tipo french terry premium'},
-  {id:31, ref:'TS-031', name:'Palazzo Culotte', gender:'mujer', cat:'pants', sub:'Palazzo', tag:'hot', price:26, sizes:['XS','S','M','L','XL'], colors:['Negro','Beige','Blanco','Terracota'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a máquina en ciclo delicado', details:'Palazzo tipo culotte con cintura alta ajustable'},
-  {id:33, ref:'TS-033', name:'Cargo Slim Urban', gender:'unisex', cat:'pants', sub:'Cargos', tag:'hot', price:24, sizes:['S','M','L','XL','XXL'], colors:['Negro','Beige','Gris Piedra'], images:['assets/images/productos/DSC_0693.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar a máquina 30°C', details:'Cargo con corte slim y detalles urbanos actuales'},
-  {id:36, ref:'TS-036', name:'Short Denim Chic', gender:'unisex', cat:'pants', sub:'Shorts', tag:'new', price:22, sizes:['XS','S','M','L','XL'], colors:['Azul Denim','Negro','Blanco','Beige'], images:['assets/images/productos/DSC_0700.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar del revés', details:'Short denim con lavado especial y corte moderno'},
-  
-  // ═══ UNISEX — CHAQUETAS (3) ═══
-  {id:38, ref:'TS-038', name:'Hoodie Oversize Mod', gender:'unisex', cat:'jacket', sub:'Hoodies', tag:'limit', price:38, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Azul','Café','Verde Militar'], images:['assets/images/productos/DSC_0709.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar a máquina con colores similares', details:'Hoodie oversize con capucha ajustable y bolsillo canguro'},
-  {id:39, ref:'TS-039', name:'Hoodie Zip Premium', gender:'unisex', cat:'jacket', sub:'Hoodies', tag:'new', price:42, sizes:['S','M','L','XL'], colors:['Negro','Gris Melange','Vino','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 30°C', details:'Hoodie con cierre completo y forro french terry premium'},
-  {id:41, ref:'TS-041', name:'Bomber Satin Luxe', gender:'unisex', cat:'jacket', sub:'Bombers', tag:'new', price:52, sizes:['S','M','L','XL'], colors:['Negro','Champagne','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Poliéster satinado, 5% Elastano', care:'Lavado en seco', details:'Bomber satinado premium con acabado luxury'},
-  {id:43, ref:'TS-043', name:'Windbreaker Color Block', gender:'unisex', cat:'jacket', sub:'Windbreakers', tag:'new', price:36, sizes:['S','M','L','XL'], colors:['Multi Negro/Amarillo','Multi Azul/Blanco','Multi Rojo/Negro'], images:['assets/images/productos/DSC_0693.webp'], composition:'100% Nylon impermeable', care:'Lavar a mano', details:'Windbreaker con diseño color block y capucha plegable'},
-];
+const GENDER_ICON = {mujer:'♀', hombre:'♂', unisex:'⚭'};
 
 const catLabel = {set:'Conjuntos', top:'Tops', pants:'Pantalones', jacket:'Chaquetas', all:'Todos'};
-const catSingular = {set:'Conjunto', top:'Top', pants:'Pantalón', jacket:'Chaqueta'};
 const tagLabel = {new:'Nuevo', hot:'Top venta', limit:'Últimas und.'};
 const tagClass = {new:'badge-new', hot:'badge-hot', limit:'badge-lim'};
 const ALL_SIZES = ['XS','S','M','L','XL','XXL'];
+const ALL_CATS = ['set','top','pants','jacket'];
+
+// ═══════════════════════════════════════
+// 45 PRODUCTOS
+// ═══════════════════════════════════════
+const P = [
+  // MUJER - CONJUNTOS (8)
+  {id:1, ref:'TS-001', name:'Conjunto Flex Pro', gender:'mujer', cat:'set', sub:'Deportivos', tag:'new', price:24, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul'], images:['assets/images/productos/DSC_0690.webp','assets/images/productos/DSC_0691.webp'], composition:'95% Algodón, 5% Elastano', care:'Lavar a máquina 30°C', details:'Conjunto deportivo de 2 piezas con ajuste perfecto'},
+  {id:2, ref:'TS-002', name:'Set Athletic Elite', gender:'mujer', cat:'set', sub:'Deportivos', tag:'hot', price:26, sizes:['S','M','L','XL'], colors:['Negro','Gris','Verde Militar','Vino'], images:['assets/images/productos/DSC_0692.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar a máquina en ciclo suave', details:'Set deportivo de alto rendimiento con tecnología dry-fit'},
+  {id:3, ref:'TS-003', name:'Set Crop + Legging', gender:'mujer', cat:'set', sub:'Deportivos', tag:'new', price:22, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Lila','Salmón'], images:['assets/images/productos/DSC_0709.webp','assets/images/productos/DSC_0722.webp'], composition:'88% Poliamida, 12% Elastano', care:'Lavar a mano con agua fría', details:'Conjunto deportivo con soporte moderado, ideal para yoga'},
+  {id:5, ref:'TS-005', name:'Conjunto Casual Weekend', gender:'mujer', cat:'set', sub:'Casuales', tag:'new', price:32, sizes:['S','M','L','XL'], colors:['Beige','Gris','Blanco Hueso','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 40°C', details:'Conjunto casual perfecto para el día a día'},
+  {id:7, ref:'TS-007', name:'Set Loungewear Silk', gender:'mujer', cat:'set', sub:'Casuales', tag:'new', price:30, sizes:['S','M','L'], colors:['Champagne','Perla','Negro','Vino'], images:['assets/images/productos/DSC_0700.webp'], composition:'95% Poliéster, 5% Elastano', care:'Lavar a mano con agua fría', details:'Set loungewear con acabado satinado tipo seda'},
+  {id:9, ref:'TS-009', name:'Set Blazer + Pantalón', gender:'mujer', cat:'set', sub:'Elegantes', tag:'new', price:48, sizes:['S','M','L','XL'], colors:['Negro','Gris','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'65% Poliéster, 32% Viscosa, 3% Elastano', care:'Lavado en seco recomendado', details:'Conjunto formal ejecutivo con blazer estructurado'},
+  {id:11, ref:'TS-011', name:'Set Beach Vibes', gender:'mujer', cat:'set', sub:'Playa', tag:'new', price:26, sizes:['XS','S','M','L'], colors:['Blanco','Coral','Turquesa','Amarillo'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Viscosa', care:'Lavar a mano', details:'Conjunto playero con estampado tropical'},
+  {id:12, ref:'TS-012', name:'Set Resort Palm', gender:'mujer', cat:'set', sub:'Playa', tag:'hot', price:28, sizes:['S','M','L'], colors:['Blanco','Beige Arena','Verde Palma'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Lino', care:'Lavar a mano con agua fría', details:'Set resort para vacaciones con estilo bohemio-chic'},
+  
+  // MUJER - TOPS (8)
+  {id:13, ref:'TS-013', name:'Crop Top Ribbed', gender:'mujer', cat:'top', sub:'Crop tops', tag:'new', price:12, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Rosa','Menta','Beige'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar en ciclo suave', details:'Crop top de tejido acanalado con corte moderno'},
+  {id:14, ref:'TS-014', name:'Crop Basic Cotton', gender:'mujer', cat:'top', sub:'Crop tops', tag:'hot', price:10, sizes:['XS','S','M','L','XL'], colors:['Negro','Blanco','Gris','Beige','Café'], images:['assets/images/productos/DSC_0696.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Crop top básico esencial de algodón peinado'},
+  {id:15, ref:'TS-015', name:'Crop Off Shoulder', gender:'mujer', cat:'top', sub:'Crop tops', tag:'new', price:14, sizes:['S','M','L'], colors:['Negro','Blanco','Vino','Verde'], images:['assets/images/productos/DSC_0698.webp'], composition:'95% Poliéster, 5% Elastano', care:'Lavar en ciclo suave', details:'Crop top con hombros descubiertos'},
+  {id:16, ref:'TS-016', name:'Blusa Satin Flow', gender:'mujer', cat:'top', sub:'Blusas', tag:'hot', price:22, sizes:['S','M','L','XL'], colors:['Champagne','Perla','Negro','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0700.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano, planchar a baja temperatura', details:'Blusa fluida con caída elegante tipo satén'},
+  {id:17, ref:'TS-017', name:'Blusa Wrap Elegance', gender:'mujer', cat:'top', sub:'Blusas', tag:'new', price:24, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rojo','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar a mano con agua fría', details:'Blusa cruzada con lazo lateral'},
+  {id:22, ref:'TS-022', name:'Body Seamless Zen', gender:'mujer', cat:'top', sub:'Bodies', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Nude','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'90% Poliamida, 10% Elastano', care:'No usar secadora', details:'Body sin costuras para máximo confort'},
+  {id:23, ref:'TS-023', name:'Body Long Sleeve', gender:'mujer', cat:'top', sub:'Bodies', tag:'hot', price:18, sizes:['XS','S','M','L'], colors:['Negro','Blanco','Chocolate','Vino'], images:['assets/images/productos/DSC_0693.webp'], composition:'92% Poliéster, 8% Elastano', care:'Lavar en ciclo suave', details:'Body de manga larga con broches ocultos'},
+  {id:24, ref:'TS-024', name:'Tank Ribbed Essential', gender:'mujer', cat:'top', sub:'Tanks', tag:'hot', price:12, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Rosa','Menta','Gris'], images:['assets/images/productos/DSC_0696.webp'], composition:'92% Algodón, 8% Elastano', care:'Lavar a mano o máquina en ciclo suave', details:'Tank de tejido acanalado ajustado'},
+  
+  // MUJER - PANTALONES (5)
+  {id:28, ref:'TS-028', name:'Biker Short Pro', gender:'mujer', cat:'pants', sub:'Bikers', tag:'hot', price:14, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Oliva','Vino'], images:['assets/images/productos/DSC_0709.webp'], composition:'75% Algodón, 25% Elastano', care:'Lavar a máquina 30°C', details:'Short biker ajustado con costuras planas'},
+  {id:29, ref:'TS-029', name:'Biker High Waist', gender:'mujer', cat:'pants', sub:'Bikers', tag:'new', price:16, sizes:['XS','S','M','L'], colors:['Negro','Nude','Gris','Blanco'], images:['assets/images/productos/DSC_0722.webp'], composition:'80% Poliamida, 20% Elastano', care:'Lavar a mano', details:'Biker de cintura alta con efecto push-up'},
+  {id:30, ref:'TS-030', name:'Palazzo Wide Silk', gender:'mujer', cat:'pants', sub:'Palazzo', tag:'new', price:28, sizes:['S','M','L','XL'], colors:['Negro','Beige','Champagne','Verde Botella'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster satinado', care:'Lavar a mano', details:'Palazzo ancho con caída tipo seda'},
+  {id:31, ref:'TS-031', name:'Palazzo Culotte', gender:'mujer', cat:'pants', sub:'Palazzo', tag:'hot', price:26, sizes:['XS','S','M','L','XL'], colors:['Negro','Beige','Blanco','Terracota'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Viscosa, 5% Elastano', care:'Lavar en ciclo delicado', details:'Palazzo tipo culotte con cintura alta'},
+  {id:34, ref:'TS-034', name:'Legging Sculpt Pro', gender:'mujer', cat:'pants', sub:'Leggings', tag:'hot', price:18, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Café','Verde Militar','Vino'], images:['assets/images/productos/DSC_0696.webp'], composition:'82% Poliamida, 18% Elastano', care:'Lavar a mano con agua fría', details:'Legging con efecto sculpt y cintura alta'},
+  {id:35, ref:'TS-035', name:'Legging High Waist', gender:'mujer', cat:'pants', sub:'Leggings', tag:'new', price:16, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris','Azul Marino','Café'], images:['assets/images/productos/DSC_0698.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar en ciclo suave', details:'Legging básico de cintura alta'},
+  
+  // MUJER - CHAQUETAS (2)
+  {id:44, ref:'TS-044', name:'Blazer Structured', gender:'mujer', cat:'jacket', sub:'Blazers', tag:'new', price:58, sizes:['S','M','L','XL'], colors:['Negro','Beige','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0696.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Blazer estructurado con hombreras discretas'},
+  {id:45, ref:'TS-045', name:'Blazer Oversize Chic', gender:'mujer', cat:'jacket', sub:'Blazers', tag:'hot', price:56, sizes:['S','M','L','XL'], colors:['Negro','Beige','Café Chocolate'], images:['assets/images/productos/DSC_0698.webp'], composition:'75% Poliéster, 23% Viscosa, 2% Elastano', care:'Lavado en seco recomendado', details:'Blazer oversize con corte moderno'},
+  
+  // HOMBRE - CONJUNTOS (2)
+  {id:4, ref:'TS-004', name:'Set Runner Pro', gender:'hombre', cat:'set', sub:'Deportivos', tag:'hot', price:28, sizes:['S','M','L','XL'], colors:['Negro','Azul Marino','Rojo'], images:['assets/images/productos/DSC_0693.webp'], composition:'85% Poliéster, 15% Elastano', care:'Lavar a máquina 30°C', details:'Conjunto para running con ventilación estratégica'},
+  {id:10, ref:'TS-010', name:'Set Formal Executive', gender:'hombre', cat:'set', sub:'Casuales', tag:'hot', price:52, sizes:['S','M','L','XL'], colors:['Negro','Gris Antracita','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'70% Poliéster, 28% Viscosa, 2% Elastano', care:'Lavado en seco', details:'Traje elegante para eventos formales'},
+  
+  // HOMBRE - TOPS (3)
+  {id:20, ref:'TS-020', name:'Camiseta Oversize', gender:'hombre', cat:'top', sub:'Camisetas', tag:'new', price:15, sizes:['S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Vino','Azul Marino'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Algodón', care:'Lavar en ciclo normal', details:'Camiseta oversize con corte urbano moderno'},
+  {id:21, ref:'TS-021', name:'Camiseta Graphic Art', gender:'hombre', cat:'top', sub:'Camisetas', tag:'hot', price:13, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris'], images:['assets/images/productos/DSC_0691.webp'], composition:'100% Algodón', care:'Lavar del revés', details:'Camiseta con estampado gráfico exclusivo'},
+  {id:25, ref:'TS-025', name:'Tank Sport Pro', gender:'hombre', cat:'top', sub:'Tanks', tag:'new', price:14, sizes:['S','M','L','XL'], colors:['Negro','Blanco','Gris','Azul','Coral'], images:['assets/images/productos/DSC_0698.webp'], composition:'88% Poliéster, 12% Elastano', care:'Lavar a máquina 30°C', details:'Tank deportivo con tejido transpirable'},
+  
+  // HOMBRE - PANTALONES (3)
+  {id:26, ref:'TS-026', name:'Jogger Urban Slim', gender:'hombre', cat:'pants', sub:'Joggers', tag:'new', price:20, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Beige','Verde Militar'], images:['assets/images/productos/DSC_0700.webp'], composition:'85% Algodón, 15% Poliéster', care:'Lavar a máquina 30°C', details:'Jogger slim con bolsillos laterales'},
+  {id:32, ref:'TS-032', name:'Cargo Utility Pro', gender:'hombre', cat:'pants', sub:'Cargos', tag:'new', price:26, sizes:['S','M','L','XL'], colors:['Verde Militar','Beige','Negro','Café'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Algodón resistente', care:'Lavar a máquina 40°C', details:'Cargo con múltiples bolsillos utility'},
+  {id:37, ref:'TS-037', name:'Short Bermuda Casual', gender:'hombre', cat:'pants', sub:'Shorts', tag:'hot', price:18, sizes:['S','M','L','XL'], colors:['Beige','Negro','Verde Militar','Azul Marino'], images:['assets/images/productos/DSC_0701.webp'], composition:'100% Algodón', care:'Lavar a máquina 30°C', details:'Bermuda casual con corte cómodo'},
+  
+  // HOMBRE - CHAQUETAS (2)
+  {id:40, ref:'TS-040', name:'Bomber Classic', gender:'hombre', cat:'jacket', sub:'Bombers', tag:'hot', price:48, sizes:['S','M','L','XL'], colors:['Negro','Verde Militar','Azul Marino','Café'], images:['assets/images/productos/DSC_0690.webp'], composition:'100% Poliéster con forro', care:'Lavado en seco recomendado', details:'Bomber jacket clásica con puños elásticos'},
+  {id:42, ref:'TS-042', name:'Windbreaker Sport', gender:'hombre', cat:'jacket', sub:'Windbreakers', tag:'limit', price:34, sizes:['S','M','L','XL'], colors:['Negro','Azul','Rojo','Amarillo Neón'], images:['assets/images/productos/DSC_0692.webp'], composition:'100% Poliéster', care:'Lavar a mano', details:'Windbreaker ligera con detalles reflectivos'},
+  
+  // UNISEX - CONJUNTOS (2)
+  {id:6, ref:'TS-006', name:'Set Urban Comfort', gender:'unisex', cat:'set', sub:'Deportivos', tag:'hot', price:34, sizes:['XS','S','M','L','XL'], colors:['Negro','Gris Melange','Beige','Verde Oliva'], images:['assets/images/productos/DSC_0698.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar en ciclo normal', details:'Conjunto urbano con estética minimalista'},
+  {id:8, ref:'TS-008', name:'Conjunto Weekend Chic', gender:'unisex', cat:'set', sub:'Deportivos', tag:'limit', price:36, sizes:['S','M','L','XL'], colors:['Beige','Terracota','Gris'], images:['assets/images/productos/DSC_0701.webp'], composition:'75% Viscosa, 25% Lino', care:'Lavar a mano, no torcer', details:'Conjunto chic con tejido fresco'},
+  
+  // UNISEX - TOPS (2)
+  {id:18, ref:'TS-018', name:'Blusa Silk Touch', gender:'unisex', cat:'top', sub:'Camisetas', tag:'limit', price:26, sizes:['S','M','L'], colors:['Blanco Hueso','Champagne','Rosa Palo'], images:['assets/images/productos/DSC_0709.webp'], composition:'100% Poliéster efecto seda', care:'Lavar a mano', details:'Camiseta con tacto seda premium'},
+  {id:19, ref:'TS-019', name:'Camiseta Basic Premium', gender:'unisex', cat:'top', sub:'Camisetas', tag:'hot', price:11, sizes:['XS','S','M','L','XL','XXL'], colors:['Negro','Blanco','Gris','Beige','Café','Verde Militar'], images:['assets/images/productos/DSC_0722.webp'], composition:'100% Algodón peinado', care:'Lavar a máquina 30°C', details:'Camiseta básica premium con corte relajado'},
+  
+  // UNISEX - PANTALONES (3)
+  {id:27, ref:'TS-027', name:'Jogger Comfort Fit', gender:'unisex', cat:'pants', sub:'Joggers', tag:'hot', price:22, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris Melange','Azul Marino','Café'], images:['assets/images/productos/DSC_0701.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar en ciclo normal', details:'Jogger con corte relajado tipo french terry'},
+  {id:33, ref:'TS-033', name:'Cargo Slim Urban', gender:'unisex', cat:'pants', sub:'Cargos', tag:'hot', price:24, sizes:['S','M','L','XL','XXL'], colors:['Negro','Beige','Gris Piedra'], images:['assets/images/productos/DSC_0693.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar a máquina 30°C', details:'Cargo con corte slim y detalles urbanos'},
+  {id:36, ref:'TS-036', name:'Short Denim Chic', gender:'unisex', cat:'pants', sub:'Shorts', tag:'new', price:22, sizes:['XS','S','M','L','XL'], colors:['Azul Denim','Negro','Blanco','Beige'], images:['assets/images/productos/DSC_0700.webp'], composition:'98% Algodón, 2% Elastano', care:'Lavar del revés', details:'Short denim con lavado especial'},
+  
+  // UNISEX - CHAQUETAS (3)
+  {id:38, ref:'TS-038', name:'Hoodie Oversize Mod', gender:'unisex', cat:'jacket', sub:'Hoodies', tag:'limit', price:38, sizes:['S','M','L','XL','XXL'], colors:['Negro','Gris','Azul','Café','Verde Militar'], images:['assets/images/productos/DSC_0709.webp'], composition:'80% Algodón, 20% Poliéster', care:'Lavar con colores similares', details:'Hoodie oversize con capucha ajustable'},
+  {id:39, ref:'TS-039', name:'Hoodie Zip Premium', gender:'unisex', cat:'jacket', sub:'Hoodies', tag:'new', price:42, sizes:['S','M','L','XL'], colors:['Negro','Gris Melange','Vino','Beige'], images:['assets/images/productos/DSC_0722.webp'], composition:'70% Algodón, 30% Poliéster', care:'Lavar a máquina 30°C', details:'Hoodie con cierre completo y forro premium'},
+  {id:41, ref:'TS-041', name:'Bomber Satin Luxe', gender:'unisex', cat:'jacket', sub:'Bombers', tag:'new', price:52, sizes:['S','M','L','XL'], colors:['Negro','Champagne','Vino','Verde Esmeralda'], images:['assets/images/productos/DSC_0691.webp'], composition:'95% Poliéster satinado, 5% Elastano', care:'Lavado en seco', details:'Bomber satinado premium con acabado luxury'},
+  {id:43, ref:'TS-043', name:'Windbreaker Color Block', gender:'unisex', cat:'jacket', sub:'Windbreakers', tag:'new', price:36, sizes:['S','M','L','XL'], colors:['Multi Negro/Amarillo','Multi Azul/Blanco','Multi Rojo/Negro'], images:['assets/images/productos/DSC_0693.webp'], composition:'100% Nylon impermeable', care:'Lavar a mano', details:'Windbreaker con diseño color block'},
+];
 
 // ═══════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════
-let filters = {
-  gender: 'all',
-  cat: 'all',
-  sub: '',
-  sizes: [],
-  tags: []
-};
+let filters = { gender:'all', cat:'all', sub:'', sizes:[], tags:[] };
 let currentPage = 1;
 let sel = null;
 let selectedColors = [];
@@ -865,7 +701,6 @@ window.toggleMobileNav = function(){
   const isOpen = links.classList.toggle('mobile-open');
   toggle.classList.toggle('active');
   toggle.setAttribute('aria-expanded', isOpen);
-  
   if(isOpen){
     const cartPanel = document.getElementById('cartPanel');
     if(cartPanel && cartPanel.classList.contains('open')) closeCartPanel();
@@ -901,6 +736,9 @@ window.addEventListener('resize', function(){
   }
 });
 
+// ═══════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════
 function showToast(msg){
   const t = document.getElementById('toast');
   const txt = document.getElementById('toastText');
@@ -929,18 +767,13 @@ function updateCartBadge(){
 // ═══════════════════════════════════════
 function getFilteredProducts(){
   return P.filter(function(p){
-    // Género
     if(filters.gender !== 'all' && p.gender !== filters.gender) return false;
-    // Categoría
     if(filters.cat !== 'all' && p.cat !== filters.cat) return false;
-    // Subcategoría (solo 1)
     if(filters.sub && p.sub !== filters.sub) return false;
-    // Tallas
     if(filters.sizes.length > 0){
       const hasSize = p.sizes.some(function(s){ return filters.sizes.indexOf(s) !== -1; });
       if(!hasSize) return false;
     }
-    // Tags
     if(filters.tags.length > 0 && filters.tags.indexOf(p.tag) === -1) return false;
     return true;
   });
@@ -988,7 +821,7 @@ function getActiveFilterCount(){
 }
 
 // ═══════════════════════════════════════
-// RENDER SIDEBAR
+// SIDEBAR
 // ═══════════════════════════════════════
 function renderSidebar(targetId){
   const container = document.getElementById(targetId);
@@ -997,47 +830,24 @@ function renderSidebar(targetId){
   let html = '';
   
   // GÉNERO
-  html += '<div class="filter-group">' +
-    '<div class="filter-group-title"><span>Género</span></div>' +
-    '<div class="filter-gender-list">';
-  
-  html += '<button class="filter-gender-btn ' + (filters.gender === 'all' ? 'active' : '') + '" data-gender="all">' +
-    '<span class="filter-gender-icon">✦</span>Todos</button>';
-  html += '<button class="filter-gender-btn ' + (filters.gender === 'mujer' ? 'active' : '') + '" data-gender="mujer">' +
-    '<span class="filter-gender-icon">♀</span>Mujer</button>';
-  html += '<button class="filter-gender-btn ' + (filters.gender === 'hombre' ? 'active' : '') + '" data-gender="hombre">' +
-    '<span class="filter-gender-icon">♂</span>Hombre</button>';
-  html += '<button class="filter-gender-btn ' + (filters.gender === 'unisex' ? 'active' : '') + '" data-gender="unisex">' +
-    '<span class="filter-gender-icon">⚭</span>Unisex</button>';
-  
+  html += '<div class="filter-group"><div class="filter-group-title"><span>Género</span></div><div class="filter-gender-list">';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'all' ? 'active' : '') + '" data-gender="all"><span class="filter-gender-icon">✦</span>Todos</button>';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'mujer' ? 'active' : '') + '" data-gender="mujer"><span class="filter-gender-icon">♀</span>Mujer</button>';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'hombre' ? 'active' : '') + '" data-gender="hombre"><span class="filter-gender-icon">♂</span>Hombre</button>';
+  html += '<button class="filter-gender-btn ' + (filters.gender === 'unisex' ? 'active' : '') + '" data-gender="unisex"><span class="filter-gender-icon">⚭</span>Unisex</button>';
   html += '</div></div>';
   
   // CATEGORÍA
-  html += '<div class="filter-group">' +
-    '<div class="filter-group-title"><span>Categoría</span></div>' +
-    '<div class="filter-cat-list">';
-  
-  html += '<div class="filter-cat-item ' + (filters.cat === 'all' ? 'active' : '') + '" data-cat="all">' +
-    '<div class="filter-cat-radio"></div>' +
-    '<span class="filter-cat-name">Todos</span>' +
-    '<span class="filter-cat-count">' + countByCategory('all') + '</span>' +
-  '</div>';
-  
-  ['set','top','pants','jacket'].forEach(function(cat){
+  html += '<div class="filter-group"><div class="filter-group-title"><span>Categoría</span></div><div class="filter-cat-list">';
+  html += '<div class="filter-cat-item ' + (filters.cat === 'all' ? 'active' : '') + '" data-cat="all"><div class="filter-cat-radio"></div><span class="filter-cat-name">Todos</span><span class="filter-cat-count">' + countByCategory('all') + '</span></div>';
+  ALL_CATS.forEach(function(cat){
     const count = countByCategory(cat);
-    html += '<div class="filter-cat-item ' + (filters.cat === cat ? 'active' : '') + '" data-cat="' + cat + '">' +
-      '<div class="filter-cat-radio"></div>' +
-      '<span class="filter-cat-name">' + catLabel[cat] + '</span>' +
-      '<span class="filter-cat-count">' + count + '</span>' +
-    '</div>';
+    html += '<div class="filter-cat-item ' + (filters.cat === cat ? 'active' : '') + '" data-cat="' + cat + '"><div class="filter-cat-radio"></div><span class="filter-cat-name">' + catLabel[cat] + '</span><span class="filter-cat-count">' + count + '</span></div>';
   });
-  
   html += '</div></div>';
   
-  // SUBCATEGORÍA (Radio - solo 1)
-  html += '<div class="filter-group">' +
-    '<div class="filter-group-title"><span>Subcategoría</span></div>';
-  
+  // SUBCATEGORÍA
+  html += '<div class="filter-group"><div class="filter-group-title"><span>Subcategoría</span></div>';
   if(filters.cat === 'all'){
     html += '<div class="filter-empty">Selecciona una categoría</div>';
   } else {
@@ -1046,19 +856,11 @@ function renderSidebar(targetId){
       html += '<div class="filter-empty">Sin subcategorías disponibles</div>';
     } else {
       html += '<div class="filter-cat-list">';
-      html += '<div class="filter-cat-item ' + (!filters.sub ? 'active' : '') + '" data-sub="">' +
-        '<div class="filter-cat-radio"></div>' +
-        '<span class="filter-cat-name">Todas</span>' +
-        '<span class="filter-cat-count">' + countByCategory(filters.cat) + '</span>' +
-      '</div>';
+      html += '<div class="filter-cat-item ' + (!filters.sub ? 'active' : '') + '" data-sub=""><div class="filter-cat-radio"></div><span class="filter-cat-name">Todas</span><span class="filter-cat-count">' + countByCategory(filters.cat) + '</span></div>';
       availableSubs.forEach(function(sub){
         const count = countBySubcategory(sub);
         const active = filters.sub === sub;
-        html += '<div class="filter-cat-item ' + (active ? 'active' : '') + '" data-sub="' + sub + '">' +
-          '<div class="filter-cat-radio"></div>' +
-          '<span class="filter-cat-name">' + sub + '</span>' +
-          '<span class="filter-cat-count">' + count + '</span>' +
-        '</div>';
+        html += '<div class="filter-cat-item ' + (active ? 'active' : '') + '" data-sub="' + sub + '"><div class="filter-cat-radio"></div><span class="filter-cat-name">' + sub + '</span><span class="filter-cat-count">' + count + '</span></div>';
       });
       html += '</div>';
     }
@@ -1066,9 +868,7 @@ function renderSidebar(targetId){
   html += '</div>';
   
   // TALLAS
-  html += '<div class="filter-group">' +
-    '<div class="filter-group-title"><span>Talla</span></div>' +
-    '<div class="filter-size-grid">';
+  html += '<div class="filter-group"><div class="filter-group-title"><span>Talla</span></div><div class="filter-size-grid">';
   ALL_SIZES.forEach(function(size){
     const active = filters.sizes.indexOf(size) !== -1;
     html += '<button class="filter-size-btn ' + (active ? 'active' : '') + '" data-size="' + size + '">' + size + '</button>';
@@ -1076,32 +876,22 @@ function renderSidebar(targetId){
   html += '</div></div>';
   
   // ESTADO
-  html += '<div class="filter-group">' +
-    '<div class="filter-group-title"><span>Estado</span></div>' +
-    '<div class="filter-tag-list">';
+  html += '<div class="filter-group"><div class="filter-group-title"><span>Estado</span></div><div class="filter-tag-list">';
   ['new','hot','limit'].forEach(function(tag){
     const active = filters.tags.indexOf(tag) !== -1;
-    html += '<div class="filter-tag-item ' + (active ? 'active' : '') + '" data-tag="' + tag + '">' +
-      '<div class="filter-tag-dot ' + tag + '"></div>' +
-      '<span>' + tagLabel[tag] + '</span>' +
-      '<div class="filter-tag-check"></div>' +
-    '</div>';
+    html += '<div class="filter-tag-item ' + (active ? 'active' : '') + '" data-tag="' + tag + '"><div class="filter-tag-dot ' + tag + '"></div><span>' + tagLabel[tag] + '</span><div class="filter-tag-check"></div></div>';
   });
   html += '</div></div>';
   
   // LIMPIAR
   const activeCount = getActiveFilterCount();
-  html += '<button class="filter-clear" ' + (activeCount === 0 ? 'disabled' : '') + '>' +
-    '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
-    'Limpiar Filtros' +
-  '</button>';
+  html += '<button class="filter-clear" ' + (activeCount === 0 ? 'disabled' : '') + '><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Limpiar Filtros</button>';
   
   container.innerHTML = html;
   attachSidebarEvents(container);
 }
 
 function attachSidebarEvents(container){
-  // Género
   container.querySelectorAll('.filter-gender-btn').forEach(function(el){
     el.addEventListener('click', function(){
       const gender = el.dataset.gender;
@@ -1115,7 +905,6 @@ function attachSidebarEvents(container){
     });
   });
   
-  // Categoría
   container.querySelectorAll('.filter-cat-item[data-cat]').forEach(function(el){
     el.addEventListener('click', function(){
       const cat = el.dataset.cat;
@@ -1128,7 +917,6 @@ function attachSidebarEvents(container){
     });
   });
   
-  // Subcategoría (radio - solo 1)
   container.querySelectorAll('.filter-cat-item[data-sub]').forEach(function(el){
     el.addEventListener('click', function(){
       const sub = el.dataset.sub;
@@ -1140,7 +928,6 @@ function attachSidebarEvents(container){
     });
   });
   
-  // Tallas
   container.querySelectorAll('.filter-size-btn').forEach(function(el){
     el.addEventListener('click', function(){
       const size = el.dataset.size;
@@ -1152,7 +939,6 @@ function attachSidebarEvents(container){
     });
   });
   
-  // Tags
   container.querySelectorAll('.filter-tag-item').forEach(function(el){
     el.addEventListener('click', function(){
       const tag = el.dataset.tag;
@@ -1164,7 +950,6 @@ function attachSidebarEvents(container){
     });
   });
   
-  // Limpiar
   const clearBtn = container.querySelector('.filter-clear');
   if(clearBtn){
     clearBtn.addEventListener('click', function(){
@@ -1180,14 +965,13 @@ window.clearAllFilters = function(){
 };
 
 // ═══════════════════════════════════════
-// ACTIVE FILTERS CHIPS
+// ACTIVE FILTERS
 // ═══════════════════════════════════════
 function renderActiveFilters(){
   const container = document.getElementById('activeFilters');
   if(!container) return;
   
   let html = '';
-  
   if(filters.gender !== 'all'){
     html += '<div class="active-filter-chip">' + GENDER_LABEL[filters.gender] + '<button data-remove-gender="1">✕</button></div>';
   }
@@ -1229,7 +1013,7 @@ function renderActiveFilters(){
 }
 
 // ═══════════════════════════════════════
-// RENDER GRID
+// GRID
 // ═══════════════════════════════════════
 function renderGrid(){
   const g = document.getElementById('grid');
@@ -1237,21 +1021,14 @@ function renderGrid(){
   if(!g) return;
   
   const list = getFilteredProducts();
-  
   if(countEl) countEl.textContent = list.length;
   
   if(list.length === 0){
-    g.innerHTML = '<div class="empty-catalog">' +
-      '<div class="empty-catalog-icon"><img src="' + ISOTIPO_PH + '" alt=""></div>' +
-      '<h3>Sin resultados</h3>' +
-      '<p>No hay productos que coincidan con los filtros seleccionados.</p>' +
-      '<button class="empty-catalog-btn" onclick="clearAllFilters()">Limpiar Filtros</button>' +
-    '</div>';
+    g.innerHTML = '<div class="empty-catalog"><div class="empty-catalog-icon"><img src="' + ISOTIPO_PH + '" alt=""></div><h3>Sin resultados</h3><p>No hay productos que coincidan con los filtros seleccionados.</p><button class="empty-catalog-btn" onclick="clearAllFilters()">Limpiar Filtros</button></div>';
     document.getElementById('pagination').innerHTML = '';
     return;
   }
   
-  // Paginación
   const totalPages = Math.ceil(list.length / ITEMS_PER_PAGE);
   if(currentPage > totalPages) currentPage = 1;
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -1270,9 +1047,12 @@ function renderGrid(){
       return '<span class="csz ' + (i < 3 ? 'av' : '') + '">' + s + '</span>';
     }).join('');
     
+    const genderIcon = GENDER_ICON[p.gender] || '';
+    
     html += '<article class="card" tabindex="0" role="listitem" data-id="' + p.id + '" aria-label="' + sanitize(p.name) + ' - $' + p.price.toFixed(2) + '">' +
       '<div class="card-img">' + imgHTML +
         '<div class="card-badge ' + tagClass[p.tag] + '">' + tagLabel[p.tag] + '</div>' +
+        '<div class="card-gender-badge" title="' + GENDER_LABEL[p.gender] + '">' + genderIcon + '</div>' +
         '<button class="card-overlay-btn" tabindex="-1">Ver Detalle</button>' +
       '</div>' +
       '<div class="card-body">' +
@@ -1307,17 +1087,10 @@ function renderGrid(){
 function renderPagination(total, totalPages){
   const container = document.getElementById('pagination');
   if(!container) return;
-  
-  if(totalPages <= 1){
-    container.innerHTML = '';
-    return;
-  }
+  if(totalPages <= 1){ container.innerHTML = ''; return; }
   
   let html = '';
-  
-  html += '<button class="page-btn" data-page="prev" ' + (currentPage === 1 ? 'disabled' : '') + '>' +
-    '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>' +
-  '</button>';
+  html += '<button class="page-btn" data-page="prev" ' + (currentPage === 1 ? 'disabled' : '') + '><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>';
   
   for(let i = 1; i <= totalPages; i++){
     if(i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)){
@@ -1327,9 +1100,7 @@ function renderPagination(total, totalPages){
     }
   }
   
-  html += '<button class="page-btn" data-page="next" ' + (currentPage === totalPages ? 'disabled' : '') + '>' +
-    '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>' +
-  '</button>';
+  html += '<button class="page-btn" data-page="next" ' + (currentPage === totalPages ? 'disabled' : '') + '><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>';
   
   container.innerHTML = html;
   
@@ -1362,7 +1133,6 @@ function updateFilterCounts(){
   const count = getActiveFilterCount();
   const sidebarCount = document.getElementById('sidebarCount');
   const mobileCount = document.getElementById('mobileFilterCount');
-  
   if(sidebarCount){
     sidebarCount.textContent = count + ' ' + (count === 1 ? 'activo' : 'activos');
     sidebarCount.classList.toggle('zero', count === 0);
@@ -1373,27 +1143,7 @@ function updateFilterCounts(){
   }
 }
 
-// ═══════════════════════════════════════
-// URL PARAMS
-// ═══════════════════════════════════════
 function updateURL(){
-  const params = new URLSearchParams();
-  if(filters.gender !== 'all') params.set('g', filters.gender);
-  if(filters.cat !== 'all') params.set('cat', filters.cat);
-  if(filters.sub) params.set('sub', filters.sub);
-  if(filters.sizes.length) params.set('sizes', filters.sizes.join(','));
-  if(filters.tags.length) params.set('tags', filters.tags.join(','));
-  const url = params.toString() ? '?' + params.toString() : window.location.pathname;
-  window.history.replaceState({}, '', url);
-}
-
-function loadFromURL(){
-  const params = new URLSearchParams(window.location.search);
-  const cat = params.get('cat');
-  const subs = params.get('subs');
-  const sizes = params.get('sizes');
-  const tags = params.get('tags');
-  function updateURL(){
   const params = new URLSearchParams();
   if(filters.gender !== 'all') params.set('g', filters.gender);
   if(filters.cat !== 'all') params.set('cat', filters.cat);
@@ -1411,16 +1161,15 @@ function loadFromURL(){
   const sub = params.get('sub');
   const sizes = params.get('sizes');
   const tags = params.get('tags');
-  
   if(gender && GENDERS.indexOf(gender) !== -1) filters.gender = gender;
-  if(cat && ['all','set','top','pants','jacket'].indexOf(cat) !== -1) filters.cat = cat;
+  if(cat && ALL_CATS.indexOf(cat) !== -1) filters.cat = cat;
   if(sub) filters.sub = sub;
   if(sizes) filters.sizes = sizes.split(',').filter(function(s){ return ALL_SIZES.indexOf(s) !== -1; });
   if(tags) filters.tags = tags.split(',').filter(function(t){ return ['new','hot','limit'].indexOf(t) !== -1; });
 }
 
 // ═══════════════════════════════════════
-// MOBILE FILTER PANEL
+// MOBILE FILTERS
 // ═══════════════════════════════════════
 window.openMobileFilters = function(){
   document.getElementById('mobileFilterOverlay').classList.add('open');
@@ -1436,7 +1185,7 @@ window.closeMobileFilters = function(){
 };
 
 // ═══════════════════════════════════════
-// MODAL PRODUCTO
+// MODAL
 // ═══════════════════════════════════════
 window.openModal = function(id){
   sel = P.find(function(p){ return p.id === id; });
@@ -1453,8 +1202,7 @@ window.openModal = function(id){
   
   let galleryHTML = '';
   if(sel.images && sel.images.length > 0){
-    galleryHTML = '<div class="modal-gallery">' +
-      '<img id="modalMainImg" class="modal-main-img" src="' + sel.images[0] + '" alt="' + sanitize(sel.name) + '" onerror="this.outerHTML=\'<div class=&quot;modal-main-img-ph&quot;><img src=&quot;' + ISOTIPO_PH + '&quot; alt=&quot;&quot;></div>\'">';
+    galleryHTML = '<div class="modal-gallery"><img id="modalMainImg" class="modal-main-img" src="' + sel.images[0] + '" alt="' + sanitize(sel.name) + '" onerror="this.outerHTML=\'<div class=&quot;modal-main-img-ph&quot;><img src=&quot;' + ISOTIPO_PH + '&quot; alt=&quot;&quot;></div>\'">';
     if(sel.images.length > 1){
       galleryHTML += '<div class="modal-thumbs" id="modalThumbs">';
       sel.images.forEach(function(img, idx){
@@ -1467,34 +1215,15 @@ window.openModal = function(id){
     galleryHTML = '<div class="modal-gallery"><div class="modal-main-img-ph"><img src="' + ISOTIPO_PH + '" alt=""></div></div>';
   }
   
-  const infoHTML = '<div class="modal-info">' +
-    '<div class="info-item"><h4>Composición</h4><p>' + sanitize(sel.composition || 'No especificado') + '</p></div>' +
-    '<div class="info-item"><h4>Cuidado</h4><p>' + sanitize(sel.care || 'No especificado') + '</p></div>' +
-    '<div class="info-item"><h4>Detalles</h4><p>' + sanitize(sel.details || 'No especificado') + '</p></div>' +
-  '</div>';
+  const infoHTML = '<div class="modal-info"><div class="info-item"><h4>Género</h4><p>' + GENDER_LABEL[sel.gender] + '</p></div><div class="info-item"><h4>Composición</h4><p>' + sanitize(sel.composition || 'No especificado') + '</p></div><div class="info-item"><h4>Cuidado</h4><p>' + sanitize(sel.care || 'No especificado') + '</p></div><div class="info-item"><h4>Detalles</h4><p>' + sanitize(sel.details || 'No especificado') + '</p></div></div>';
   
-  const pricesHTML = '<div class="price-cards">' +
-    '<div class="pc"><div class="pc-l">Unitario</div><div class="pc-v">$' + sel.price.toFixed(2) + '</div></div>' +
-    '<div class="pc best"><div class="pc-l">Por Docena</div><div class="pc-v">$' + (sel.price * 12).toFixed(2) + '</div><div class="pc-note">x12 und</div></div>' +
-  '</div>';
+  const pricesHTML = '<div class="price-cards"><div class="pc"><div class="pc-l">Unitario</div><div class="pc-v">$' + sel.price.toFixed(2) + '</div></div><div class="pc best"><div class="pc-l">Por Docena</div><div class="pc-v">$' + (sel.price * 12).toFixed(2) + '</div><div class="pc-note">x12 und</div></div></div>';
   
-  const colorsHTML = '<div class="m-label">Selecciona los colores</div>' +
-    '<div class="m-min-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Puedes elegir varios colores. Mínimo 12 unidades en total</div>' +
-    '<div class="m-colors" id="m-colors">' +
-      sel.colors.map(function(c){
-        return '<button class="mcolor" data-color="' + c + '" aria-label="Color ' + c + '" aria-pressed="false">' + c + '</button>';
-      }).join('') +
-    '</div>';
+  const colorsHTML = '<div class="m-label">Selecciona los colores</div><div class="m-min-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Puedes elegir varios colores. Mínimo 12 unidades en total</div><div class="m-colors" id="m-colors">' + sel.colors.map(function(c){ return '<button class="mcolor" data-color="' + c + '" aria-label="Color ' + c + '" aria-pressed="false">' + c + '</button>'; }).join('') + '</div>';
   
   const colorsSectionHTML = '<div id="m-colors-section"></div>';
   
-  const totalHTML = '<div class="m-total-section">' +
-    '<img src="' + ISOTIPO_WM + '" alt="" class="m-total-wm" aria-hidden="true" onerror="this.style.display=\'none\'">' +
-    '<div class="m-total-row"><span class="m-total-l">Total unidades</span><span class="m-total-v" id="m-total-qty">0 und</span></div>' +
-    '<div class="m-total-final"><span class="m-total-final-l">Total</span><span class="m-total-final-v" id="m-total-price">$0.00</span></div>' +
-  '</div>' +
-  '<div class="m-min-reminder">📌 El pedido mínimo es 12 unidades en total (puede ser combinando varios productos y colores)</div>' +
-  '<button class="btn-add-cart" id="btn-add-cart" disabled>Agregar al pedido</button>';
+  const totalHTML = '<div class="m-total-section"><img src="' + ISOTIPO_WM + '" alt="" class="m-total-wm" aria-hidden="true" onerror="this.style.display=\'none\'"><div class="m-total-row"><span class="m-total-l">Total unidades</span><span class="m-total-v" id="m-total-qty">0 und</span></div><div class="m-total-final"><span class="m-total-final-l">Total</span><span class="m-total-final-v" id="m-total-price">$0.00</span></div></div><div class="m-min-reminder">📌 El pedido mínimo es 12 unidades en total (puede ser combinando varios productos y colores)</div><button class="btn-add-cart" id="btn-add-cart" disabled>Agregar al pedido</button>';
   
   body.innerHTML = galleryHTML + infoHTML + pricesHTML + colorsHTML + colorsSectionHTML + totalHTML;
   
@@ -1521,13 +1250,9 @@ function attachModalEvents(){
       }
     });
   });
-  
   document.querySelectorAll('#m-colors .mcolor').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      toggleColor(btn, btn.dataset.color);
-    });
+    btn.addEventListener('click', function(){ toggleColor(btn, btn.dataset.color); });
   });
-  
   const addBtn = document.getElementById('btn-add-cart');
   if(addBtn) addBtn.addEventListener('click', doOrder);
 }
@@ -1568,7 +1293,6 @@ function updateColorIndicators(){
 function renderColorBlocks(){
   const section = document.getElementById('m-colors-section');
   if(!section) return;
-  
   if(selectedColors.length === 0){
     section.innerHTML = '';
     calcTotals();
@@ -1578,28 +1302,13 @@ function renderColorBlocks(){
   let html = '';
   selectedColors.forEach(function(color){
     const colorData = stateMap[color] || {};
-    
-    html += '<div class="m-color-block">' +
-      '<div class="m-color-header">' +
-        '<span class="m-color-name">' + sanitize(color) + '</span>' +
-        '<span class="m-color-total" data-color-total="' + color + '">0 und</span>' +
-      '</div>' +
-      '<div class="m-size-grid">';
-    
+    html += '<div class="m-color-block"><div class="m-color-header"><span class="m-color-name">' + sanitize(color) + '</span><span class="m-color-total" data-color-total="' + color + '">0 und</span></div><div class="m-size-grid">';
     sel.sizes.forEach(function(size){
       const savedQty = colorData[size] || 0;
       const val = savedQty > 0 ? savedQty : 0;
       const decDisabled = savedQty === 0 ? 'disabled' : '';
-      html += '<div class="m-size-item">' +
-        '<label class="m-size-label">' + size + '</label>' +
-        '<div class="m-size-controls">' +
-          '<button type="button" class="m-size-btn" data-action="dec" data-color="' + color + '" data-size="' + size + '" aria-label="Restar" ' + decDisabled + '>−</button>' +
-          '<input type="number" class="m-size-input" min="0" step="1" value="' + val + '" data-color="' + color + '" data-size="' + size + '" aria-label="Cantidad talla ' + size + ' color ' + color + '" inputmode="numeric">' +
-          '<button type="button" class="m-size-btn" data-action="inc" data-color="' + color + '" data-size="' + size + '" aria-label="Sumar">+</button>' +
-        '</div>' +
-      '</div>';
+      html += '<div class="m-size-item"><label class="m-size-label">' + size + '</label><div class="m-size-controls"><button type="button" class="m-size-btn" data-action="dec" data-color="' + color + '" data-size="' + size + '" aria-label="Restar" ' + decDisabled + '>−</button><input type="number" class="m-size-input" min="0" step="1" value="' + val + '" data-color="' + color + '" data-size="' + size + '" aria-label="Cantidad talla ' + size + ' color ' + color + '" inputmode="numeric"><button type="button" class="m-size-btn" data-action="inc" data-color="' + color + '" data-size="' + size + '" aria-label="Sumar">+</button></div></div>';
     });
-    
     html += '</div></div>';
   });
   
@@ -1639,7 +1348,6 @@ function renderColorBlocks(){
       else if(action === 'dec' && val > 0) val--;
       input.value = val;
       handleQtyChange(input);
-      
       const decBtn = section.querySelector('.m-size-btn[data-action="dec"][data-color="' + color + '"][data-size="' + size + '"]');
       if(decBtn) decBtn.disabled = (val === 0);
     });
@@ -1652,12 +1360,9 @@ function handleQtyChange(input){
   let val = parseInt(input.value);
   if(isNaN(val) || val < 0) val = 0;
   else val = Math.floor(val);
-  
   const color = input.dataset.color;
   const size = input.dataset.size;
-  
   if(!stateMap[color]) stateMap[color] = {};
-  
   if(val > 0){
     stateMap[color][size] = val;
     input.value = val;
@@ -1665,7 +1370,6 @@ function handleQtyChange(input){
     delete stateMap[color][size];
     input.value = 0;
   }
-  
   calcTotals();
   updateColorIndicators();
 }
@@ -1673,21 +1377,17 @@ function handleQtyChange(input){
 function calcTotals(){
   if(!sel) return;
   let totalQty = 0;
-  
   selectedColors.forEach(function(color){
     const data = stateMap[color] || {};
     let colorTotal = 0;
     Object.keys(data).forEach(function(size){ colorTotal += data[size]; });
     totalQty += colorTotal;
-    
     const colorTotalEl = document.querySelector('[data-color-total="' + color + '"]');
     if(colorTotalEl) colorTotalEl.textContent = colorTotal + ' und';
   });
-  
   const qtyEl = document.getElementById('m-total-qty');
   const priceEl = document.getElementById('m-total-price');
   const btnEl = document.getElementById('btn-add-cart');
-  
   if(qtyEl) qtyEl.textContent = totalQty + ' und';
   const precio = totalQty >= 100 ? sel.price * totalQty * 0.9 : sel.price * totalQty;
   if(priceEl) priceEl.textContent = '$' + precio.toFixed(2);
@@ -1696,9 +1396,7 @@ function calcTotals(){
 
 function doOrder(){
   if(!sel) return;
-  
   let lines = [], totalQty = 0;
-  
   selectedColors.forEach(function(color){
     const data = stateMap[color] || {};
     Object.keys(data).forEach(function(size){
@@ -1709,19 +1407,12 @@ function doOrder(){
       }
     });
   });
-  
-  if(lines.length === 0){
-    showToast('Ingresa al menos 1 unidad');
-    return;
-  }
+  if(lines.length === 0){ showToast('Ingresa al menos 1 unidad'); return; }
   
   const existingIdx = cartItems.findIndex(function(item){ return item.productId === sel.id; });
-  
   if(existingIdx !== -1){
     lines.forEach(function(newLine){
-      const existingLine = cartItems[existingIdx].lines.find(function(l){
-        return l.color === newLine.color && l.size === newLine.size;
-      });
+      const existingLine = cartItems[existingIdx].lines.find(function(l){ return l.color === newLine.color && l.size === newLine.size; });
       if(existingLine) existingLine.qty += newLine.qty;
       else cartItems[existingIdx].lines.push(newLine);
     });
@@ -1730,7 +1421,6 @@ function doOrder(){
     cartItems.push({ productId: sel.id, lines: lines });
     showToast(sel.name + ' agregado (' + totalQty + ' und)');
   }
-  
   updateCartBadge();
   saveToStorage();
   closeModal();
@@ -1747,7 +1437,6 @@ window.openCartPanel = function(){
     navToggle.classList.remove('active');
     navToggle.setAttribute('aria-expanded', 'false');
   }
-  
   document.getElementById('cartPanelOverlay').classList.add('open');
   document.getElementById('cartPanel').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1755,7 +1444,6 @@ window.openCartPanel = function(){
   document.body.style.width = '100%';
   document.body.dataset.scrollY = window.scrollY;
   document.body.style.top = '-' + window.scrollY + 'px';
-  
   requestAnimationFrame(function(){
     setTimeout(function(){
       renderCartPanel();
@@ -1768,7 +1456,6 @@ window.openCartPanel = function(){
 window.closeCartPanel = function(){
   document.getElementById('cartPanelOverlay').classList.remove('open');
   document.getElementById('cartPanel').classList.remove('open');
-  
   const scrollY = document.body.dataset.scrollY || '0';
   document.body.style.overflow = '';
   document.body.style.position = '';
@@ -1784,13 +1471,7 @@ function renderCartPanel(){
   if(!body || !footer) return;
   
   if(cartItems.length === 0){
-    body.innerHTML = '<div class="cart-empty-state">' +
-      '<img src="' + ISOTIPO_WM + '" alt="" class="ces-wm" aria-hidden="true" onerror="this.style.display=\'none\'">' +
-      '<div class="ces-icon"><img src="' + ISOTIPO_PH + '" alt=""></div>' +
-      '<h3 class="ces-title">Tu pedido está vacío</h3>' +
-      '<p class="ces-sub">Explora nuestro catálogo y descubre piezas exclusivas.<br>Mínimo 12 unidades por pedido.</p>' +
-      '<button class="btn btn-primary btn-sm" onclick="closeCartPanel()">Explorar Catálogo</button>' +
-      '</div>';
+    body.innerHTML = '<div class="cart-empty-state"><img src="' + ISOTIPO_WM + '" alt="" class="ces-wm" aria-hidden="true" onerror="this.style.display=\'none\'"><div class="ces-icon"><img src="' + ISOTIPO_PH + '" alt=""></div><h3 class="ces-title">Tu pedido está vacío</h3><p class="ces-sub">Explora nuestro catálogo y descubre piezas exclusivas.<br>Mínimo 12 unidades por pedido.</p><button class="btn btn-primary btn-sm" onclick="closeCartPanel()">Explorar Catálogo</button></div>';
     footer.style.display = 'none';
     return;
   }
@@ -1816,41 +1497,20 @@ function renderCartPanel(){
     
     const thumbSrc = (p.images && p.images[0]) ? p.images[0] : '';
     
-    itemsHTML += '<div class="cart-item">' +
-      '<div class="ci-row">' +
-        '<div class="ci-thumb">' + (thumbSrc ? '<img src="' + thumbSrc + '" alt="' + sanitize(p.name) + '" loading="lazy">' : '') + '</div>' +
-        '<div class="ci-info">' +
-          '<div class="ci-ref">' + p.ref + '</div>' +
-          '<h4 class="ci-name">' + sanitize(p.name) + '</h4>' +
-          '<div class="ci-price">$' + p.price.toFixed(2) + ' c/u</div>' +
-        '</div>' +
-        '<button class="ci-del" data-remove-item="' + idx + '" aria-label="Eliminar ' + sanitize(p.name) + '">✕</button>' +
-      '</div>';
+    itemsHTML += '<div class="cart-item"><div class="ci-row"><div class="ci-thumb">' + (thumbSrc ? '<img src="' + thumbSrc + '" alt="' + sanitize(p.name) + '" loading="lazy">' : '') + '</div><div class="ci-info"><div class="ci-ref">' + p.ref + '</div><h4 class="ci-name">' + sanitize(p.name) + '</h4><div class="ci-price">$' + p.price.toFixed(2) + ' c/u</div></div><button class="ci-del" data-remove-item="' + idx + '" aria-label="Eliminar ' + sanitize(p.name) + '">✕</button></div>';
     
     Object.keys(colorsData).forEach(function(color){
       const colorQty = colorsData[color].reduce(function(s, l){ return s + l.qty; }, 0);
-      itemsHTML += '<div class="ci-color-group">' +
-        '<div class="ci-color-header">' +
-          '<span class="ci-color-name">' + sanitize(color) + '</span>' +
-          '<span class="ci-color-qty">' + colorQty + ' und</span>' +
-        '</div>';
-      
+      itemsHTML += '<div class="ci-color-group"><div class="ci-color-header"><span class="ci-color-name">' + sanitize(color) + '</span><span class="ci-color-qty">' + colorQty + ' und</span></div>';
       colorsData[color].forEach(function(line){
         const lineIdx = item.lines.findIndex(function(l){ return l.color === line.color && l.size === line.size; });
         const lineBaseTotal = p.price * line.qty;
-        itemsHTML += '<div class="ci-line">' +
-          '<div><div class="ci-line-info">Talla ' + line.size + '</div><div class="ci-line-sub">' + line.qty + ' und · $' + lineBaseTotal.toFixed(2) + '</div></div>' +
-          '<button class="ci-line-del" data-remove-line="' + idx + '-' + lineIdx + '" aria-label="Eliminar talla ' + line.size + '">✕</button>' +
-        '</div>';
+        itemsHTML += '<div class="ci-line"><div><div class="ci-line-info">Talla ' + line.size + '</div><div class="ci-line-sub">' + line.qty + ' und · $' + lineBaseTotal.toFixed(2) + '</div></div><button class="ci-line-del" data-remove-line="' + idx + '-' + lineIdx + '" aria-label="Eliminar talla ' + line.size + '">✕</button></div>';
       });
-      
       itemsHTML += '</div>';
     });
     
-    itemsHTML += '<div class="ci-subtotal">' +
-      '<span class="ci-subtotal-l">' + itemQty + ' unidades</span>' +
-      '<span class="ci-subtotal-v">$' + itemFinalTotal.toFixed(2) + '</span>' +
-    '</div></div>';
+    itemsHTML += '<div class="ci-subtotal"><span class="ci-subtotal-l">' + itemQty + ' unidades</span><span class="ci-subtotal-v">$' + itemFinalTotal.toFixed(2) + '</span></div></div>';
   });
   
   body.innerHTML = itemsHTML;
@@ -1870,44 +1530,7 @@ function renderCartPanel(){
   const isComplete = grandQty >= 12;
   const remaining = Math.max(12 - grandQty, 0);
   
-  footer.innerHTML = 
-    '<div class="progress-container">' +
-      '<div class="progress-label">' +
-        '<span class="progress-label-text">Progreso</span>' +
-        '<span class="progress-label-count">' + grandQty + ' / 12 und</span>' +
-      '</div>' +
-      '<div class="progress-bar"><div class="progress-bar-fill ' + (isComplete ? 'complete' : '') + '" style="width:' + progressPercent + '%"></div></div>' +
-      '<div class="progress-message ' + (isComplete ? 'complete' : 'pending') + '">' +
-        (isComplete ? '✓ Pedido mínimo alcanzado' : 'Te faltan ' + remaining + ' unidades para el mínimo') +
-      '</div>' +
-    '</div>' +
-    '<div class="cpf-total">' +
-      '<img src="' + ISOTIPO_WM + '" alt="" class="cpf-total-wm" aria-hidden="true" onerror="this.style.display=\'none\'">' +
-      '<span class="cpf-total-l">Total</span><span class="cpf-total-v">$' + grandTotal.toFixed(2) + '</span>' +
-    '</div>' +
-    '<div class="cpf-form-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Datos de envío</div>' +
-    '<div class="cpf-form-row">' +
-      '<div class="cpf-form-group"><label class="cpf-form-label" for="cf-nombre">Nombre *</label><input type="text" class="cpf-form-input" id="cf-nombre" placeholder="Tu nombre" value="' + sanitize(customerData.nombre || '') + '" autocomplete="given-name"></div>' +
-      '<div class="cpf-form-group"><label class="cpf-form-label" for="cf-apellido">Apellido</label><input type="text" class="cpf-form-input" id="cf-apellido" placeholder="Tu apellido" value="' + sanitize(customerData.apellido || '') + '" autocomplete="family-name"></div>' +
-    '</div>' +
-    '<div class="cpf-form-row">' +
-      '<div class="cpf-form-group"><label class="cpf-form-label" for="cf-correo">Correo</label><input type="email" class="cpf-form-input" id="cf-correo" placeholder="correo@ejemplo.com" value="' + sanitize(customerData.correo || '') + '" autocomplete="email"></div>' +
-      '<div class="cpf-form-group"><label class="cpf-form-label" for="cf-telefono">Teléfono *</label><input type="tel" class="cpf-form-input" id="cf-telefono" placeholder="099 000 0000" value="' + sanitize(customerData.telefono || '') + '" autocomplete="tel"></div>' +
-    '</div>' +
-    '<div class="cpf-form-row">' +
-      '<div class="cpf-form-group cpf-form-full"><label class="cpf-form-label" for="cf-direccion">Dirección</label><input type="text" class="cpf-form-input" id="cf-direccion" placeholder="Calle principal #123 y secundaria" value="' + sanitize(customerData.direccion || '') + '" autocomplete="street-address"></div>' +
-    '</div>' +
-    '<div class="cpf-form-row">' +
-      '<div class="cpf-form-group"><label class="cpf-form-label" for="cf-ciudad">Ciudad</label><input type="text" class="cpf-form-input" id="cf-ciudad" placeholder="Quito, Guayaquil..." value="' + sanitize(customerData.ciudad || '') + '" autocomplete="address-level2"></div>' +
-      '<div class="cpf-form-group"><label class="cpf-form-label" for="cf-provincia">Provincia</label><input type="text" class="cpf-form-input" id="cf-provincia" placeholder="Pichincha, Guayas..." value="' + sanitize(customerData.provincia || '') + '" autocomplete="address-level1"></div>' +
-    '</div>' +
-    '<div class="cpf-form-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Envíos a todo Ecuador desde Ambato</div>' +
-    '<div class="cpf-min-warning ' + (grandQty >= 12 ? 'hidden' : '') + '">⚠️ Tu pedido tiene ' + grandQty + ' unidades. El mínimo es 12.</div>' +
-    '<button class="cpf-btn" id="cpfSendBtn" ' + (grandQty < 12 ? 'disabled' : '') + '>' +
-      '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
-      'Enviar por WhatsApp' +
-    '</button>' +
-    '<button class="cpf-clear" id="cpfClearBtn">Vaciar pedido</button>';
+  footer.innerHTML = '<div class="progress-container"><div class="progress-label"><span class="progress-label-text">Progreso</span><span class="progress-label-count">' + grandQty + ' / 12 und</span></div><div class="progress-bar"><div class="progress-bar-fill ' + (isComplete ? 'complete' : '') + '" style="width:' + progressPercent + '%"></div></div><div class="progress-message ' + (isComplete ? 'complete' : 'pending') + '">' + (isComplete ? '✓ Pedido mínimo alcanzado' : 'Te faltan ' + remaining + ' unidades para el mínimo') + '</div></div><div class="cpf-total"><img src="' + ISOTIPO_WM + '" alt="" class="cpf-total-wm" aria-hidden="true" onerror="this.style.display=\'none\'"><span class="cpf-total-l">Total</span><span class="cpf-total-v">$' + grandTotal.toFixed(2) + '</span></div><div class="cpf-form-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Datos de envío</div><div class="cpf-form-row"><div class="cpf-form-group"><label class="cpf-form-label" for="cf-nombre">Nombre *</label><input type="text" class="cpf-form-input" id="cf-nombre" placeholder="Tu nombre" value="' + sanitize(customerData.nombre || '') + '" autocomplete="given-name"></div><div class="cpf-form-group"><label class="cpf-form-label" for="cf-apellido">Apellido</label><input type="text" class="cpf-form-input" id="cf-apellido" placeholder="Tu apellido" value="' + sanitize(customerData.apellido || '') + '" autocomplete="family-name"></div></div><div class="cpf-form-row"><div class="cpf-form-group"><label class="cpf-form-label" for="cf-correo">Correo</label><input type="email" class="cpf-form-input" id="cf-correo" placeholder="correo@ejemplo.com" value="' + sanitize(customerData.correo || '') + '" autocomplete="email"></div><div class="cpf-form-group"><label class="cpf-form-label" for="cf-telefono">Teléfono *</label><input type="tel" class="cpf-form-input" id="cf-telefono" placeholder="099 000 0000" value="' + sanitize(customerData.telefono || '') + '" autocomplete="tel"></div></div><div class="cpf-form-row"><div class="cpf-form-group cpf-form-full"><label class="cpf-form-label" for="cf-direccion">Dirección</label><input type="text" class="cpf-form-input" id="cf-direccion" placeholder="Calle principal #123 y secundaria" value="' + sanitize(customerData.direccion || '') + '" autocomplete="street-address"></div></div><div class="cpf-form-row"><div class="cpf-form-group"><label class="cpf-form-label" for="cf-ciudad">Ciudad</label><input type="text" class="cpf-form-input" id="cf-ciudad" placeholder="Quito, Guayaquil..." value="' + sanitize(customerData.ciudad || '') + '" autocomplete="address-level2"></div><div class="cpf-form-group"><label class="cpf-form-label" for="cf-provincia">Provincia</label><input type="text" class="cpf-form-input" id="cf-provincia" placeholder="Pichincha, Guayas..." value="' + sanitize(customerData.provincia || '') + '" autocomplete="address-level1"></div></div><div class="cpf-form-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Envíos a todo Ecuador desde Ambato</div><div class="cpf-min-warning ' + (grandQty >= 12 ? 'hidden' : '') + '">⚠️ Tu pedido tiene ' + grandQty + ' unidades. El mínimo es 12.</div><button class="cpf-btn" id="cpfSendBtn" ' + (grandQty < 12 ? 'disabled' : '') + '><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar por WhatsApp</button><button class="cpf-clear" id="cpfClearBtn">Vaciar pedido</button>';
   
   const debouncedUpdate = debounce(updateCustomerData, 400);
   footer.oninput = function(e){
@@ -1964,7 +1587,6 @@ function sendCartOrder(){
   const totalCartQty = cartItems.reduce(function(s, item){
     return s + item.lines.reduce(function(ls, l){ return ls + l.qty; }, 0);
   }, 0);
-  
   if(cartItems.length === 0){ showToast('Agrega productos primero'); return; }
   if(totalCartQty < 12){ showToast('El pedido mínimo es 12 unidades'); return; }
   if(!customerData.nombre || !customerData.telefono){
@@ -1984,7 +1606,6 @@ function sendCartOrder(){
   msg += '*DETALLE DEL PEDIDO*\n\n';
   
   let itemNum = 1, grandTotal = 0, totalQty = 0;
-  
   cartItems.forEach(function(item){
     const p = P.find(function(x){ return x.id === item.productId; });
     if(!p) return;
@@ -2001,7 +1622,7 @@ function sendCartOrder(){
       colorsData[line.color].push(line);
     });
     
-    msg += String(itemNum).padStart(2,'0') + '. ' + p.name + '\n';
+    msg += String(itemNum).padStart(2,'0') + '. ' + p.name + ' (' + GENDER_LABEL[p.gender] + ')\n';
     msg += '   📌 Ref: ' + p.ref + ' | Precio: $' + p.price.toFixed(2) + '/und\n';
     
     Object.keys(colorsData).forEach(function(color){
