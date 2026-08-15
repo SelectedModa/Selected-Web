@@ -987,15 +987,6 @@ function getActiveFilterCount(){
   return count;
 }
 
-function getActiveFilterCount(){
-  let count = 0;
-  if(filters.cat !== 'all') count++;
-  count += filters.subs.length;
-  count += filters.sizes.length;
-  count += filters.tags.length;
-  return count;
-}
-
 // ═══════════════════════════════════════
 // RENDER SIDEBAR
 // ═══════════════════════════════════════
@@ -1387,8 +1378,9 @@ function updateFilterCounts(){
 // ═══════════════════════════════════════
 function updateURL(){
   const params = new URLSearchParams();
+  if(filters.gender !== 'all') params.set('g', filters.gender);
   if(filters.cat !== 'all') params.set('cat', filters.cat);
-  if(filters.subs.length) params.set('subs', filters.subs.join(','));
+  if(filters.sub) params.set('sub', filters.sub);
   if(filters.sizes.length) params.set('sizes', filters.sizes.join(','));
   if(filters.tags.length) params.set('tags', filters.tags.join(','));
   const url = params.toString() ? '?' + params.toString() : window.location.pathname;
@@ -1423,11 +1415,6 @@ function loadFromURL(){
   if(gender && GENDERS.indexOf(gender) !== -1) filters.gender = gender;
   if(cat && ['all','set','top','pants','jacket'].indexOf(cat) !== -1) filters.cat = cat;
   if(sub) filters.sub = sub;
-  if(sizes) filters.sizes = sizes.split(',').filter(function(s){ return ALL_SIZES.indexOf(s) !== -1; });
-  if(tags) filters.tags = tags.split(',').filter(function(t){ return ['new','hot','limit'].indexOf(t) !== -1; });
-}
-  if(cat && ['all','set','top','pants','jacket'].indexOf(cat) !== -1) filters.cat = cat;
-  if(subs) filters.subs = subs.split(',');
   if(sizes) filters.sizes = sizes.split(',').filter(function(s){ return ALL_SIZES.indexOf(s) !== -1; });
   if(tags) filters.tags = tags.split(',').filter(function(t){ return ['new','hot','limit'].indexOf(t) !== -1; });
 }
