@@ -1,0 +1,47 @@
+backend:
+  name: github
+  repo: SelectedModa/Selected-Web
+  branch: main
+
+media_folder: "assets/images/productos"
+public_folder: "assets/images/productos"
+
+collections:
+  - name: "catalogo"
+    label: "Catálogo de Tienda"
+    files:
+      - label: "Todos los Productos"
+        name: "productos"
+        file: "productos.json"
+        fields:
+          - label: "Lista de Prendas"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} — ${{fields.price}}"
+            fields:
+              - {label: "ID del Producto", name: "id", widget: "number", value_type: "int"}
+              - {label: "Nombre", name: "name", widget: "string"}
+              - {label: "Precio ($)", name: "price", widget: "number", value_type: "float"}
+              
+              # ⚠️ OJO: Puse categorías básicas. Si usan otras, dímelo y lo ajustamos
+              - label: "Categoría"
+                name: "category"
+                widget: "select"
+                options: ["hombre", "mujer", "unisex", "ofertas"]
+              
+              - label: "Tallas disponibles"
+                name: "sizes"
+                widget: "select"
+                multiple: true
+                required: false
+                options: ["XS", "S", "M", "L", "XL", "XXL", "Única"]
+
+              - label: "Variantes (Colores y Fotos)"
+                name: "variants"
+                widget: "list"
+                summary: "{{fields.color}} ({{fields.hex}})"
+                min: 1
+                fields:
+                  - {label: "Nombre del Color", name: "color", widget: "string"}
+                  - {label: "Código HEX Exacto", name: "hex", widget: "string", default: "#000000", pattern: ['^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$', 'Debe llevar el #']}
+                  - {label: "Foto de la prenda", name: "img", widget: "image"}
