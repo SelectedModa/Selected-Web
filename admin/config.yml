@@ -8,7 +8,7 @@ public_folder: "assets/images/productos"
 
 collections:
   - name: "catalogo"
-    label: "Catálogo de Tienda"
+    label: "Catálogo Selected"
     files:
       - label: "Todos los Productos"
         name: "productos"
@@ -17,24 +17,86 @@ collections:
           - label: "Lista de Prendas"
             name: "items"
             widget: "list"
-            summary: "{{fields.name}} — ${{fields.price}}"
+            summary: "{{fields.code}} — {{fields.name}} (${{fields.price}})"
             fields:
-              - {label: "ID del Producto", name: "id", widget: "number", value_type: "int"}
-              - {label: "Nombre", name: "name", widget: "string"}
-              - {label: "Precio ($)", name: "price", widget: "number", value_type: "float"}
-              
-              # ⚠️ OJO: Puse categorías básicas. Si usan otras, dímelo y lo ajustamos
+              - label: "ID (número interno)"
+                name: "id"
+                widget: "number"
+                value_type: "int"
+                hint: "1, 2, 3... (consecutivo)"
+
+              - label: "Código / SKU"
+                name: "code"
+                widget: "string"
+                hint: "Ej: TS-001, TS-014"
+
+              - label: "Nombre del producto"
+                name: "name"
+                widget: "string"
+                hint: "Ej: CONJUNTO FLEX PRO"
+
               - label: "Categoría"
                 name: "category"
                 widget: "select"
-                options: ["hombre", "mujer", "unisex", "ofertas"]
-              
+                options:
+                  - { label: "Conjuntos", value: "set" }
+                  - { label: "Tops", value: "top" }
+                  - { label: "Pantalones", value: "pants" }
+                  - { label: "Chaquetas", value: "jacket" }
+
+              - label: "Subcategoría"
+                name: "subcategory"
+                widget: "select"
+                options:
+                  # Conjuntos
+                  - { label: "Deportivos", value: "deportivos" }
+                  - { label: "Casuales", value: "casuales" }
+                  - { label: "Elegantes", value: "elegantes" }
+                  - { label: "Playa", value: "playa" }
+                  # Tops
+                  - { label: "Crop tops", value: "crop-tops" }
+                  - { label: "Blusas", value: "blusas" }
+                  - { label: "Bodies", value: "bodies" }
+                  - { label: "Tanks", value: "tanks" }
+                  - { label: "Camisetas", value: "camisetas" }
+                  # Pantalones
+                  - { label: "Bikers", value: "bikers" }
+                  - { label: "Palazzo", value: "palazzo" }
+                  - { label: "Leggings", value: "leggings" }
+                  - { label: "Joggers", value: "joggers" }
+                  - { label: "Cargos", value: "cargos" }
+                  - { label: "Shorts", value: "shorts" }
+                  # Chaquetas
+                  - { label: "Blazers", value: "blazers" }
+                  - { label: "Bombers", value: "bombers" }
+                  - { label: "Windbreakers", value: "windbreakers" }
+                  - { label: "Hoodies", value: "hoodies" }
+
+              - label: "Precio Unitario ($)"
+                name: "price"
+                widget: "number"
+                value_type: "float"
+                min: 0
+
+              - label: "Precio Docena ($)"
+                name: "priceDozen"
+                widget: "number"
+                value_type: "float"
+                required: false
+                min: 0
+                hint: "Si lo dejas vacío, se puede calcular como price × 12"
+
               - label: "Tallas disponibles"
                 name: "sizes"
                 widget: "select"
                 multiple: true
                 required: false
-                options: ["XS", "S", "M", "L", "XL", "XXL", "Única"]
+                options: ["XS", "S", "M", "L", "XL", "XXL"]
+
+              - label: "Descripción (opcional)"
+                name: "description"
+                widget: "text"
+                required: false
 
               - label: "Variantes (Colores y Fotos)"
                 name: "variants"
@@ -42,6 +104,18 @@ collections:
                 summary: "{{fields.color}} ({{fields.hex}})"
                 min: 1
                 fields:
-                  - {label: "Nombre del Color", name: "color", widget: "string"}
-                  - {label: "Código HEX Exacto", name: "hex", widget: "string", default: "#000000", pattern: ['^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$', 'Debe llevar el #']}
-                  - {label: "Foto de la prenda", name: "img", widget: "image"}
+                  - label: "Nombre del Color"
+                    name: "color"
+                    widget: "string"
+
+                  - label: "Código HEX"
+                    name: "hex"
+                    widget: "string"
+                    default: "#000000"
+                    pattern: ['^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$', 'Debe iniciar con #. Ej: #0A0A0A']
+
+                  - label: "Foto"
+                    name: "img"
+                    widget: "image"
+                    media_folder: "assets/images/productos"
+                    public_folder: "assets/images/productos"
